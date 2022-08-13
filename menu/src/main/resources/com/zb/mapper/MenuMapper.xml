@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.mapper.MenuMapper">
+    <resultMap id="menumap" type="com.zb.pojo.Menu">
+        <result property="id" column="id"/>
+        <result property="menuName" column="menu_name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="ordered" column="ordered"/>
+        <result property="path" column="path"/>
+        <result property="icon" column="icon"/>
+        <collection property="twoMenu" ofType="com.zb.pojo.Menu">
+            <result property="id" column="tid"/>
+            <result property="menuName" column="tmenuname"/>
+            <result property="parentId" column="tparentid"/>
+            <result property="ordered" column="tordered"/>
+            <result property="path" column="tpath"/>
+            <result property="icon" column="ticon"/>
+        </collection>
+    </resultMap>
+    <select id="listMenu" resultMap="menumap">
+
+        SELECT
+        one_.*,
+        two_.id tid,
+        two_.menu_name tmenuname,
+        two_.parent_id tparentid,
+        two_.ordered tordered,
+        two_.path tpath,
+        two_.icon ticon
+
+        FROM menu one_  LEFT JOIN menu two_ ON one_.id =two_.parent_id where one_.id &lt; 101 and one_.id &gt; 1
+
+
+    </select>
+</mapper>
