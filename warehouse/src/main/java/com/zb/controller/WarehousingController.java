@@ -18,10 +18,9 @@ public class WarehousingController {
     @Autowired
     private WarehousingService warehousingService;
 
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     public Result findAll(){
         List<Warehousing> list = warehousingService.findAll();
-
         return new Result().setCode(200).setData(list).setMessage("success");
     }
 }
