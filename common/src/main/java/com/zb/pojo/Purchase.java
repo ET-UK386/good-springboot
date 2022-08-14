@@ -29,7 +29,7 @@ public class Purchase {
     /** 审核人建议*/
   private String examineOpinion;
     /** 流程状态状态    0：审核中，1：审核完成， 2：审核不通过，3：审核驳回需要修改*/
-  private Long status;
+  private Integer status;
 
   /** 审核人*/
   private User examineUser;
