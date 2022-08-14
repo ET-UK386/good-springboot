@@ -1,6 +1,7 @@
 package com.zb.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,23 +17,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class User {
-
-    private Long id;
-    /** 角色id*/
-    private Long roleId;
-    /** 用户名*/
-    private String username;
-    /** 密码*/
-    private String password;
-    /** 地址*/
-    private String address;
-    /** 手机号*/
-    private String phone;
-
-    private Long createUserId;
-    private Date createTime;
-    private Long userRenewId;
-    private Date renewTime;
 
     public Long getId() {
         return id;
@@ -113,4 +97,65 @@ public class User {
     public void setRenewTime(Date renewTime) {
         this.renewTime = renewTime;
     }
+
+    public String getCon1() {
+        return con1;
+    }
+
+    public void setCon1(String con1) {
+        this.con1 = con1;
+    }
+
+    public String getCon2() {
+        return con2;
+    }
+
+    public void setCon2(String con2) {
+        this.con2 = con2;
+    }
+
+    public String getCon3() {
+        return con3;
+    }
+
+    public void setCon3(String con3) {
+        this.con3 = con3;
+    }
+
+    private Long id;
+    private Long roleId;
+    private String username;
+    private String password;
+    private String address;
+    private String phone;
+    private Long createUserId;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date createTime;
+    private Long userRenewId;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date renewTime;
+    private String con1;
+    private String con2;
+    private String con3;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
 }
