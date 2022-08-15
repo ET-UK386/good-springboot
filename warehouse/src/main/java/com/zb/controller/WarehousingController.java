@@ -124,7 +124,7 @@ public class WarehousingController {
      * 查询需要入库审核的入库流程列表
      * @return
      */
-    @GetMapping("checkBeforeStorage")
+    @GetMapping("inventoryAudit")
     public Result inventoryAudit(){
         List<Warehousing> warehousings = warehousingService.findInventoryAudit();
         return new Result().setCode(200).setMessage("success").setData(warehousings);

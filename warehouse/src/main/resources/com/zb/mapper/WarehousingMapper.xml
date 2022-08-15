@@ -347,7 +347,7 @@
                  left join goodspu spu on sku.spu_id = spu.id
         where w.id = #{id}
     </select>
-    <select id="selectByStatus" resultType="com.zb.pojo.Warehousing">
+    <select id="selectByStatus" resultMap="warehouseMap">
         select w.id                   as w_id,
                w.purchase_id          as w_purchase_id,
                w.detailed_purchase_id as w_detailed_purchase_id,
