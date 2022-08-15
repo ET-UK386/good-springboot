@@ -3,4 +3,64 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zb.mapper.WarehouseMapper">
 
+    <resultMap id="wareshouseMap" type="com.zb.pojo.Warehouse">
+        <result property="id" column="w_id"/>
+        <result property="detailedPurchaseId" column="w_detailed_purchase_id"/>
+        <result property="stockNumber" column="w_stock_number"/>
+        <result property="warehouseAddress" column="w_warehouse_address"/>
+        <result property="phone" column="w_phone"/>
+        <result property="createUserId" column="w_create_user_id"/>
+        <result property="createTime" column="w_create_time"/>
+        <result property="userRenewId" column="w_user_renew_id"/>
+        <result property="renewTime" column="w_renew_time"/>
+
+        <association property="detailedPurchase" javaType="com.zb.pojo.DetailedPurchase">
+            <result property="id" column="dp_id"/>
+            <result property="purchaseId" column="dp_purchase_id"/>
+            <result property="vendorId" column="dp_vendor_id"/>
+            <result property="skuId" column="dp_sku_id"/>
+            <result property="batch" column="dp_batch"/>
+            <result property="purchasePrice" column="dp_purchase_price"/>
+            <result property="number" column="dp_number"/>
+            <result property="status" column="dp_status"/>
+            <result property="createUserId" column="dp_create_user_id"/>
+            <result property="createTime" column="dp_create_time"/>
+            <result property="userRenewId" column="dp_user_renew_id"/>
+            <result property="renewTime" column="dp_renew_time"/>
+        </association>
+    </resultMap>
+    <insert id="insert">
+        insert into warehouse (id, detailed_purchase_id, stock_number, warehouse_address, phone)
+        values (default, #{detailedPurchaseId}, #{stockNumber}, #{warehouseAddress}, #{phone});
+    </insert>
+
+
+    <select id="selectAll" resultType="com.zb.pojo.Warehouse">
+        select w.id                   as w_id,
+               w.detailed_purchase_id as w_detailed_purchase_id,
+               w.stock_number         as w_stock_number,
+               w.warehouse_address    as w_warehouse_address,
+               w.phone                as w_phone,
+               w.create_user_id       as w_create_user_id,
+               w.create_time          as w_create_time,
+               w.user_renew_id        as w_user_renew_id,
+               w.renew_time           as w_renew_time,
+
+               dp.id                  as dp_id,
+               dp.purchase_id         as dp_purchase_id,
+               dp.vendor_id           as dp_vendor_id,
+               dp.sku_id              as dp_sku_id,
+               dp.batch               as dp_batch,
+               dp.purchase_price      as dp_purchase_price,
+               dp.number              as dp_number,
+               dp.status              as dp_status,
+               dp.create_user_id      as dp_create_user_id,
+               dp.create_time         as dp_create_time,
+               dp.user_renew_id       as dp_user_renew_id,
+               dp.renew_time          as dp_renew_time
+        from warehouse w
+                 left join detailed_purchase dp on w.detailed_purchase_id = dp.id;
+    </select>
+
+
 </mapper>

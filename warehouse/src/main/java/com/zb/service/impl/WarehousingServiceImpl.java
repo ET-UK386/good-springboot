@@ -25,11 +25,21 @@ public class WarehousingServiceImpl implements WarehousingService {
     @Autowired
     private StokeServicec stokeServicec;
 
+    /**
+     * 查询全部
+     * @return
+     */
     @Override
     public List<Warehousing> findAll() {
         return warehousingMapper.selectAll();
     }
 
+    /**
+     * 入库前审核
+     * @param warehousing 审核订单
+     * @param loginUser 登录用户（审核人）
+     * @return
+     */
     @Override
     public Integer checkBeforeStorage(Warehousing warehousing, User loginUser) {
         warehousing.setExamineUserId(loginUser.getId());
@@ -37,11 +47,21 @@ public class WarehousingServiceImpl implements WarehousingService {
         return warehousingMapper.checkBeforeStorage(warehousing);
     }
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
     @Override
     public Warehousing findById(Long id) {
         return warehousingMapper.selectById(id);
     }
 
+    /**
+     * 创建入库流程单
+     * @param purchase 进货订单
+     * @return
+     */
     @Override
     public Map<String, Object> createWarehousing(Purchase purchase) {
         Warehousing warehousing = new Warehousing();
@@ -50,7 +70,6 @@ public class WarehousingServiceImpl implements WarehousingService {
         StringBuilder successBatchs = new StringBuilder();
         StringBuilder errorBatchs = new StringBuilder();
         for (DetailedPurchase detailedPurchase : detailedPurchases) {
-            // TODO: 2022/8/14 根据进货流程创建订单未完成
             if (detailedPurchase.getStatus() == 4) {
                 warehousing.setPurchaseId(purchase.getId())
                         .setDetailedPurchaseId(detailedPurchase.getId())
@@ -71,6 +90,12 @@ public class WarehousingServiceImpl implements WarehousingService {
         return map;
     }
 
+    /**
+     * 入库审核
+     * @param warehousing 审核订单
+     * @param loginUser 登录用户（审核人）
+     * @return
+     */
     @Override
     public Integer inventoryAudit(Warehousing warehousing, User loginUser) {
         warehousing.setWarehousingUserId(loginUser.getId());
@@ -78,6 +103,10 @@ public class WarehousingServiceImpl implements WarehousingService {
         return warehousingMapper.checkBeforeStorage(warehousing);
     }
 
+    /**
+     * 查询入库前审核列表
+     * @return
+     */
     @Override
     public List<Warehousing> findAuditWarehousing() {
         // 审核状态
@@ -85,6 +114,10 @@ public class WarehousingServiceImpl implements WarehousingService {
         return warehousingMapper.selectByStatus(status);
     }
 
+    /**
+     * 查询入库审核列表
+     * @return
+     */
     @Override
     public List<Warehousing> findInventoryAudit() {
         // 审核状态
