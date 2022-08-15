@@ -10,5 +10,5 @@ public interface StokeServicec {
 
     List<DetailedPurchase> listPurchaseDetailedPurchase();
 
-    List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Integer id);
+    List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Long id);
 }

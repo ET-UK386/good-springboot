@@ -196,11 +196,11 @@
                 s.user_renew_id as s_user_renew_id,
                 d.renew_time as d_renew_time
                 from `detailed_purchase` as d
-                INNER JOIN `purchase` as p on d.purchase_id = p.id
-                INNER JOIN `vendor` as v on d.vendor_id = v.id
-                INNER JOIN `goodsku` as g on d.sku_id = g.id
-                INNER JOIN `user` as u on d.create_user_id = u.id
-                INNER JOIN `user` as s on d.user_renew_id = s.id
+                LEFT JOIN `purchase` as p on d.purchase_id = p.id
+                LEFT JOIN `vendor` as v on d.vendor_id = v.id
+                LEFT JOIN `goodsku` as g on d.sku_id = g.id
+                LEFT JOIN `user` as u on d.create_user_id = u.id
+                LEFT JOIN `user` as s on d.user_renew_id = s.id
                 where p.id=#{id}
     </select>
 </mapper>

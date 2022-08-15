@@ -20,4 +20,18 @@ public interface WarehousingMapper {
      * @return
      */
     Integer checkBeforeStorage(Warehousing warehousing);
+
+    /**
+     * 添加入库订单
+     * @param warehousing
+     * @return
+     */
+    Integer insert(Warehousing warehousing);
+
+    /**
+     * 根据入库状态查询
+     * @param status
+     * @return
+     */
+    List<Warehousing> selectByStatus(Integer status);
 }

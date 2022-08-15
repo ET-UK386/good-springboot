@@ -23,7 +23,7 @@ public class StokeServicecImpl implements StokeServicec {
     }
 
     @Override
-    public List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Integer id) {
+    public List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Long id) {
         return stokeMapper.listPurchaseDetailedPurchaseBylistPurchaseId(id);
     }
 

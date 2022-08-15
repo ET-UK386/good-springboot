@@ -33,7 +33,7 @@ public class Warehousing {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "UTC+8")
   private Date warehousingTime;
   /** 入库数量*/
-  private Long warehousingNumber;
+  private Integer warehousingNumber;
   /** 入库明细
    * 0：待审核（签收审核）
    * 1：待审核不通过（订单作废）

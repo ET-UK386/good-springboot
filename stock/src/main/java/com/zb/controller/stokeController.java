@@ -5,6 +5,7 @@ import com.zb.pojo.Purchase;
 import com.zb.service.StokeServicec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +31,7 @@ public class stokeController {
 
     @RequestMapping("/listPurchaseDetailedPurchaseById/{id}")
     @ResponseBody
-    public List<DetailedPurchase> listPurchaseDetailedPurchaseById(Integer id) {
+    public List<DetailedPurchase> listPurchaseDetailedPurchaseById(@PathVariable("id") Long id) {
         return stokeServicec.listPurchaseDetailedPurchaseBylistPurchaseId(id);
     }
 }

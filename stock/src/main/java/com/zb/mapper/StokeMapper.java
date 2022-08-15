@@ -12,5 +12,5 @@ public interface StokeMapper {
 
     List<DetailedPurchase> listPurchaseDetailedPurchase();
 
-    List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Integer id);
+    List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Long id);
 }
