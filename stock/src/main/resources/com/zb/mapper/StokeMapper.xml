@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.mapper.StokeMapper">
+    <resultMap id="listPurchase" type="com.zb.pojo.Purchase">
+        <result property="id" column="p_id"/>
+        <result property="purchaseDesc" column="p_purchase_desc"/>
+        <result property="purchaseNumber" column="p_purchase_number"/>
+        <result property="examineUserId" column="p_examine_user_id"/>
+        <result property="examineTime" column="p_examine_time"/>
+        <result property="examineOpinion" column="p_examine_opinion"/>
+        <result property="status" column="p_examine_status"/>
+        <result property="createUserId" column="p_create_user_id"/>
+        <result property="createTime" column="p_create_time"/>
+        <result property="userRenewId" column="p_user_renew_id"/>
+        <result property="renewTime" column="p_renew_time"/>
+
+        <association property="examineUser" javaType="com.zb.pojo.User">
+            <result property="id" column="u_id"/>
+            <result property="roleId" column="u_role_id"/>
+            <result property="username" column="u_username"/>
+            <result property="password" column="u_password"/>
+            <result property="address" column="u_address"/>
+            <result property="phone" column="u_phone"/>
+            <result property="createUserId" column="u_create_user_id"/>
+            <result property="createTime" column="u_create_time"/>
+            <result property="userRenewId" column="u_user_renew_id"/>
+            <result property="renewTime" column="u_renew_time"/>
+        </association>
+
+        <association property="createUser" javaType="com.zb.pojo.User">
+            <result property="id" column="s_id"/>
+            <result property="roleId" column="s_role_id"/>
+            <result property="username" column="s_username"/>
+            <result property="password" column="s_password"/>
+            <result property="address" column="s_address"/>
+            <result property="phone" column="s_phone"/>
+            <result property="createUserId" column="s_create_user_id"/>
+            <result property="createTime" column="s_create_time"/>
+            <result property="userRenewId" column="s_user_renew_id"/>
+            <result property="renewTime" column="s_renew_time"/>
+        </association>
+
+        <association property="userRenew" javaType="com.zb.pojo.User">
+            <result property="id" column="e_id"/>
+            <result property="roleId" column="e_role_id"/>
+            <result property="username" column="e_username"/>
+            <result property="password" column="e_password"/>
+            <result property="address" column="e_address"/>
+            <result property="phone" column="e_phone"/>
+            <result property="createUserId" column="e_create_user_id"/>
+            <result property="createTime" column="e_create_time"/>
+            <result property="userRenewId" column="e_user_renew_id"/>
+            <result property="renewTime" column="e_renew_time"/>
+        </association>
+    </resultMap>
+
+    <select id="listPurchase" resultMap="listPurchase">
+            SELECT
+            p.id as p_id,
+            p.purchase_desc as p_purchase_desc,
+            p.purchase_number as p_purchase_number,
+            u.username as u_username,
+            p.examine_time as p_examine_time,
+            p.examine_opinion as p_examine_opinion,
+            p.examine_status as p_examine_status,
+            s.username as s_username,
+            p.create_time as p_create_time,
+            e.username as e_username,
+            p.renew_time as p_renew_time
+            from `purchase` p
+            INNER JOIN `user` u on p.examine_user_id = u.id
+            INNER JOIN `user` s on p.create_user_id = s.id
+            INNER JOIN `user` e on p.user_renew_id = e.id
+    </select>
+
+    <resultMap id="listPurchaseDetailedPurchase" type="com.zb.pojo.DetailedPurchase">
+        <result property="id" column="d_id"/>
+        <result property="purchaseId" column="d_purchase_id"/>
+        <result property="vendorId" column="d_vendor_id"/>
+        <result property="skuId" column="d_sku_id"/>
+        <result property="batch" column="d_batch"/>
+        <result property="purchasePrice" column="d_purchase_price"/>
+        <result property="number" column="d_number"/>
+        <result property="status" column="d_status"/>
+        <result property="createUserId" column="d_create_user_id"/>
+        <result property="createTime" column="d_create_time"/>
+        <result property="userRenewId" column="d_user_renew_id"/>
+        <result property="renewTime" column="d_renew_time"/>
+
+        <association property="purchase" javaType="com.zb.pojo.Purchase">
+            <result property="id" column="p_id"/>
+            <result property="purchaseDesc" column="p_purchase_desc"/>
+            <result property="purchaseNumber" column="p_purchase_number"/>
+            <result property="examineUserId" column="p_examine_user_id"/>
+            <result property="examineTime" column="p_examine_time"/>
+            <result property="examineOpinion" column="p_examine_opinion"/>
+            <result property="status" column="p_examine_status"/>
+            <result property="createUserId" column="p_create_user_id"/>
+            <result property="createTime" column="p_create_time"/>
+            <result property="userRenewId" column="p_user_renew_id"/>
+            <result property="renewTime" column="p_renew_time"/>
+        </association>
+
+        <association property="vendor" javaType="com.zb.pojo.Vendor">
+            <result property="id" column="v_id"/>
+            <result property="vendorName" column="v_vendor_name"/>
+            <result property="skuId" column="sku_id"/>
+            <result property="vendorAddress" column="v_vendor_address"/>
+            <result property="desc" column="v_desc"/>
+            <result property="principal" column="v_principal"/>
+            <result property="tel" column="v_tel"/>
+            <result property="createUserId" column="v_create_user_id"/>
+            <result property="createTime" column="v_create_time"/>
+            <result property="userRenewId" column="v_user_renew_id"/>
+            <result property="renewTime" column="renew_time"/>
+        </association>
+
+        <association property="goodsku" javaType="com.zb.pojo.Goodsku">
+            <result property="id" column="g_id"/>
+            <result property="spuId" column="g_spu_id"/>
+            <result property="skuName" column="g_sku_name"/>
+            <result property="skuDesc" column="g_sku_desc"/>
+            <result property="colorId" column="g_color_id"/>
+            <result property="priceId" column="g_price_id"/>
+            <result property="stockId" column="g_Stock_id"/>
+            <result property="salesVolume" column="g_sales_volume"/>
+            <result property="companyId" column="g_company_id"/>
+            <result property="manufacturer" column="g_manufacturer"/>
+            <result property="supplierId" column="g_Supplier_id"/>
+            <result property="createUserId" column="g_create_user_id"/>
+            <result property="createTime" column="g_create_time"/>
+            <result property="userRenewId" column="g_user_renewId"/>
+            <result property="renewTime" column="g_renew_time"/>
+        </association>
+
+        <association property="createUser" javaType="com.zb.pojo.User">
+            <result property="id" column="u_id"/>
+            <result property="roleId" column="u_role_id"/>
+            <result property="username" column="u_username"/>
+            <result property="password" column="u_password"/>
+            <result property="address" column="u_address"/>
+            <result property="phone" column="u_phone"/>
+            <result property="createUserId" column="u_create_user_id"/>
+            <result property="createTime" column="u_create_time"/>
+            <result property="userRenewId" column="u_user_renew_id"/>
+            <result property="renewTime" column="u_renew_time"/>
+        </association>
+
+        <association property="renewUser" javaType="com.zb.pojo.User">
+            <result property="id" column="s_id"/>
+            <result property="roleId" column="s_role_id"/>
+            <result property="username" column="s_username"/>
+            <result property="password" column="s_password"/>
+            <result property="address" column="s_address"/>
+            <result property="phone" column="s_phone"/>
+            <result property="createUserId" column="s_create_user_id"/>
+            <result property="createTime" column="s_create_time"/>
+            <result property="userRenewId" column="s_user_renew_id"/>
+            <result property="renewTime" column="s_renew_time"/>
+        </association>
+    </resultMap>
+
+    <select id="listPurchaseDetailedPurchase" resultMap="listPurchaseDetailedPurchase">
+            SELECT
+                d.id as d_id,
+                p.id as p_id,
+                v.id as v_id,
+                g.id as g_id,
+                d.batch as d_batch,
+                d.purchase_price as d_purchase_price,
+                d.number as d_number,
+                d.`status` as d_status,
+                u.username as u_username,
+                d.create_time as d_create_time,
+                s.user_renew_id as s_user_renew_id,
+                d.renew_time as d_renew_time
+                from `detailed_purchase` as d
+                INNER JOIN `purchase` as p on d.purchase_id = p.id
+                INNER JOIN `vendor` as v on d.vendor_id = v.id
+                INNER JOIN `goodsku` as g on d.sku_id = g.id
+                INNER JOIN `user` as u on d.create_user_id = u.id
+                INNER JOIN `user` as s on d.user_renew_id = s.id
+    </select>
+    <select id="listPurchaseDetailedPurchaseBylistPurchaseId" resultMap="listPurchaseDetailedPurchase">
+                SELECT
+                d.id as d_id,
+                p.id as p_id,
+                v.id as v_id,
+                g.id as g_id,
+                d.batch as d_batch,
+                d.purchase_price as d_purchase_price,
+                d.number as d_number,
+                d.`status` as d_status,
+                u.username as u_username,
+                d.create_time as d_create_time,
+                s.user_renew_id as s_user_renew_id,
+                d.renew_time as d_renew_time
+                from `detailed_purchase` as d
+                LEFT JOIN `purchase` as p on d.purchase_id = p.id
+                LEFT JOIN `vendor` as v on d.vendor_id = v.id
+                LEFT JOIN `goodsku` as g on d.sku_id = g.id
+                LEFT JOIN `user` as u on d.create_user_id = u.id
+                LEFT JOIN `user` as s on d.user_renew_id = s.id
+                where p.id=#{id}
+    </select>
+</mapper>

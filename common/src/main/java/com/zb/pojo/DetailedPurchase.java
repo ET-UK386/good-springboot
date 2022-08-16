@@ -19,26 +19,38 @@ import java.util.Date;
 @Accessors(chain = true)
 public class DetailedPurchase {
 
-  private Long id;
-  /** 进货单ID*/
-  private Long purchaseId;
-  /** 供应商ID*/
-  private Long vendorId;
-  private Long skuId;
-  /** 批次*/
-  private String batch;
-  /** 购买价格*/
-  private BigDecimal purchasePrice;
-  /** 数量*/
-  private Integer number;
-  /** 状态*/
-  private Integer status;
+    private Long id;
+    /** 进货单ID*/
+    private Long purchaseId;
+    /** 供应商ID*/
+    private Long vendorId;
+    /**商品skuid*/
+    private Long skuId;
+    /** 批次*/
+    private String batch;
+    /** 购买价格*/
+    private BigDecimal purchasePrice;
+    /** 数量*/
+    private Integer number;
+    /** 状态*/
+    private Integer status;
+    /**创建人id*/
+    private Long createUserId;
+    /**创建时间*/
+    private Date createTime;
+    /**更新人id*/
+    private Long userRenewId;
+    /**更新时间*/
+    private Date renewTime;
 
-  private Long createUserId;
-  private Date createTime;
-  private Long userRenewId;
-  private Date renewTime;
-
-
-
+    /**进货单*/
+    private Purchase purchase;
+    /**经销商*/
+    private Vendor vendor;
+    /**商品sku*/
+    private Goodsku goodsku;
+    /**创建人*/
+    private User createUser;
+    /**更新人*/
+    private User renewUser;
 }

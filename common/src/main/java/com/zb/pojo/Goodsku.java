@@ -1,5 +1,6 @@
 package com.zb.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,14 +40,16 @@ public class Goodsku {
   private Integer supplierId;
 
   private Integer createUserId;
+  @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date createTime;
   private Integer userRenewId;
+  @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
   private Goodspu goodspu;
   private Sort sort;
   private User user;
   private Color color;
-  private Purchase.Price price;
+  private Price price;
   private Warehouse warehouse;
   private Units units;
   private Vendor vendor;
@@ -104,134 +107,6 @@ public class Goodsku {
   }
 
   public void setStockId(Integer stockId) {
-    this.stockId = stockId;
-  }
 
-  public Integer getSalesVolume() {
-    return salesVolume;
-  }
-
-  public void setSalesVolume(Integer salesVolume) {
-    this.salesVolume = salesVolume;
-  }
-
-  public Integer getCompanyId() {
-    return companyId;
-  }
-
-  public void setCompanyId(Integer companyId) {
-    this.companyId = companyId;
-  }
-
-  public String getManufacturer() {
-    return manufacturer;
-  }
-
-  public void setManufacturer(String manufacturer) {
-    this.manufacturer = manufacturer;
-  }
-
-  public Integer getSupplierId() {
-    return supplierId;
-  }
-
-  public void setSupplierId(Integer supplierId) {
-    this.supplierId = supplierId;
-  }
-
-  public Integer getCreateUserId() {
-    return createUserId;
-  }
-
-  public void setCreateUserId(Integer createUserId) {
-    this.createUserId = createUserId;
-  }
-
-  public Date getCreateTime() {
-    return createTime;
-  }
-
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
-
-  public Integer getUserRenewId() {
-    return userRenewId;
-  }
-
-  public void setUserRenewId(Integer userRenewId) {
-    this.userRenewId = userRenewId;
-  }
-
-  public Date getRenewTime() {
-    return renewTime;
-  }
-
-  public void setRenewTime(Date renewTime) {
-    this.renewTime = renewTime;
-  }
-
-  public Goodspu getGoodspu() {
-    return goodspu;
-  }
-
-  public void setGoodspu(Goodspu goodspu) {
-    this.goodspu = goodspu;
-  }
-
-  public Sort getSort() {
-    return sort;
-  }
-
-  public void setSort(Sort sort) {
-    this.sort = sort;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public Color getColor() {
-    return color;
-  }
-
-  public void setColor(Color color) {
-    this.color = color;
-  }
-
-  public Purchase.Price getPrice() {
-    return price;
-  }
-
-  public void setPrice(Purchase.Price price) {
-    this.price = price;
-  }
-
-  public Warehouse getWarehouse() {
-    return warehouse;
-  }
-
-  public void setWarehouse(Warehouse warehouse) {
-    this.warehouse = warehouse;
-  }
-
-  public Units getUnits() {
-    return units;
-  }
-
-  public void setUnits(Units units) {
-    this.units = units;
-  }
-
-  public Vendor getVendor() {
-    return vendor;
-  }
-
-  public void setVendor(Vendor vendor) {
-    this.vendor = vendor;
   }
 }
