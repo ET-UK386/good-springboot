@@ -48,6 +48,7 @@ public class Warehousing {
   private String signingDetails;
   /** 入库明细*/
   private String inventoryDetails;
+  private String statusStr;
 
 
   /** 进货单*/
@@ -71,4 +72,36 @@ public class Warehousing {
   private Long userRenewId;
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "UTC+8")
   private Date renewTime;
+
+  public String getStatusStr() {
+    switch (this.status){
+      case 0:
+        this.statusStr = "待审核";
+        break;
+      case 1:
+        this.statusStr = "待审核不通过";
+        break;
+      case 2:
+        this.statusStr = "审核数目不对";
+        break;
+      case 3:
+        this.statusStr = "待入库";
+        break;
+      case 4:
+        this.statusStr = "待入库不通过";
+        break;
+      case 5:
+        this.statusStr = "入库数目不对";
+        break;
+      case 6:
+        this.statusStr = "有问题";
+        break;
+      case 200:
+        this.statusStr = "完成";
+        break;
+      default:
+        break;
+    }
+    return statusStr;
+  }
 }
