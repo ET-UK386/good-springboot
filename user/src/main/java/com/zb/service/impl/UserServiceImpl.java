@@ -3,7 +3,6 @@ package com.zb.service.impl;
 import com.zb.mapper.UserMapper;
 import com.zb.pojo.User;
 import com.zb.service.UserService;
-import javafx.beans.binding.StringExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,8 +48,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    //查询全部的收银员
     @Override
-    public List<User> ListCashier(String username, String address, String phone) {
+    public List<User> ListCashier(String username, String address, String phone, int currentPage, int pageSize) {
         Map<String,Object> map=new HashMap<>();
         if(username!=null &&!"".equals(username.trim())){
             map.put("username",username);
@@ -61,13 +61,16 @@ public class UserServiceImpl implements UserService {
         if(phone!=null &&!"".equals(phone.trim())){
             map.put("phone",phone);
         }
+        map.put("currentPage",(currentPage-1)*pageSize);
+        map.put("pageSize",pageSize);
+
 
 
         return userMapper.ListCashier(map);
     }
 
     @Override
-    public List<User> surveyor(String username, String address, String phone) {
+    public int countListCashier(String username, String address, String phone) {
         Map<String,Object> map=new HashMap<>();
         if(username!=null &&!"".equals(username.trim())){
             map.put("username",username);
@@ -79,13 +82,64 @@ public class UserServiceImpl implements UserService {
             map.put("phone",phone);
         }
 
+        return userMapper.countListCashier(map);
+    }
+    //三表查询全部验货员
+    @Override
+    public List<User> surveyor(String username, String address, String phone, int currentPage, int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+        map.put("currentPage",(currentPage-1)*pageSize);
+        map.put("pageSize",pageSize);
         return userMapper.surveyor(map);
+    }
+
+    @Override
+    public int countListsurveyor(String username, String address, String phone) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+
+        return userMapper.countListsurveyor(map);
     }
 
 
     //三表查询全部理货员
     @Override
-    public List<User> tally(String username, String address, String phone) {
+    public List<User> tally(String username, String address, String phone, int currentPage, int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+
+        }
+        map.put("currentPage",(currentPage-1)*pageSize);
+        map.put("pageSize",pageSize);
+        return userMapper.tally(map);
+    }
+
+    @Override
+    public int countListtally(String username, String address, String phone) {
         Map<String,Object> map=new HashMap<>();
         if(username!=null &&!"".equals(username.trim())){
             map.put("username",username);
@@ -96,7 +150,8 @@ public class UserServiceImpl implements UserService {
         if(phone!=null &&!"".equals(phone.trim())){
             map.put("phone",phone);
         }
-        return userMapper.tally(map);
+
+        return userMapper.countListtally(map);
     }
 
     @Override

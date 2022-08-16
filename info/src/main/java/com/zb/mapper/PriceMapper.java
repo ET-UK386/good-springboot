@@ -1,6 +1,6 @@
 package com.zb.mapper;
 
-import com.zb.pojo.Price;
+import com.zb.pojo.Purchase;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface PriceMapper {
     //查询
-    List<Price> listPrice(Integer sku_id);
+    List<Purchase.Price> listPrice(Integer sku_id);
 }

@@ -19,4 +19,22 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> listMenu() {
         return menuMapper.listMenu();
     }
+    //权限获取收银员需要的列表
+    @Override
+    public List<Menu> listMenu2() {
+        return menuMapper.listMenu2();
+    }
+    //权限获取验证员需要的列表
+
+
+
+    @Override
+    public List<Menu> listMenu3() {
+        return menuMapper.listMenu3();
+    }
+    //权限获取理货员需要的列表
+    @Override
+    public List<Menu> listMenu4() {
+        return menuMapper.listMenu4();
+    }
 }

@@ -43,14 +43,16 @@ public interface UserService {
 
 
     //查询全部收银员
-    List<User> ListCashier(String username, String address, String phone);
-
+    List<User> ListCashier(String username, String address, String phone, int currentPage, int pageSize);
+    int countListCashier(String username, String address, String phone);
 
     //查询全部验员
-    List<User> surveyor(String username, String address, String phone);
+    List<User> surveyor(String username, String address, String phone, int currentPage, int pageSize);
+    int countListsurveyor(String username, String address, String phone);
 
     //三表查询全部理货员
-    List<User> tally(String username, String address, String phone);
+    List<User> tally(String username, String address, String phone, int currentPage, int pageSize);
+    int countListtally(String username, String address, String phone);
 
     //修改用户显示状态为0
     int deleteByid(int id);
