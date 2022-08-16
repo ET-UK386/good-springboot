@@ -46,7 +46,7 @@ public class Goodsku {
   private Sort sort;
   private User user;
   private Color color;
-  private Price price;
+  private Purchase.Price price;
   private Warehouse warehouse;
   private Units units;
   private Vendor vendor;
@@ -203,11 +203,11 @@ public class Goodsku {
     this.color = color;
   }
 
-  public Price getPrice() {
+  public Purchase.Price getPrice() {
     return price;
   }
 
-  public void setPrice(Price price) {
+  public void setPrice(Purchase.Price price) {
     this.price = price;
   }
 

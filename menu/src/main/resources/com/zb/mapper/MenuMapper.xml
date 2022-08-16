@@ -28,8 +28,61 @@
         two_.path tpath,
         two_.icon ticon
 
-        FROM menu one_  LEFT JOIN menu two_ ON one_.id =two_.parent_id where one_.id &lt; 101 and one_.id &gt; 1
+        FROM menu one_  LEFT JOIN menu two_ ON one_.id =two_.parent_id where
+          <![CDATA[
+        one_.id < 101
+          ]]>and one_.id > 1
 
+
+    </select>
+    <select id="listMenu2" resultMap="menumap">
+        SELECT
+        one_.*,
+        two_.id tid,
+        two_.menu_name tmenuname,
+        two_.parent_id tparentid,
+        two_.ordered tordered,
+        two_.path tpath,
+        two_.icon ticon
+
+        FROM menu one_  LEFT JOIN menu two_ ON one_.id =two_.parent_id where
+
+        one_.id in (2)
+
+
+
+    </select>
+    <select id="listMenu3"  resultMap="menumap">
+           SELECT
+        one_.*,
+        two_.id tid,
+        two_.menu_name tmenuname,
+        two_.parent_id tparentid,
+        two_.ordered tordered,
+        two_.path tpath,
+        two_.icon ticon
+
+        FROM menu one_  LEFT JOIN menu two_ ON one_.id =two_.parent_id where
+
+        one_.id in(3,5,6)
+
+
+
+    </select>
+    <select id="listMenu4" resultMap="menumap">
+
+          SELECT
+        one_.*,
+        two_.id tid,
+        two_.menu_name tmenuname,
+        two_.parent_id tparentid,
+        two_.ordered tordered,
+        two_.path tpath,
+        two_.icon ticon
+
+        FROM menu one_  LEFT JOIN menu two_ ON one_.id =two_.parent_id where
+
+        one_.id in(4)
 
     </select>
 </mapper>

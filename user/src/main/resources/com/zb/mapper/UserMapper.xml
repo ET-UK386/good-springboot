@@ -4,11 +4,6 @@
 <mapper namespace="com.zb.mapper.UserMapper">
 
 
-
-
-
-
-
     <resultMap id="User" type="com.zb.pojo.User">
         <result property="id" column="id"></result>
         <result property="roleId" column="role_id"></result>
@@ -119,6 +114,7 @@ p.renew_time AS prenewtime
             and u.phone=#{phone}
         </if>
 
+        limit   #{currentPage},#{pageSize}
     </select>
 
     <select id="userList" resultType="com.zb.pojo.User">
@@ -150,7 +146,7 @@ SELECT * FROM USER
             and u.phone=#{phone}
         </if>
 
-
+        limit   #{currentPage},#{pageSize}
     </select>
     <select id="tally" resultMap="User">
         SELECT u.id,u.role_id,u.username,u.password,u.address,
@@ -170,7 +166,52 @@ SELECT * FROM USER
         <if test="phone!=null">
             and u.phone=#{phone}
         </if>
-
+        limit   #{currentPage},#{pageSize}
 
     </select>
+    <select id="countListCashier" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='收银员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+    </select>
+    <select id="countListsurveyor" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='验货员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+
+    </select>
+    <select id="countListtally" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='理货员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+
+    </select>
+
 </mapper>

@@ -22,13 +22,18 @@ public interface UserMapper {
 
     //三表查询全部收银员
     List<User> ListCashier(Map<String, Object> map);
+    int countListCashier(Map<String, Object> map);
 
     //三表查询全部验货员
     List<User> surveyor(Map<String, Object> map);
+    int countListsurveyor(Map<String, Object> map);
+
 
 
     //三表查询全部理货员
     List<User> tally(Map<String, Object> map);
+    int countListtally(Map<String, Object> map);
+
 
 
     //查询用户表
@@ -65,5 +70,7 @@ public interface UserMapper {
 
     //根据id查询
     User userGetById(int id);
+
+
 }
 

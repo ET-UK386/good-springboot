@@ -60,7 +60,7 @@ public class UserController {
     public  int addUserCashier(@RequestBody(required = false) User u){
 
         User o = (User) redisTemplate.opsForValue().get(u.getToken());
-        System.out.println("啊啊啊啊啊啊啊啊啊啊啊啊"+o);
+
         u.setCreateTime(new Date());
         u.setCreateUserId(o.getId());
         u.setRenewTime(new Date());
@@ -73,7 +73,7 @@ public class UserController {
     public  int addSurveyor(@RequestBody(required = false) User u){
 
         User o = (User) redisTemplate.opsForValue().get(u.getToken());
-        System.out.println("啊啊啊啊啊啊啊啊啊啊啊啊"+o);
+
         u.setCreateTime(new Date());
         u.setCreateUserId(o.getId());
         u.setRenewTime(new Date());
@@ -86,7 +86,7 @@ public class UserController {
     public  int addTally(@RequestBody(required = false) User u){
 
         User o = (User) redisTemplate.opsForValue().get(u.getToken());
-        System.out.println("啊啊啊啊啊啊啊啊啊啊啊啊"+o);
+
         u.setCreateTime(new Date());
         u.setCreateUserId(o.getId());
         u.setRenewTime(new Date());
@@ -107,7 +107,7 @@ public class UserController {
 
 
         User o = (User) redisTemplate.opsForValue().get(u.getToken());
-        System.out.println("啊啊啊啊啊啊啊啊啊啊啊啊顶顶顶顶"+o);
+
         u.setUserRenewId(o.getId());
         u.setRenewTime(new Date());
         return  userService.UpdateGetByUserId(u);
@@ -116,23 +116,41 @@ public class UserController {
     //查询全部收银员
 
     @RequestMapping("ListCashier")
-    public   List<User> ListCashier( String username,String address,String phone){
-        return  userService.ListCashier(username,address,phone);
+    public  Map<String ,Object> ListCashier( String username,String address,String phone,
+                                     int currentPage,int pageSize ){
+        Map<String ,Object> map=new HashMap<>();
+        int countCashier=userService.countListCashier(username,address,phone);
+          List<User> listCashier=userService.ListCashier(username,address,phone,currentPage,pageSize);
+          map.put("countCashier",countCashier);
+        map.put("listCashier",listCashier);
+        return  map;
     }
 
     //查询全部验货员
 
     @RequestMapping("Listsurveyor")
-    public List<User> Listsurveyor(String username,String address,String phone){
-        return  userService.surveyor(username,address,phone);
+    public  Map<String ,Object>  Listsurveyor(String username,String address,String phone,
+                                   int currentPage,int pageSize){
+        Map<String ,Object> map=new HashMap<>();
+          List<User> listsurveyor=userService.surveyor(username,address,phone, currentPage, pageSize);
+          int countListsurveyor=userService.countListsurveyor( username, address, phone);
+          map.put("listsurveyor",listsurveyor);
+        map.put("countListsurveyor",countListsurveyor);
+          return  map;
     }
 
 
     //查询全部理货员
 
     @RequestMapping("Listtally")
-    public List<User> tally(String username,String address,String phone){
-        return  userService.tally(username,address,phone);
+    public  Map<String ,Object>  tally(String username,String address,String phone,
+                                       int currentPage,int pageSize){
+         Map<String ,Object> map=new HashMap<>();
+          List<User> listally=userService.tally(username,address,phone,currentPage,pageSize);
+          int countlistally=userService.countListtally(username,address,phone);
+          map.put("listally",listally);
+          map.put("countlistally",countlistally);
+          return  map;
     }
 
 
@@ -159,4 +177,22 @@ public class UserController {
     public  User userGetById(int id){
         return  userService.userGetById(id);
     }
+
+    //查询token里面的权限id
+    @RequestMapping("tokenPowerId")
+    public  Map<String,Object> tokenPowerId(String token){
+        Map<String,Object> map=new HashMap<>();
+        System.out.println("啊啊啊啊啊啊啊啊啊啊啊啊啊"+token);
+        User o = (User) redisTemplate.opsForValue().get(token);
+        System.out.println("啊啊啊啊啊啊啊啊啊啊啊啊"+o);
+        Long powerid=o.getRole().getUserPower();
+        map.put("powerid",powerid);
+        System.out.println(powerid);
+        return map;
+
+    }
+
+
+
 }
+

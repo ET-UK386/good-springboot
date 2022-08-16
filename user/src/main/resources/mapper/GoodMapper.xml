@@ -20,7 +20,7 @@
         <association property="color" javaType="com.zb.pojo.Color">
             <result property="colorName" column="color_name"></result>
         </association>
-        <association property="price" javaType="com.zb.pojo.Price">
+        <association property="price" javaType="com.zb.pojo.Purchase.Price">
             <result property="price" column="price"></result>
         </association>
         <association property="warehouse" javaType="com.zb.pojo.Warehouse">
