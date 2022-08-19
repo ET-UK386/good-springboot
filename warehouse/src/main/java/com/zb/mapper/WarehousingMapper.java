@@ -33,5 +33,5 @@ public interface WarehousingMapper {
      * @param status
      * @return
      */
-    List<Warehousing> selectByStatus(Integer status);
+    List<Warehousing> selectByStatus(Integer[] status);
 }

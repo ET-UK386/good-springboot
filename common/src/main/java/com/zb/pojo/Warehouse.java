@@ -25,11 +25,16 @@ public class Warehouse {
   private String warehouseAddress;
   /** 联系方式*/
   private String phone;
+  /** 商品skuID*/
+  private Long skuId;
+
+  private Long createUserId;
+  private Date createTime;
+  private Long userRenewId;
+  private Date renewTime;
 
   private DetailedPurchase detailedPurchase;
-
-  private Integer createUserId;
-  private Date createTime;
-  private Integer userRenewId;
-  private Date renewTime;
+  private Goodsku goodsku;
+  private User createUser;
+  private User userRenew;
 }
