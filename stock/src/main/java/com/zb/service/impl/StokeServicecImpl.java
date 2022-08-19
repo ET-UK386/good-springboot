@@ -1,8 +1,7 @@
 package com.zb.service.impl;
 
 import com.zb.mapper.StokeMapper;
-import com.zb.pojo.DetailedPurchase;
-import com.zb.pojo.Purchase;
+import com.zb.pojo.*;
 import com.zb.service.StokeServicec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +29,30 @@ public class StokeServicecImpl implements StokeServicec {
     @Override
     public List<DetailedPurchase> listPurchaseDetailedPurchase() {
         return stokeMapper.listPurchaseDetailedPurchase();
+    }
+
+    @Override
+    public Integer addDetailedPurchase(DetailedPurchase d) {
+        return stokeMapper.addDetailedPurchase(d);
+    }
+
+    @Override
+    public List<Goodsku> listGoodSku() {
+        return stokeMapper.listGoodSku();
+    }
+
+    @Override
+    public Price listPriceById(Integer id) {
+        return stokeMapper.listPriceById(id);
+    }
+
+    @Override
+    public Goodsku listGoodSkuById(Integer id) {
+        return stokeMapper.listGoodSkuById(id);
+    }
+
+    @Override
+    public List<Vendor> listVendor() {
+        return stokeMapper.listVendor();
     }
 }

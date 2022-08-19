@@ -1,7 +1,6 @@
 package com.zb.service;
 
-import com.zb.pojo.DetailedPurchase;
-import com.zb.pojo.Purchase;
+import com.zb.pojo.*;
 
 import java.util.List;
 
@@ -11,4 +10,14 @@ public interface StokeServicec {
     List<DetailedPurchase> listPurchaseDetailedPurchase();
 
     List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Long id);
+
+    List<Goodsku> listGoodSku();
+
+    Integer addDetailedPurchase(DetailedPurchase d);
+
+    List<Vendor> listVendor();
+
+    Goodsku listGoodSkuById(Integer goods);
+
+    Price listPriceById(Integer id);
 }
