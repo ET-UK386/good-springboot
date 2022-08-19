@@ -22,9 +22,18 @@ public class WarehouseController {
      */
     @GetMapping("findAll")
     public Result findAll(){
-        List<Warehouse> list = warehouseService.findAll();
+        List<Warehouse> list = warehouseService.findList();
         return new Result().setData(list).setMessage("success").setCode(200);
+    }
 
+    /**
+     * 根据skuid查询列表
+     * @return
+     */
+    @GetMapping("findBySkuId/{skuId}")
+    public Result findBySkuId(@PathVariable("skuId") Long skuId){
+        List<Warehouse> list = warehouseService.findBySkuIdWarehouses(skuId);
+        return new Result().setData(list).setMessage("success").setCode(200);
     }
 
     @PostMapping("add")

@@ -18,4 +18,14 @@ public interface WarehouseService {
      * @return
      */
     Integer add(Warehouse warehouse);
+
+    List<Warehouse> findList();
+
+
+    /**
+     * 根据skuid查询列表
+     * @param skuId
+     * @return
+     */
+    List<Warehouse> findBySkuIdWarehouses(Long skuId);
 }

@@ -27,4 +27,14 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Integer add(Warehouse warehouse) {
         return warehouseMapper.insert(warehouse);
     }
+
+    @Override
+    public List<Warehouse> findList() {
+        return warehouseMapper.selectList();
+    }
+
+    @Override
+    public List<Warehouse> findBySkuIdWarehouses(Long skuId) {
+        return warehouseMapper.selectBySkuIdWarehouses(skuId);
+    }
 }

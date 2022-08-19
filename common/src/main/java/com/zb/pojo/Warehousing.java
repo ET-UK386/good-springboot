@@ -41,7 +41,7 @@ public class Warehousing {
    * 3：待入库（入库盛和）
    * 4：待入库不通过（订单作废）
    * 5：入库数目不对（入库盛和）
-   * 200：有问题（如少货）
+   * 200：
    * */
   private Integer status;
   /** 签收明细*/
@@ -63,6 +63,7 @@ public class Warehousing {
   private  Goodsku goodsku;
   /** 商品spu*/
   private  Goodspu goodspu;
+  private String token;
 
 
 

@@ -15,6 +15,20 @@ public interface WarehouseMapper {
     List<Warehouse> selectAll();
 
     /**
+     * 根据skuid分组查询
+     * @return
+     */
+    List<Warehouse> selectList();
+
+    /**
+     * 根据skuid查询列表
+     * @param skuId
+     * @return
+     */
+    List<Warehouse> selectBySkuIdWarehouses(Long skuId);
+
+
+    /**
      * 添加
      * @param warehouse
      * @return

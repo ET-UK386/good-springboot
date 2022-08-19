@@ -52,11 +52,13 @@ public class WarehousingController {
      * 创建入库订单
      */
     @PostMapping("createWarehousing")
-    public Result createWarehousing(Purchase purchase, String token) {
+    public Result createWarehousing(@RequestBody Purchase purchase) {
         // 获取流程审核状态
         Integer purchaseStatus = purchase.getStatus();
-        // 获取当前登录用户
-        User loginUser = (User) redisTemplate.opsForValue().get(token);
+
+        if(purchase.getPurchaseNumber() > 0){
+            return new Result().setCode(500).setMessage("采购数量不规范");
+        }
 
         Object data = null;
         String message = null;
@@ -70,15 +72,15 @@ public class WarehousingController {
                 Map<String, Object> res = warehousingService.createWarehousing(purchase);
                 String success = (String) res.get("success");
                 String error = (String) res.get("error");
-                if(Strings.isEmpty(error) && Strings.isNotEmpty(success)){
+                if (Strings.isEmpty(error) && Strings.isNotEmpty(success)) {
                     // 该进货流程全部创建完成
                     code = 200;
-                    message = "成功创建：" +success + "创建失败："+error;
-                }else if(Strings.isNotEmpty(success) && Strings.isNotEmpty(error)){
+                    message = "成功创建：" + success + "创建失败：" + error;
+                } else if (Strings.isNotEmpty(success) && Strings.isNotEmpty(error)) {
                     // 该进货流程有个别未完成
                     code = 404;
-                    message = "成功创建：" +success + "创建失败："+error;
-                }else{
+                    message = "成功创建：" + success + "创建失败：" + error;
+                } else {
                     // 全部都失败
                     code = 500;
                     message = "异常";
@@ -102,10 +104,11 @@ public class WarehousingController {
 
     /**
      * 查询需要审核的入库流程列表
+     *
      * @return
      */
     @GetMapping("checkBeforeStorage")
-    public Result checkBeforeStorage(){
+    public Result checkBeforeStorage() {
         List<Warehousing> warehousings = warehousingService.findAuditWarehousing();
         return new Result().setCode(200).setMessage("success").setData(warehousings);
     }
@@ -114,18 +117,21 @@ public class WarehousingController {
      * 入库前审核（）
      */
     @PutMapping("checkBeforeStorage")
-    public void checkBeforeStorage(@RequestBody Warehousing warehousing, String token) {
+    public Result checkBeforeStorage(@RequestBody Warehousing warehousing) {
+        String token = warehousing.getToken();
         // 获取当前登录用户
         User loginUser = (User) redisTemplate.opsForValue().get(token);
         warehousingService.checkBeforeStorage(warehousing, loginUser);
+        return new Result().setMessage("success").setCode(200);
     }
 
     /**
      * 查询需要入库审核的入库流程列表
+     *
      * @return
      */
     @GetMapping("inventoryAudit")
-    public Result inventoryAudit(){
+    public Result inventoryAudit() {
         List<Warehousing> warehousings = warehousingService.findInventoryAudit();
         return new Result().setCode(200).setMessage("success").setData(warehousings);
     }
@@ -134,12 +140,23 @@ public class WarehousingController {
      * 入库前审核（）
      */
     @PutMapping("inventoryAudit")
-    public void inventoryAudit(@RequestBody Warehousing warehousing, String token) {
+    public Result inventoryAudit(@RequestBody Warehousing warehousing) {
+        String token = warehousing.getToken();
         // 获取当前登录用户
         User loginUser = (User) redisTemplate.opsForValue().get(token);
-        warehousingService.inventoryAudit(warehousing, loginUser);
-    }
+        Integer integer = warehousingService.inventoryAudit(warehousing, loginUser);
 
+        switch (integer) {
+            case -1:
+                return new Result().setMessage("error").setCode(500);
+            case 0:
+                return new Result().setMessage("创建仓库数据失败").setCode(404);
+            case 1:
+                return new Result().setMessage("success").setCode(200);
+            default:
+                return null;
+        }
+    }
 
 
 }

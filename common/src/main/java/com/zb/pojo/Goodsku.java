@@ -45,6 +45,7 @@ public class Goodsku {
   private Integer userRenewId;
   @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
+
   private Goodspu goodspu;
   private Sort sort;
   private User user;

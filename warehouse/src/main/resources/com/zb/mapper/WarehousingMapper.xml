@@ -103,7 +103,7 @@
     </resultMap>
     <insert id="insert">
         insert into warehousing (purchase_id, detailed_purchase_id, Warehousing_number, status, create_time)
-        values (#{purchaseId},#{detailedPurchaseId}, #{warehousingNumber}, #{status}, #{createTime});
+        values (#{purchaseId}, #{detailedPurchaseId}, #{warehousingNumber}, #{status}, #{createTime});
     </insert>
     <update id="checkBeforeStorage">
         update warehousing
@@ -348,106 +348,111 @@
         where w.id = #{id}
     </select>
     <select id="selectByStatus" resultMap="warehouseMap">
-        select w.id                   as w_id,
-               w.purchase_id          as w_purchase_id,
-               w.detailed_purchase_id as w_detailed_purchase_id,
-               w.examine_user_id      as w_examine_user_id,
-               w.examine_time         as w_examine_time,
-               w.Warehousing_user_id  as w_Warehousing_user_id,
-               w.Warehousing_time     as w_Warehousing_time,
-               w.Warehousing_number   as w_Warehousing_number,
-               w.status               as w_status,
-               w.create_user_id       as w_create_user_id,
-               w.create_time          as w_create_time,
-               w.user_renew_id        as w_user_renew_id,
-               w.renew_time           as w_renew_time,
-               w.signing_details      as w_signing_details,
-               w.inventory_details    as w_inventory_details,
+        select w.id as w_id,
+        w.purchase_id as w_purchase_id,
+        w.detailed_purchase_id as w_detailed_purchase_id,
+        w.examine_user_id as w_examine_user_id,
+        w.examine_time as w_examine_time,
+        w.Warehousing_user_id as w_Warehousing_user_id,
+        w.Warehousing_time as w_Warehousing_time,
+        w.Warehousing_number as w_Warehousing_number,
+        w.status as w_status,
+        w.create_user_id as w_create_user_id,
+        w.create_time as w_create_time,
+        w.user_renew_id as w_user_renew_id,
+        w.renew_time as w_renew_time,
+        w.signing_details as w_signing_details,
+        w.inventory_details as w_inventory_details,
 
-               p.id                   as p_id,
-               p.purchase_desc        as p_purchase_desc,
-               p.purchase_number      as p_purchase_number,
-               p.examine_user_id      as p_examine_user_id,
-               p.examine_time         as p_examine_time,
-               p.examine_opinion      as p_examine_opinion,
-               p.status               as p_status,
-               p.create_user_id       as p_create_user_id,
-               p.create_time          as p_create_time,
-               p.user_renew_id        as p_user_renew_id,
-               p.renew_time           as p_renew_time,
+        p.id as p_id,
+        p.purchase_desc as p_purchase_desc,
+        p.purchase_number as p_purchase_number,
+        p.examine_user_id as p_examine_user_id,
+        p.examine_time as p_examine_time,
+        p.examine_opinion as p_examine_opinion,
+        p.status as p_status,
+        p.create_user_id as p_create_user_id,
+        p.create_time as p_create_time,
+        p.user_renew_id as p_user_renew_id,
+        p.renew_time as p_renew_time,
 
-               dp.id                  as dp_id,
-               dp.purchase_id         as dp_purchase_id,
-               dp.vendor_id           as dp_vendor_id,
-               dp.sku_id              as dp_sku_id,
-               dp.batch               as dp_batch,
-               dp.purchase_price      as dp_purchase_price,
-               dp.number              as dp_number,
-               dp.status              as dp_status,
-               dp.create_user_id      as dp_create_user_id,
-               dp.create_time         as dp_create_time,
-               dp.user_renew_id       as dp_user_renew_id,
-               dp.renew_time          as dp_renew_time,
+        dp.id as dp_id,
+        dp.purchase_id as dp_purchase_id,
+        dp.vendor_id as dp_vendor_id,
+        dp.sku_id as dp_sku_id,
+        dp.batch as dp_batch,
+        dp.purchase_price as dp_purchase_price,
+        dp.number as dp_number,
+        dp.status as dp_status,
+        dp.create_user_id as dp_create_user_id,
+        dp.create_time as dp_create_time,
+        dp.user_renew_id as dp_user_renew_id,
+        dp.renew_time as dp_renew_time,
 
-               e.id                   as e_id,
-               e.role_id              as e_role_id,
-               e.username             as e_username,
-               e.password             as e_password,
-               e.address              as e_address,
-               e.phone                as e_phone,
-               e.create_user_id       as e_create_user_id,
-               e.create_time          as e_create_time,
-               e.user_renew_id        as e_user_renew_id,
-               e.renew_time           as e_renew_time,
+        e.id as e_id,
+        e.role_id as e_role_id,
+        e.username as e_username,
+        e.password as e_password,
+        e.address as e_address,
+        e.phone as e_phone,
+        e.create_user_id as e_create_user_id,
+        e.create_time as e_create_time,
+        e.user_renew_id as e_user_renew_id,
+        e.renew_time as e_renew_time,
 
-               wa.id                  as wa_id,
-               wa.role_id             as wa_role_id,
-               wa.username            as wa_username,
-               wa.password            as wa_password,
-               wa.address             as wa_address,
-               wa.phone               as wa_phone,
-               wa.create_user_id      as wa_create_user_id,
-               wa.create_time         as wa_create_time,
-               wa.user_renew_id       as wa_user_renew_id,
-               wa.renew_time          as wa_renew_time,
+        wa.id as wa_id,
+        wa.role_id as wa_role_id,
+        wa.username as wa_username,
+        wa.password as wa_password,
+        wa.address as wa_address,
+        wa.phone as wa_phone,
+        wa.create_user_id as wa_create_user_id,
+        wa.create_time as wa_create_time,
+        wa.user_renew_id as wa_user_renew_id,
+        wa.renew_time as wa_renew_time,
 
-               sku.id                 as sku_id,
-               sku.spu_id             as sku_spu_id,
-               sku.sku_name           as sku_sku_name,
-               sku.sku_desc           as sku_sku_desc,
-               sku.color_id           as sku_color_id,
-               sku.price_id           as sku_price_id,
-               sku.Stock_id           as sku_Stock_id,
-               sku.sales_volume       as sku_sales_volume,
-               sku.company_id         as sku_company_id,
-               sku.manufacturer       as sku_manufacturer,
-               sku.Supplier_id        as sku_Supplier_id,
-               sku.create_user_id     as sku_create_user_id,
-               sku.create_time        as sku_create_time,
-               sku.user_renewId       as sku_user_renewId,
-               sku.renew_time         as sku_renew_time,
+        sku.id as sku_id,
+        sku.spu_id as sku_spu_id,
+        sku.sku_name as sku_sku_name,
+        sku.sku_desc as sku_sku_desc,
+        sku.color_id as sku_color_id,
+        sku.price_id as sku_price_id,
+        sku.Stock_id as sku_Stock_id,
+        sku.sales_volume as sku_sales_volume,
+        sku.company_id as sku_company_id,
+        sku.manufacturer as sku_manufacturer,
+        sku.Supplier_id as sku_Supplier_id,
+        sku.create_user_id as sku_create_user_id,
+        sku.create_time as sku_create_time,
+        sku.user_renewId as sku_user_renewId,
+        sku.renew_time as sku_renew_time,
 
-               spu.id                 as spu_id,
-               spu.good_name          as spu_good_name,
-               spu.brand              as spu_brand,
-               spu.sort_id            as spu_sort_id,
-               spu.status             as spu_status,
-               spu.create_user_id     as spu_create_user_id,
-               spu.create_time        as spu_create_time,
-               spu.user_renew_id      as spu_user_renew_id,
-               spu.renew_time         as spu_renew_time,
-               spu.con1               as spu_con1,
-               spu.con2               as spu_con2,
-               spu.con3               as spu_con3
+        spu.id as spu_id,
+        spu.good_name as spu_good_name,
+        spu.brand as spu_brand,
+        spu.sort_id as spu_sort_id,
+        spu.status as spu_status,
+        spu.create_user_id as spu_create_user_id,
+        spu.create_time as spu_create_time,
+        spu.user_renew_id as spu_user_renew_id,
+        spu.renew_time as spu_renew_time,
+        spu.con1 as spu_con1,
+        spu.con2 as spu_con2,
+        spu.con3 as spu_con3
 
         from warehousing w
-                 left join purchase p
-                           on w.purchase_id = p.id
-                 left join detailed_purchase dp on w.detailed_purchase_id = dp.id
-                 left join user e on w.examine_user_id = e.id
-                 left join user wa on w.Warehousing_user_id = wa.id
-                 left join goodsku sku on dp.sku_id = sku.id
-                 left join goodspu spu on sku.spu_id = spu.id
-        where w.status = #{status}
+        left join purchase p
+        on w.purchase_id = p.id
+        left join detailed_purchase dp on w.detailed_purchase_id = dp.id
+        left join user e on w.examine_user_id = e.id
+        left join user wa on w.Warehousing_user_id = wa.id
+        left join goodsku sku on dp.sku_id = sku.id
+        left join goodspu spu on sku.spu_id = spu.id
+        <where>
+            <foreach collection="status" item="stu" open="(" separator=" or " close=")">
+                w.status = #{stu}
+            </foreach>
+        </where>
+        order by w.status;
     </select>
 </mapper>
