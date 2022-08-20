@@ -2,6 +2,7 @@ package com.zb.controller;
 
 import com.zb.pojo.*;
 import com.zb.service.StokeServicec;
+import org.apache.ibatis.javassist.runtime.Desc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -65,9 +66,20 @@ public class stokeController {
      */
     @RequestMapping("addDetailedPurchase")
     @ResponseBody
-    public Integer addDetailedPurchase(String token, String Desc, Integer number, String goods, String vendor) {
+    public Integer addDetailedPurchase(String token,
+                                       String Desc,
+                                       String number,
+                                       String goods,
+                                       String vendor) {
+//        System.out.println("token:" + token);
+//        System.out.println("Desc:" + Desc);
+//        System.out.println("number:" + number);
+//        System.out.println("goods:" + goods);
+//        System.out.println("vendor:" + vendor);
+
         //获得更改用户的信息
         User o = (User) redisTemplate.opsForValue().get(token);
+        /**设置详情表*/
         DetailedPurchase d = new DetailedPurchase();
         /** 进货单id*/
         d.setPurchaseId((long) 0);
@@ -83,7 +95,7 @@ public class stokeController {
         Price price = stokeServicec.listPriceById(g.getPriceId());
         d.setPurchasePrice(price.getPrice());
         /** 数量 */
-        d.setNumber(number);
+        d.setNumber(Integer.valueOf(number));
         /**创建订单时订单状态为1*/
         d.setStatus(5);
         /**设置创建人和时间*/
@@ -93,6 +105,21 @@ public class stokeController {
         d.setUserRenewId(o.getId());
         d.setRenewTime(new Date());
 
+        /**设置进货单*/
+        //描述
+        Purchase p = new Purchase();
+        p.setPurchaseDesc(Desc);
+        //进货数量
+        p.setPurchaseNumber(Long.valueOf(number));
+        //创建人
+        p.setCreateUserId(o.getId());
+        p.setCreateTime(new Date());
+        //设置更新人和时间
+        p.setUserRenewId(o.getId());
+        p.setRenewTime(new Date());
+        //审核人状态  刚申请  状态默认0
+        p.setStatus(0);
+        stokeServicec.addPurchase(p);
         /** 华丽的分界线 */
 //        for (int i = 0; i <= 5; i++) {
 //            System.out.println("===================================================================");

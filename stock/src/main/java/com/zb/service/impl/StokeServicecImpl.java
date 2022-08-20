@@ -27,6 +27,11 @@ public class StokeServicecImpl implements StokeServicec {
     }
 
     @Override
+    public Integer addPurchase(Purchase p) {
+        return stokeMapper.addPurchase(p);
+    }
+
+    @Override
     public List<DetailedPurchase> listPurchaseDetailedPurchase() {
         return stokeMapper.listPurchaseDetailedPurchase();
     }

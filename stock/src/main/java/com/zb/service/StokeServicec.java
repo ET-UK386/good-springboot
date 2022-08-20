@@ -13,6 +13,8 @@ public interface StokeServicec {
 
     List<Goodsku> listGoodSku();
 
+    Integer addPurchase(Purchase p);
+
     Integer addDetailedPurchase(DetailedPurchase d);
 
     List<Vendor> listVendor();
