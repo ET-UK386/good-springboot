@@ -22,4 +22,6 @@ public interface StokeServicec {
     Goodsku listGoodSkuById(Integer goods);
 
     Price listPriceById(Integer id);
+
+    Integer listMaxPurchaseId();
 }

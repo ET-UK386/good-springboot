@@ -24,4 +24,6 @@ public interface StokeMapper {
     List<Vendor> listVendor();
 
     Price listPriceById(Integer id);
+
+    Integer listMaxPurchaseId();
 }

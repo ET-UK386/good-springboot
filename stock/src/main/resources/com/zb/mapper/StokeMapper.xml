@@ -54,7 +54,7 @@
         </association>
     </resultMap>
     <insert id="addPurchase">
-        INSERT INTO `purchase` VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, DEFAULT, DEFAULT, DEFAULT, #{status},#{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
+        INSERT INTO `purchase` VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, #{examineUserId}, #{examineTime}, #{examineOpinion}, #{status},#{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
     </insert>
     <insert id="addDetailedPurchase">
         INSERT into detailed_purchase VALUES(DEFAULT,#{purchaseId},#{vendorId},#{skuId},#{batch},#{purchasePrice},#{number},#{status},#{createUserId},#{createTime},#{userRenewId},#{renewTime},DEFAULT,DEFAULT,DEFAULT)
@@ -221,5 +221,8 @@
     </select>
     <select id="listPriceById" resultType="com.zb.pojo.Price">
         SELECT * FROM `price` where id=#{id}
+    </select>
+    <select id="listMaxPurchaseId" resultType="java.lang.Integer">
+        SELECT max(id) from purchase
     </select>
 </mapper>

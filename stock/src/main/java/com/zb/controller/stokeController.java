@@ -82,7 +82,8 @@ public class stokeController {
         /**设置详情表*/
         DetailedPurchase d = new DetailedPurchase();
         /** 进货单id*/
-        d.setPurchaseId((long) 0);
+        Integer purchaseId = stokeServicec.listMaxPurchaseId();
+        d.setPurchaseId(Long.valueOf(purchaseId)+1);
         /** 用时间戳记录批次*/
         String TradeNo = String.valueOf(System.currentTimeMillis());
         d.setBatch(TradeNo);
@@ -119,6 +120,11 @@ public class stokeController {
         p.setRenewTime(new Date());
         //审核人状态  刚申请  状态默认0
         p.setStatus(0);
+        //审核人
+        p.setExamineUserId(o.getId());
+        p.setExamineTime(new Date());
+        //审核意见
+        p.setExamineOpinion("无");
         stokeServicec.addPurchase(p);
         /** 华丽的分界线 */
 //        for (int i = 0; i <= 5; i++) {
