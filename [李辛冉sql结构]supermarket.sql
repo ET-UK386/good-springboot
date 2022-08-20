@@ -11,7 +11,7 @@
  Target Server Version : 50560
  File Encoding         : 65001
 
- Date: 14/08/2022 13:31:12
+ Date: 20/08/2022 19:36:24
 */
 
 SET NAMES utf8mb4;
@@ -51,7 +51,7 @@ CREATE TABLE `detailed_purchase`  (
   `batch` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '批次',
   `purchase_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '进货单价',
   `number` int(11) NULL DEFAULT NULL COMMENT '数量',
-  `status` int(11) NULL DEFAULT NULL COMMENT '1: 同意， 2：代表驳回， 3：供应商没货',
+  `status` int(11) NULL DEFAULT NULL COMMENT '1: 同意， 2：代表驳回， 3：供应商没货，4.订单完成，5.订单创建',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
@@ -60,12 +60,16 @@ CREATE TABLE `detailed_purchase`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买详情' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买详情' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of detailed_purchase
 -- ----------------------------
 INSERT INTO `detailed_purchase` VALUES (1, 1, 1, 1, '100001', 3.00, 2, 1, 1, '2022-08-04 10:27:50', 1, '2022-08-04 10:27:50', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (24, 3, 1, 1, '1660965210835', 3.50, 100, 5, 1, '2022-08-20 11:13:30', 1, '2022-08-20 11:13:30', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (25, 4, 1, 1, '1660968972226', 3.50, 100, 5, 1, '2022-08-20 12:16:12', 1, '2022-08-20 12:16:12', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (26, 5, 1, 1, '1660982104857', 3.50, 200, 5, 1, '2022-08-20 15:55:04', 1, '2022-08-20 15:55:04', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (27, 6, 1, 2, '1660982212579', 2.00, 1111, 5, 1, '2022-08-20 15:56:52', 1, '2022-08-20 15:56:52', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for goodsku
@@ -91,12 +95,13 @@ CREATE TABLE `goodsku`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品sku' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品sku' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of goodsku
 -- ----------------------------
 INSERT INTO `goodsku` VALUES (1, 1, '可乐', '饮料', 1, 1, 1, 10, 1, '可口可乐', 1, 1, '2022-08-04 10:27:50', 1, '2022-08-04 10:27:50', NULL, NULL, NULL);
+INSERT INTO `goodsku` VALUES (2, 2, '巧克力', '零食', 1, 2, 2, 20, 2, '德福', 2, 2, '2022-08-18 11:24:03', 2, '2022-08-18 11:24:03', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for goodspu
@@ -149,8 +154,8 @@ INSERT INTO `menu` VALUES (7, '供应商', NULL, 0, '/Supplier', 'el-icon-s-cust
 INSERT INTO `menu` VALUES (8, '员工管理', NULL, 0, '/Employee', 'el-icon-user');
 INSERT INTO `menu` VALUES (101, '零售出库', '2', 1, '/Retail/Outbound', NULL);
 INSERT INTO `menu` VALUES (102, '零售退货', '2', 2, '/Retail/Returns', NULL);
-INSERT INTO `menu` VALUES (103, '订单明细', '3', 1, '/Purchase/Detail', NULL);
-INSERT INTO `menu` VALUES (104, '采购统计', '3', 2, '/Purchase/Statistics', NULL);
+INSERT INTO `menu` VALUES (103, '采购商品', '3', 1, '/Purchase/Stock', NULL);
+INSERT INTO `menu` VALUES (104, '订单明细', '3', 2, '/Purchase/Detail', NULL);
 INSERT INTO `menu` VALUES (105, '入库明细', '4', 1, '/Warehouse/Detail', NULL);
 INSERT INTO `menu` VALUES (106, '商品信息', '5', 1, '/Commodity/Message', NULL);
 INSERT INTO `menu` VALUES (107, '收入', '6', 1, '/Finance/Income', NULL);
@@ -159,7 +164,7 @@ INSERT INTO `menu` VALUES (109, '供应商信息', '7', 1, '/Supplier/Message', 
 INSERT INTO `menu` VALUES (110, '收银员', '8', 1, '/Employee/Cashier', NULL);
 INSERT INTO `menu` VALUES (111, '验货员', '8', 2, '/Employee/Inspector', NULL);
 INSERT INTO `menu` VALUES (112, '理货员', '8', 3, '/Employee/TallyClerk', NULL);
-INSERT INTO `menu` VALUES (113, '采购商品', '3', 3, '/Purchase/Stock', NULL);
+INSERT INTO `menu` VALUES (113, '采购统计', '3', 3, '/Purchase/Statistics', NULL);
 
 -- ----------------------------
 -- Table structure for power
@@ -210,6 +215,7 @@ CREATE TABLE `price`  (
 -- Records of price
 -- ----------------------------
 INSERT INTO `price` VALUES (1, 1, 3.50, 2, '2022-08-09 10:26:47', 2, '2022-08-09 10:26:47', NULL, NULL, NULL);
+INSERT INTO `price` VALUES (2, 2, 2.00, 1, '2022-08-20 10:19:03', 1, '2022-08-20 10:19:08', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for purchase
@@ -231,12 +237,16 @@ CREATE TABLE `purchase`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of purchase
 -- ----------------------------
 INSERT INTO `purchase` VALUES (1, '可乐', 100, 2, '2022-08-13 10:22:20', '无', 1, 1, '2022-08-13 10:22:20', 2, '2022-08-13 10:22:20', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (3, '可乐缺货', 100, 1, '2022-08-20 12:28:26', '无', 0, 1, '2022-08-20 11:13:30', 1, '2022-08-20 11:13:30', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (4, '可乐缺货', 100, 1, '2022-08-20 12:28:29', '无', 0, 1, '2022-08-20 12:16:12', 1, '2022-08-20 12:16:12', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (5, '可乐缺货', 200, 1, '2022-08-20 15:55:04', '无', 0, 1, '2022-08-20 15:55:04', 1, '2022-08-20 15:55:04', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (6, '巧克力', 1111, 1, '2022-08-20 15:56:52', '无', 0, 1, '2022-08-20 15:56:52', 1, '2022-08-20 15:56:52', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -255,7 +265,7 @@ CREATE TABLE `role`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role
@@ -342,7 +352,7 @@ CREATE TABLE `user`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -356,8 +366,8 @@ INSERT INTO `user` VALUES (6, 4, '坤坤', '123', '美国', '1234567845', 1, '20
 INSERT INTO `user` VALUES (7, 4, '特朗普', '123', '南京', '13003405082', 0, '2022-08-11 00:00:00', 0, '2022-08-11 00:00:00', '1', '0', '0');
 INSERT INTO `user` VALUES (8, 8, '狗头', '123', '南京', '130034055', 1, '2022-08-13 14:43:35', 1, '2022-08-13 15:03:35', '1', NULL, NULL);
 INSERT INTO `user` VALUES (9, 2, '啊啊啊', '多少', '多少', '1321313', 1, '2022-08-13 14:49:01', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `user` VALUES (10, 2, '马儿哈啊', '123', '天津', '1234567546', 1, '2022-08-13 14:53:40', 1, '2022-08-13 16:22:09', '1', NULL, NULL);
-INSERT INTO `user` VALUES (11, 2, '二五', '123', '新疆', '12365456417', 1, '2022-08-13 15:04:59', 1, '2022-08-13 15:05:12', '1', NULL, NULL);
+INSERT INTO `user` VALUES (10, 2, '马儿哈啊', '12321', '天津2', '12345675462', 1, '2022-08-13 14:53:40', 21, '2022-08-18 14:19:10', '1', NULL, NULL);
+INSERT INTO `user` VALUES (11, 2, '二五', '123122', '新疆', '12365456417', 1, '2022-08-13 15:04:59', 21, '2022-08-18 14:18:09', '1', NULL, NULL);
 INSERT INTO `user` VALUES (12, 3, '麦子', '123', '安徽', '15694510461', 1, '2022-08-13 16:23:38', 1, '2022-08-13 17:30:38', '1', NULL, NULL);
 INSERT INTO `user` VALUES (13, 2, '哈皮', '123', '哈尔滨', '15454672343', 1, '2022-08-13 16:45:54', 1, '2022-08-13 16:45:54', '1', NULL, NULL);
 INSERT INTO `user` VALUES (14, 2, '盖伦', '123', '内蒙古', '6545646614', 1, '2022-08-13 16:56:38', 1, '2022-08-13 16:56:38', '1', NULL, NULL);
@@ -367,6 +377,7 @@ INSERT INTO `user` VALUES (17, 4, '打速度', '123', '南京', '1231313', 1, '2
 INSERT INTO `user` VALUES (18, 4, '理啊啊', '3123', '南京', '1300340163', 1, '2022-08-13 17:09:34', 1, '2022-08-13 17:22:29', '1', NULL, NULL);
 INSERT INTO `user` VALUES (19, 3, '打速度', '的速度', '大萨达', '12313213', 1, '2022-08-13 17:12:26', 1, '2022-08-13 17:26:57', '1', NULL, NULL);
 INSERT INTO `user` VALUES (20, 2, '滴滴啊', '1231', '哈耳边', '1646132163', 1, '2022-08-13 17:17:39', 1, '2022-08-13 17:28:14', '1', NULL, NULL);
+INSERT INTO `user` VALUES (21, 1, '老李', '123', '1111', '1111', 1, '2022-08-04 12:22:11', 1, '2022-08-17 12:22:16', '1', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for vendor
