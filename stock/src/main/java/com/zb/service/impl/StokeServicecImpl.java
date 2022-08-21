@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,6 +32,7 @@ public class StokeServicecImpl implements StokeServicec {
         return stokeMapper.listMaxPurchaseId();
     }
 
+
     @Override
     public Integer addPurchase(Purchase p) {
         return stokeMapper.addPurchase(p);
@@ -39,6 +41,17 @@ public class StokeServicecImpl implements StokeServicec {
     @Override
     public List<DetailedPurchase> listPurchaseDetailedPurchase() {
         return stokeMapper.listPurchaseDetailedPurchase();
+    }
+
+
+    @Override
+    public Integer updateDetailedPurchase(long status, long renewId, Date reTime, long puId) {
+        return stokeMapper.updateDetailedPurchase(status,renewId,reTime,puId);
+    }
+
+    @Override
+    public Integer updatePurchaseById(long userId, Long renewUserId, long id, Integer status, String opinion, Date exDate, Date renDate) {
+        return stokeMapper.updatePurchaseById(userId, renewUserId, id, status, opinion, exDate, renDate);
     }
 
     @Override

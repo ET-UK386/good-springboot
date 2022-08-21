@@ -11,7 +11,7 @@
  Target Server Version : 50560
  File Encoding         : 65001
 
- Date: 20/08/2022 19:36:24
+ Date: 21/08/2022 15:06:54
 */
 
 SET NAMES utf8mb4;
@@ -51,7 +51,7 @@ CREATE TABLE `detailed_purchase`  (
   `batch` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '批次',
   `purchase_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '进货单价',
   `number` int(11) NULL DEFAULT NULL COMMENT '数量',
-  `status` int(11) NULL DEFAULT NULL COMMENT '1: 同意， 2：代表驳回， 3：供应商没货，4.订单完成，5.订单创建',
+  `status` int(11) NULL DEFAULT NULL COMMENT '0.审核中，1: 同意， 2：代表驳回， 3：供应商没货，4.订单完成',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
@@ -65,11 +65,11 @@ CREATE TABLE `detailed_purchase`  (
 -- ----------------------------
 -- Records of detailed_purchase
 -- ----------------------------
-INSERT INTO `detailed_purchase` VALUES (1, 1, 1, 1, '100001', 3.00, 2, 1, 1, '2022-08-04 10:27:50', 1, '2022-08-04 10:27:50', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (24, 3, 1, 1, '1660965210835', 3.50, 100, 5, 1, '2022-08-20 11:13:30', 1, '2022-08-20 11:13:30', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (25, 4, 1, 1, '1660968972226', 3.50, 100, 5, 1, '2022-08-20 12:16:12', 1, '2022-08-20 12:16:12', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (26, 5, 1, 1, '1660982104857', 3.50, 200, 5, 1, '2022-08-20 15:55:04', 1, '2022-08-20 15:55:04', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (27, 6, 1, 2, '1660982212579', 2.00, 1111, 5, 1, '2022-08-20 15:56:52', 1, '2022-08-20 15:56:52', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (1, 1, 1, 1, '100001', 3.00, 2, 3, 1, '2022-08-04 10:27:50', 1, '2022-08-21 15:02:59', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (24, 3, 1, 1, '1660965210835', 3.50, 100, 0, 1, '2022-08-20 11:13:30', 1, '2022-08-20 11:13:30', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (25, 4, 1, 1, '1660968972226', 3.50, 100, 3, 1, '2022-08-20 12:16:12', 1, '2022-08-21 15:00:53', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (26, 5, 1, 1, '1660982104857', 3.50, 200, 3, 1, '2022-08-20 15:55:04', 1, '2022-08-21 15:04:26', NULL, NULL, NULL);
+INSERT INTO `detailed_purchase` VALUES (27, 6, 1, 2, '1660982212579', 2.00, 1111, 0, 1, '2022-08-20 15:56:52', 1, '2022-08-20 15:56:52', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for goodsku
@@ -228,7 +228,7 @@ CREATE TABLE `purchase`  (
   `examine_user_id` int(11) NULL DEFAULT NULL COMMENT '审核人id 与用户表相关联',
   `examine_time` datetime NULL DEFAULT NULL COMMENT '审核时间',
   `examine_opinion` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核人意见',
-  `examine_status` int(11) NULL DEFAULT NULL COMMENT '审核状态 0通过 1不通过',
+  `examine_status` int(11) NULL DEFAULT NULL COMMENT '0：审核中，1：不通过，2：通过',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
@@ -242,10 +242,10 @@ CREATE TABLE `purchase`  (
 -- ----------------------------
 -- Records of purchase
 -- ----------------------------
-INSERT INTO `purchase` VALUES (1, '可乐', 100, 2, '2022-08-13 10:22:20', '无', 1, 1, '2022-08-13 10:22:20', 2, '2022-08-13 10:22:20', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (3, '可乐缺货', 100, 1, '2022-08-20 12:28:26', '无', 0, 1, '2022-08-20 11:13:30', 1, '2022-08-20 11:13:30', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (4, '可乐缺货', 100, 1, '2022-08-20 12:28:29', '无', 0, 1, '2022-08-20 12:16:12', 1, '2022-08-20 12:16:12', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (5, '可乐缺货', 200, 1, '2022-08-20 15:55:04', '无', 0, 1, '2022-08-20 15:55:04', 1, '2022-08-20 15:55:04', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (1, '可乐', 100, 1, '2022-08-21 15:02:59', '请问企鹅', 1, 1, '2022-08-13 10:22:20', 1, '2022-08-21 15:02:59', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (3, '可乐缺货', 100, 1, '2022-08-21 13:32:46', '456', 0, 1, '2022-08-20 11:13:30', 1, '2022-08-21 13:32:46', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (4, '可乐缺货', 100, 1, '2022-08-21 15:00:53', '手动阀手动阀手动阀手动阀手动阀手动阀', 1, 1, '2022-08-20 12:16:12', 1, '2022-08-21 15:00:53', NULL, NULL, NULL);
+INSERT INTO `purchase` VALUES (5, '可乐缺货', 200, 1, '2022-08-21 15:04:26', '供应商没货', 1, 1, '2022-08-20 15:55:04', 1, '2022-08-21 15:04:26', NULL, NULL, NULL);
 INSERT INTO `purchase` VALUES (6, '巧克力', 1111, 1, '2022-08-20 15:56:52', '无', 0, 1, '2022-08-20 15:56:52', 1, '2022-08-20 15:56:52', NULL, NULL, NULL);
 
 -- ----------------------------
@@ -370,7 +370,7 @@ INSERT INTO `user` VALUES (10, 2, '马儿哈啊', '12321', '天津2', '123456754
 INSERT INTO `user` VALUES (11, 2, '二五', '123122', '新疆', '12365456417', 1, '2022-08-13 15:04:59', 21, '2022-08-18 14:18:09', '1', NULL, NULL);
 INSERT INTO `user` VALUES (12, 3, '麦子', '123', '安徽', '15694510461', 1, '2022-08-13 16:23:38', 1, '2022-08-13 17:30:38', '1', NULL, NULL);
 INSERT INTO `user` VALUES (13, 2, '哈皮', '123', '哈尔滨', '15454672343', 1, '2022-08-13 16:45:54', 1, '2022-08-13 16:45:54', '1', NULL, NULL);
-INSERT INTO `user` VALUES (14, 2, '盖伦', '123', '内蒙古', '6545646614', 1, '2022-08-13 16:56:38', 1, '2022-08-13 16:56:38', '1', NULL, NULL);
+INSERT INTO `user` VALUES (14, 2, '盖伦', '123', '内蒙古', '6545646614', 1, '2022-08-13 16:56:38', 1, '2022-08-21 10:13:51', '1', NULL, NULL);
 INSERT INTO `user` VALUES (15, 2, '打多少', '1231', '南京', '16545313213', 1, '2022-08-13 16:57:59', 1, '2022-08-13 16:57:59', '1', NULL, NULL);
 INSERT INTO `user` VALUES (16, 2, '大萨达', '211321', '南京', '123', 1, '2022-08-13 17:03:16', 1, '2022-08-13 17:03:16', '1', NULL, NULL);
 INSERT INTO `user` VALUES (17, 4, '打速度', '123', '南京', '1231313', 1, '2022-08-13 17:04:07', 1, '2022-08-13 17:04:07', '1', NULL, NULL);
