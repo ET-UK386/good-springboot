@@ -7,15 +7,168 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired(required = false)
+
+    @Autowired
     private UserMapper userMapper;
+    //登录
+    @Override
+    public User listUser(String username, String password) {
+        return userMapper.listUser(username,password);
+    }
+    //添加收银员
+    @Override
+    public int addUserCashier(User u) {
+        return userMapper.addUserCashier(u);
+    }
+    //添加验货员
+    @Override
+    public int addSurveyor(User u) {
+        return userMapper.addSurveyor(u);
+    }
+    //添加理货员
+    @Override
+    public int addTally(User u) {
+        return userMapper.addTally(u);
+    }
+
+    //修改用户
+
 
     @Override
-    public User login(String username, String password) {
-        return userMapper.login(username, password);
+    public int UpdateGetByUserId(User u) {
+        return userMapper.UpdateGetByUserId(u);
+    }
+
+
+    //查询全部的收银员
+    @Override
+    public List<User> ListCashier(String username, String address, String phone, int currentPage, int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+        map.put("currentPage",(currentPage-1)*pageSize);
+        map.put("pageSize",pageSize);
+
+
+
+        return userMapper.ListCashier(map);
+    }
+
+    @Override
+    public int countListCashier(String username, String address, String phone) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+
+        return userMapper.countListCashier(map);
+    }
+    //三表查询全部验货员
+    @Override
+    public List<User> surveyor(String username, String address, String phone, int currentPage, int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+        map.put("currentPage",(currentPage-1)*pageSize);
+        map.put("pageSize",pageSize);
+        return userMapper.surveyor(map);
+    }
+
+    @Override
+    public int countListsurveyor(String username, String address, String phone) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+
+        return userMapper.countListsurveyor(map);
+    }
+
+
+    //三表查询全部理货员
+    @Override
+    public List<User> tally(String username, String address, String phone, int currentPage, int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+
+        }
+        map.put("currentPage",(currentPage-1)*pageSize);
+        map.put("pageSize",pageSize);
+        return userMapper.tally(map);
+    }
+
+    @Override
+    public int countListtally(String username, String address, String phone) {
+        Map<String,Object> map=new HashMap<>();
+        if(username!=null &&!"".equals(username.trim())){
+            map.put("username",username);
+        }
+        if(address!=null &&!"".equals(address.trim())){
+            map.put("address",address);
+        }
+        if(phone!=null &&!"".equals(phone.trim())){
+            map.put("phone",phone);
+        }
+
+        return userMapper.countListtally(map);
+    }
+
+    @Override
+    public List<User> userList() {
+        return userMapper.userList();
+    }
+
+    //修改用户显示状态为0
+
+    @Override
+    public int deleteByid(int id) {
+        return userMapper.deleteByid(id);
+    }
+
+    //根据id查询
+    @Override
+    public User userGetById(int id) {
+        return userMapper.userGetById(id);
     }
 }

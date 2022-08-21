@@ -1,22 +1,217 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zb.mapper.UserMapper">
-    <select id="login" resultType="com.zb.pojo.User">
-        select id,
-               role_id,
-               username,
-               password,
-               address,
-               phone,
-               create_user_id,
-               create_time,
-               user_renew_id,
-               renew_time,
-               con1,
-               con2,
-               con3
-        from user
-        where username = #{username}
-          and password = #{password};
+
+
+    <resultMap id="User" type="com.zb.pojo.User">
+        <result property="id" column="id"></result>
+        <result property="roleId" column="role_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="address" column="address"></result>
+        <result property="phone" column="phone"></result>
+        <result property="createUserId" column="create_user_id"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="userRenewId" column="user_renew_id"></result>
+        <result property="renewTime" column="renew_time"></result>
+
+        <association property="role" javaType="com.zb.pojo.Role">
+            <result property="id" column="id"></result>
+            <result property="username" column="rusername"></result>
+            <result property="userPower" column="user_power"></result>
+            <result property="parentId" column="parent_id"></result>
+            <result property="createUserId" column="create_user_id"></result>
+            <result property="createTime" column="create_time"></result>
+            <result property="userRenewId" column="user_renew_id"></result>
+            <result property="renewTime" column="renew_time"></result>
+
+            <collection property="power"  ofType="com.zb.pojo.Power">
+                <result property="id" column="id"></result>
+                <result property="roleId" column="role_id"></result>
+                <result property="canUse" column="can_use"></result>
+                <result property="createUserId" column="create_user_id"></result>
+                <result property="createTime" column="create_time"></result>
+                <result property="userRenewId" column="user_renew_id"></result>
+                <result property="renewTime" column="renew_time"></result>
+
+
+            </collection>
+        </association>
+
+        <!--create_user_id AS createUserId,create_time createTime-->
+
+    </resultMap>
+    <insert id="addUserCashier">
+
+INSERT INTO USER(role_id ,username,password,address,phone,create_user_id,create_time,
+con1,renew_time,user_renew_id)
+values(2,#{username},#{password},#{address},#{phone},#{createUserId},NOW(),1,NOW(),#{userRenewId})
+
+
+    </insert>
+
+
+    <insert id="addSurveyor">
+        INSERT INTO USER(role_id ,username,password,address,phone,create_user_id,create_time,
+con1,renew_time,user_renew_id)
+values(3,#{username},#{password},#{address},#{phone},#{createUserId},NOW(),1,NOW(),#{userRenewId})
+
+
+
+    </insert>
+    <insert id="addTally">
+        INSERT INTO USER(role_id ,username,password,address,phone,create_user_id,create_time,
+con1,renew_time,user_renew_id)
+values(4,#{username},#{password},#{address},#{phone},#{createUserId},NOW(),1,NOW(),#{userRenewId})
+
+
+    </insert>
+    <update id="UpdateGetByUserId">
+
+         update USER set  role_id=#{roleId},username=#{username},password=#{password},
+         address=#{address},phone=#{phone},renew_time=NOW(),user_renew_id=#{userRenewId} where id=#{id}
+
+    </update>
+
+
+    <update id="deleteByid">
+
+        update user set con1=0 where id=#{id}
+    </update>
+
+
+    <select id="listUser" resultMap="User">
+
+SELECT u.id,u.role_id,u.username,u.password,u.address,
+u.phone,u.create_user_id,u.create_time,u.user_renew_id,u.renew_time,
+r.id AS rid,r.username AS rusername,r.user_power,r.parent_id,r.create_user_id,r.create_time AS rcreatetime,
+r.user_renew_id,r.renew_time AS rrenewtime,
+p.id AS pid , p.role_id ,p.can_use,p.create_user_id,p.create_time AS pcreatetime,p.user_renew_id,
+p.renew_time AS prenewtime
+ FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+ AND r.id=p.id  where u.username=#{username} and u.password=#{password}
+
+
     </select>
+
+    <select id="ListCashier"  resultMap="User">
+        SELECT u.id,u.role_id,u.username,u.password,u.address,
+        u.phone,u.create_user_id,u.create_time,u.user_renew_id,u.renew_time,
+        r.id AS rid,r.username AS rusername,r.user_power,r.parent_id,r.create_user_id,r.create_time AS rcreatetime,
+        r.user_renew_id,r.renew_time AS rrenewtime,
+        p.id AS pid , p.role_id ,p.can_use,p.create_user_id,p.create_time AS pcreatetime,p.user_renew_id,
+        p.renew_time AS prenewtime
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='收银员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+
+        limit   #{currentPage},#{pageSize}
+    </select>
+
+    <select id="userList" resultType="com.zb.pojo.User">
+
+SELECT * FROM USER
+    </select>
+    <select id="userGetById" resultType="com.zb.pojo.User">
+
+        select * from  user where id=#{id};
+    </select>
+
+
+    <select id="surveyor" resultMap="User">
+        SELECT u.id,u.role_id,u.username,u.password,u.address,
+        u.phone,u.create_user_id,u.create_time,u.user_renew_id,u.renew_time,
+        r.id AS rid,r.username AS rusername,r.user_power,r.parent_id,r.create_user_id,r.create_time AS rcreatetime,
+        r.user_renew_id,r.renew_time AS rrenewtime,
+        p.id AS pid , p.role_id ,p.can_use,p.create_user_id,p.create_time AS pcreatetime,p.user_renew_id,
+        p.renew_time AS prenewtime
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='验货员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+
+        limit   #{currentPage},#{pageSize}
+    </select>
+    <select id="tally" resultMap="User">
+        SELECT u.id,u.role_id,u.username,u.password,u.address,
+        u.phone,u.create_user_id,u.create_time,u.user_renew_id,u.renew_time,
+        r.id AS rid,r.username AS rusername,r.user_power,r.parent_id,r.create_user_id,r.create_time AS rcreatetime,
+        r.user_renew_id,r.renew_time AS rrenewtime,
+        p.id AS pid , p.role_id ,p.can_use,p.create_user_id,p.create_time AS pcreatetime,p.user_renew_id,
+        p.renew_time AS prenewtime
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='理货员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+        limit   #{currentPage},#{pageSize}
+
+    </select>
+    <select id="countListCashier" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='收银员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+    </select>
+    <select id="countListsurveyor" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='验货员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+
+    </select>
+    <select id="countListtally" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM  USER u INNER JOIN role r ON  u.role_id=r.id  INNER JOIN  POWER p   ON r.user_power=r.id
+        AND r.id=p.id  WHERE r.username='理货员' AND u.con1=1
+        <if test="username!=null">
+            and u.username like concat ('%',#{username},'%')
+        </if>
+        <if test="address!=null">
+            and u.address=#{address}
+        </if>
+        <if test="phone!=null">
+            and u.phone=#{phone}
+        </if>
+
+    </select>
+
 </mapper>

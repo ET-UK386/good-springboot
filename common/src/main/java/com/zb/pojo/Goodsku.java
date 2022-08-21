@@ -44,6 +44,9 @@ public class Goodsku {
   private Integer userRenewId;
   @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
+
+  private Integer logic_status;
+
   private Goodspu goodspu;
   private Sort sort;
   private User user;
@@ -52,6 +55,7 @@ public class Goodsku {
   private Warehouse warehouse;
   private Units units;
   private Vendor vendor;
+
 
   public Integer getId() {
     return id;
@@ -171,6 +175,14 @@ public class Goodsku {
 
   public void setRenewTime(Date renewTime) {
     this.renewTime = renewTime;
+  }
+
+  public Integer getLogic_status() {
+    return logic_status;
+  }
+
+  public void setLogic_status(Integer logic_status) {
+    this.logic_status = logic_status;
   }
 
   public Goodspu getGoodspu() {

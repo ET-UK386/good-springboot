@@ -21,4 +21,19 @@ public class MenuController {
     public List<Menu> listMenu() {
         return menuService.listMenu();
     }
+
+    @RequestMapping("/listMenu2")
+    public List<Menu> listMenu2() {
+        return menuService.listMenu2();
+    }
+
+    @RequestMapping("/listMenu3")
+    public List<Menu> listMenu3() {
+        return menuService.listMenu3();
+    }
+
+    @RequestMapping("/listMenu4")
+    public List<Menu> listMenu4() {
+        return menuService.listMenu4();
+    }
 }

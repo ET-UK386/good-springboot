@@ -16,70 +16,70 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Price {
+    private Integer id;
+    /** sku ID*/
+    private Integer skuId;
+    /** 价格*/
+    private double price;
 
-  private Integer id;
-  /** sku ID*/
-  private Integer skuId;
-  /** 价格*/
-  private double price;
-  private Integer createUserId;
-  private Date createTime;
-  private Integer userRenewId;
-  private Date renewTime;
+    private Integer createUserId;
+    private Date createTime;
+    private Integer userRenewId;
+    private Date renewTime;
 
-  public Integer getId() {
-    return id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public Integer getSkuId() {
-    return skuId;
-  }
+    public Integer getSkuId() {
+        return skuId;
+    }
 
-  public void setSkuId(Integer skuId) {
-    this.skuId = skuId;
-  }
+    public void setSkuId(Integer skuId) {
+        this.skuId = skuId;
+    }
 
-  public double getPrice() {
-    return price;
-  }
+    public double getPrice() {
+        return price;
+    }
 
-  public void setPrice(double price) {
-    this.price = price;
-  }
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-  public Integer getCreateUserId() {
-    return createUserId;
-  }
+    public Integer getCreateUserId() {
+        return createUserId;
+    }
 
-  public void setCreateUserId(Integer createUserId) {
-    this.createUserId = createUserId;
-  }
+    public void setCreateUserId(Integer createUserId) {
+        this.createUserId = createUserId;
+    }
 
-  public Date getCreateTime() {
-    return createTime;
-  }
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-  public Integer getUserRenewId() {
-    return userRenewId;
-  }
+    public Integer getUserRenewId() {
+        return userRenewId;
+    }
 
-  public void setUserRenewId(Integer userRenewId) {
-    this.userRenewId = userRenewId;
-  }
+    public void setUserRenewId(Integer userRenewId) {
+        this.userRenewId = userRenewId;
+    }
 
-  public Date getRenewTime() {
-    return renewTime;
-  }
+    public Date getRenewTime() {
+        return renewTime;
+    }
 
-  public void setRenewTime(Date renewTime) {
-    this.renewTime = renewTime;
-  }
+    public void setRenewTime(Date renewTime) {
+        this.renewTime = renewTime;
+    }
 }

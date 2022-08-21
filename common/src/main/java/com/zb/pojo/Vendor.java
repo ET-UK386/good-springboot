@@ -16,100 +16,136 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vendor {
+    /**
+     * 主键
+     */
+    private Integer id;
+    /**
+     * 供应商名称
+     */
+    private String vendorName;
+    /**
+     * 商品skuid
+     */
+    private Integer skuId;
+    /**
+     * 厂商址
+     */
+    private String vendorAddress;
+    /**
+     * 描述信息
+     */
+    private String desc;
+    /**
+     * 负责人
+     */
+    private String principal;
+    /**
+     * 联系电话
+     */
+    private String tel;
+    /**
+     * 创建人id
+     */
+    private Integer createUserId;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 更新人id
+     */
+    private Integer userRenewId;
+    /**
+     * 更新时间
+     */
+    private Date renewTime;
 
-  private Integer id;
-  /** 厂商址*/
-  private String vendorAddress;
-  /** 描述信息*/
-  private String desc;
-  /** 负责人*/
-  private String principal;
-  /** 联系电话*/
-  private String tel;
+    public Integer getId() {
+        return id;
+    }
 
-  private Integer createUserId;
-  private Date createTime;
-  private Integer userRenewId;
-  private Date renewTime;
-  private String vendorName;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public String getVendorName() {
+        return vendorName;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
 
-  public String getVendorAddress() {
-    return vendorAddress;
-  }
+    public Integer getSkuId() {
+        return skuId;
+    }
 
-  public void setVendorAddress(String vendorAddress) {
-    this.vendorAddress = vendorAddress;
-  }
+    public void setSkuId(Integer skuId) {
+        this.skuId = skuId;
+    }
 
-  public String getDesc() {
-    return desc;
-  }
+    public String getVendorAddress() {
+        return vendorAddress;
+    }
 
-  public void setDesc(String desc) {
-    this.desc = desc;
-  }
+    public void setVendorAddress(String vendorAddress) {
+        this.vendorAddress = vendorAddress;
+    }
 
-  public String getPrincipal() {
-    return principal;
-  }
+    public String getDesc() {
+        return desc;
+    }
 
-  public void setPrincipal(String principal) {
-    this.principal = principal;
-  }
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
-  public String getTel() {
-    return tel;
-  }
+    public String getPrincipal() {
+        return principal;
+    }
 
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
+    public void setPrincipal(String principal) {
+        this.principal = principal;
+    }
 
-  public Integer getCreateUserId() {
-    return createUserId;
-  }
+    public String getTel() {
+        return tel;
+    }
 
-  public void setCreateUserId(Integer createUserId) {
-    this.createUserId = createUserId;
-  }
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
-  public Date getCreateTime() {
-    return createTime;
-  }
+    public Integer getCreateUserId() {
+        return createUserId;
+    }
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
+    public void setCreateUserId(Integer createUserId) {
+        this.createUserId = createUserId;
+    }
 
-  public Integer getUserRenewId() {
-    return userRenewId;
-  }
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-  public void setUserRenewId(Integer userRenewId) {
-    this.userRenewId = userRenewId;
-  }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-  public Date getRenewTime() {
-    return renewTime;
-  }
+    public Integer getUserRenewId() {
+        return userRenewId;
+    }
 
-  public void setRenewTime(Date renewTime) {
-    this.renewTime = renewTime;
-  }
+    public void setUserRenewId(Integer userRenewId) {
+        this.userRenewId = userRenewId;
+    }
 
-  public String getVendorName() {
-    return vendorName;
-  }
+    public Date getRenewTime() {
+        return renewTime;
+    }
 
-  public void setVendorName(String vendorName) {
-    this.vendorName = vendorName;
-  }
+    public void setRenewTime(Date renewTime) {
+        this.renewTime = renewTime;
+    }
 }
