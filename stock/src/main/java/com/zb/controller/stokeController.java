@@ -2,15 +2,15 @@ package com.zb.controller;
 
 import com.zb.pojo.*;
 import com.zb.service.StokeServicec;
-import org.apache.ibatis.javassist.runtime.Desc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @CrossOrigin("*")
@@ -45,14 +45,6 @@ public class stokeController {
         return stokeServicec.listGoodSku();
     }
 
-//    @RequestMapping("addDetailedPurchase")
-//    @ResponseBody
-//    public Integer addDetailedPurchase(@RequestBody DetailedPurchase d, String token) {
-//        User o = (User) redisTemplate.opsForValue().get(token);
-//        d.setCreateUserId(o.getId());
-//        d.setCreateTime(new Date());
-//        return stokeServicec.addDetailedPurchase(d);
-//    }
 
     /**
      * 采购商品
@@ -84,7 +76,7 @@ public class stokeController {
         /** 进货单id*/
         // TODO: 2022/8/21 干啥的 
         Integer purchaseId = stokeServicec.listMaxPurchaseId();
-        d.setPurchaseId(Long.valueOf(purchaseId)+1);
+        d.setPurchaseId(Long.valueOf(purchaseId) + 1);
         /** 用时间戳记录批次*/
         String TradeNo = String.valueOf(System.currentTimeMillis());
         d.setBatch(TradeNo);
@@ -147,4 +139,35 @@ public class stokeController {
         return stokeServicec.listVendor();
     }
 
+
+    /**
+     * 根据token查询id来判断是否能编辑和删除
+     */
+    @RequestMapping("tokenPowerId")
+    @ResponseBody
+    public Map<String, Object> tokenPowerId(String token) {
+        Map<String, Object> map = new HashMap<>();
+        //获得更改用户的信息
+        User o = (User) redisTemplate.opsForValue().get(token);
+        long roleId = o.getRoleId();
+        map.put("roleId", roleId);
+        return map;
+    }
+
+    @RequestMapping("updatePurchaseById")
+    @ResponseBody
+    public Integer updatePurchaseById(String token, Integer status, String opinion, Integer id, @RequestParam(required = false) Integer status2) {
+        System.out.println("============================" + status);
+        //获得更改用户的信息
+        User o = (User) redisTemplate.opsForValue().get(token);
+        long userId = o.getId();
+        Date date = new Date();
+        if (opinion == "") {
+            opinion = "无";
+        }
+        if (status == 1) {
+            stokeServicec.updateDetailedPurchase(status2, userId, date, id);
+        }
+        return stokeServicec.updatePurchaseById(userId, o.getId(), id, status, opinion, date, date);
+    }
 }

@@ -2,7 +2,8 @@ package com.zb.service;
 
 import com.zb.pojo.*;
 
-import java.util.List;
+        import java.util.Date;
+        import java.util.List;
 
 public interface StokeServicec {
     List<Purchase> listPurchase();
@@ -24,4 +25,8 @@ public interface StokeServicec {
     Price listPriceById(Integer id);
 
     Integer listMaxPurchaseId();
+
+    Integer updatePurchaseById(long userId, Long renewUserId, long id, Integer status, String opinion, Date exDate, Date renDate);
+
+    Integer updateDetailedPurchase(long status,long renewId,Date reTime,long puId);
 }
