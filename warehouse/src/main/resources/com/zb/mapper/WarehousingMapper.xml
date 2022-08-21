@@ -4,7 +4,6 @@
 <mapper namespace="com.zb.mapper.WarehousingMapper">
 
     <resultMap id="warehouseMap" type="com.zb.pojo.Warehousing">
-
         <result property="id" column="w_id"/>
         <result property="purchaseId" column="w_purchase_id"/>
         <result property="detailedPurchaseId" column="w_detailed_purchase_id"/>

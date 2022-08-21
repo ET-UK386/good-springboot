@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+
 public class Goodspu {
 
   private Integer id;
@@ -22,15 +22,33 @@ public class Goodspu {
   private String goodName;
   /** 品牌*/
   private String brand;
-  private Long sortId;
+  private Integer sortId;
   private Integer status;
-
-  private Long createUserId;
+  private Integer createUserId;
   private Date createTime;
-  private Long userRenewId;
+  private Integer userRenewId;
   private Date renewTime;
   private Sort sort;
   private User user;
+  private String statusStr;
+  public String getStatusStr() {
+    switch (status){
+      case 0 : statusStr ="上架";
+      break;
+      case 1 : statusStr ="下架";
+      break;
+      case 2 : statusStr ="售罄";
+      break;
+      default:
+        break;
+    }
+    return statusStr;
+  }
+
+  public void setStatusStr(String statusStr) {
+    this.statusStr = statusStr;
+  }
+
   public Integer getId() {
     return id;
   }
@@ -55,11 +73,11 @@ public class Goodspu {
     this.brand = brand;
   }
 
-  public Long getSortId() {
+  public Integer getSortId() {
     return sortId;
   }
 
-  public void setSortId(Long sortId) {
+  public void setSortId(Integer sortId) {
     this.sortId = sortId;
   }
 
@@ -71,11 +89,11 @@ public class Goodspu {
     this.status = status;
   }
 
-  public Long getCreateUserId() {
+  public Integer getCreateUserId() {
     return createUserId;
   }
 
-  public void setCreateUserId(Long createUserId) {
+  public void setCreateUserId(Integer createUserId) {
     this.createUserId = createUserId;
   }
 
@@ -87,11 +105,11 @@ public class Goodspu {
     this.createTime = createTime;
   }
 
-  public Long getUserRenewId() {
+  public Integer getUserRenewId() {
     return userRenewId;
   }
 
-  public void setUserRenewId(Long userRenewId) {
+  public void setUserRenewId(Integer userRenewId) {
     this.userRenewId = userRenewId;
   }
 

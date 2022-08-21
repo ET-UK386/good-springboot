@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Transient;
 
 import java.util.Date;
 
@@ -15,8 +16,42 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class User {
+
+    private Long id;
+    private Long roleId;
+    private String username;
+    private String password;
+    private String address;
+    private String phone;
+    private Long createUserId;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date createTime;
+    private Long userRenewId;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date renewTime;
+    private String con1;
+    private String con2;
+    private String con3;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
@@ -121,41 +156,4 @@ public class User {
     public void setCon3(String con3) {
         this.con3 = con3;
     }
-
-    private Long id;
-    private Long roleId;
-    private String username;
-    private String password;
-    private String address;
-    private String phone;
-    private Long createUserId;
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date createTime;
-    private Long userRenewId;
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date renewTime;
-    private String con1;
-    private String con2;
-    private String con3;
-    private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    private Role role;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-
 }

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.mapper.GoodMapper">
+    <!--手动映射-->
+    <resultMap id="umap" type="com.zb.pojo.Goodsku">
+        <result property="id" column="id"></result>
+        <result property="skuName" column="sku_name"></result>
+        <result property="skuDesc" column="sku_desc"></result>
+        <result property="salesVolume" column="sales_volume"></result>
+        <result property="manufacturer" column="manufacturer"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="renewTime" column="renew_time"></result>
+        <association property="goodspu" javaType="com.zb.pojo.Goodspu">
+            <result property="id" column="id"></result>
+            <result property="brand" column="brand"></result>
+            <result property="status" column="status"></result>
+            <association property="sort" javaType="com.zb.pojo.Sort">
+                <result property="sortName" column="sort_name"></result>
+            </association>
+        </association>
+        <association property="color" javaType="com.zb.pojo.Color">
+            <result property="colorName" column="color_name"></result>
+        </association>
+        <association property="price" javaType="com.zb.pojo.Price">
+            <result property="price" column="price"></result>
+        </association>
+        <association property="warehouse" javaType="com.zb.pojo.Warehouse">
+            <result property="stockNumber" column="stock_number"></result>
+        </association>
+        <association property="units" javaType="com.zb.pojo.Units">
+            <result property="unitsName" column="units_name"></result>
+        </association>
+        <association property="vendor" javaType="com.zb.pojo.Vendor">
+            <result property="vendorName" column="vendor_name"></result>
+            <result property="tel" column="tel"></result>
+        </association>
+        <collection property="user" ofType="com.zb.pojo.User">
+            <result property="username" column="username"></result>
+            <result property="createUserId" column="create_user_id"></result>
+            <result property="createTime" column="create_time"></result>
+            <result property="userRenewId" column="user_renew_id"></result>
+            <result property="renewTime" column="renew_time"></result>
+
+        </collection>
+    </resultMap>
+    <!--添加-->
+    <insert id="insertGoodspu" useGeneratedKeys="true" keyProperty="id">
+        insert into goodspu(id,good_name,brand,sort_id,status) values (default,#{goodName},#{brand},#{sortId},#{status})
+    </insert>
+    <insert id="insertvendor" useGeneratedKeys="true" keyProperty="id">
+        insert into vendor(tel,vendor_name) values(#{tel},#{vendorName})
+    </insert>
+    <insert id="insertGood">
+        insert into goodsku values
+        (default ,#{spuId},#{skuName},#{skuDesc},#{colorId},#{priceId},#{stockId},#{salesVolume},#{companyId},#{manufacturer},#{supplierId},#{createUserId},#{createTime},#{userRenewId},#{renewTime},default,default,default)
+    </insert>
+    <insert id="insertprice" useGeneratedKeys="true" keyProperty="id">
+        insert into price (sku_id,price) value (#{skuId},#{price})
+    </insert>
+    <insert id="insertStock" useGeneratedKeys="true" keyProperty="id">
+        insert into warehouse (stock_number) value(#{stockNumber})
+    </insert>
+    <insert id="insertSort" useGeneratedKeys="true" keyProperty="id">
+        insert into sort(id,sort_name) values (default ,#{sortName})
+    </insert>
+    <select id="findSort"  resultType="com.zb.pojo.Sort" >
+        SELECT id FROM sort WHERE sort_name = #{sortName}
+    </select>
+    <select id="findColor" resultType="com.zb.pojo.Color">
+        select id from color where color_name = #{colorName}
+    </select>
+    <select id="findUnits" resultType="com.zb.pojo.Units">
+        select id from units where units_name = #{unitsName}
+    </select>
+    <!--逻辑删除-->
+    <update id="updateLogic_status">
+          update goodsku set logic_status = 1 where id = #{id}
+    </update>
+    <!--修改-->
+    <update id="updateGood">
+        UPDATE goodsku SET
+        spu_id = #{spuId},
+        sku_name = #{skuName},
+        sku_desc = #{skuDesc},
+        color_id = #{colorId},
+        price_id = #{priceId},
+        stock_id = #{stockId},
+        sales_volume = #{salesVolume},
+        company_id = #{companyId},
+        manufacturer = #{manufacturer},
+        supplier_id = #{supplierId},
+        user_renewId = #{userRenewId},
+        renew_time = #{renewTime}
+        WHERE id = #{id}
+    </update>
+    <update id="updateSpu" useGeneratedKeys="true" keyProperty="id">
+        update goodspu set brand = #{brand},sort_id = #{sortId},status = #{status} where id = #{id}
+    </update>
+    <update id="updateSort" useGeneratedKeys="true" keyProperty="id">
+        update sort set sort_name = #{sortName} where id = #{id}
+    </update>
+    <update id="updatePrice" useGeneratedKeys="true" keyProperty="id">
+        update price set price = #{price} where id = #{id}
+    </update>
+    <update id="updateColor" useGeneratedKeys="true" keyProperty="id">
+        update color set color_name = #{colorName} where id = #{id}
+    </update>
+    <update id="updateWarehouse" useGeneratedKeys="true" keyProperty="id">
+        update warehouse set stock_number = #{stockNumber} where id = #{id}
+    </update>
+    <update id="updateVendor" useGeneratedKeys="true" keyProperty="id">
+        update vendor set tel = #{tel},vendor_name = #{vendorName} where id = #{id}
+    </update>
+    <update id="updateGoodskuPrice">
+        update goodsku set price_id = #{priceId} where id = #{id}
+    </update>
+    <update id="updateUnits">
+        update units set units_name = #{unitsName} where id = #{id}
+    </update>
+    <select id="findspu" resultType="com.zb.pojo.Goodspu">
+        select id from goodspu where id = #{id}
+    </select>
+    <select id="findPrice" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM price WHERE price = #{price}
+    </select>
+    <select id="findPriceTwo" resultType="com.zb.pojo.Price">
+        select id from price where price = #{price}
+    </select>
+    <select id="findWarehouse" resultType="com.zb.pojo.Warehouse">
+        select id from warehouse where stock_number = #{stockNumber}
+    </select>
+    <!--查询全部-->
+    <select id="listGood" resultMap="umap">
+          SELECT k.id,
+          p.id,
+        k.sku_name,
+        k.sku_desc,
+        k.sales_volume,
+        p.brand,
+        p.`status`,
+        s.`sort_name` ,
+        c.`color_name` ,
+        pr.`price`,
+        w.`stock_number` ,
+        un.`units_name` ,
+        k.`manufacturer` ,
+        v.`vendor_name` ,
+        v.`tel`,
+        u.`username` ,
+	    k.`create_time` ,
+	    us.`username` userrenewname ,
+        k.`renew_time`
+        FROM goodsku k
+        INNER JOIN goodspu p ON k.spu_id= p.`id`
+        INNER JOIN sort s ON s.`id` = p.`sort_id`
+        INNER JOIN `user` u ON u.`id` = k.`create_user_id`
+        INNER JOIN `user` us ON us.`id` = k.`user_renewId`
+        INNER JOIN color c ON k.color_id = c.`id`
+        INNER JOIN price pr ON pr.`id` = k.price_id
+        INNER JOIN warehouse w ON w.`id`=k.stock_id
+        INNER JOIN units un ON un.id = k.company_id
+        INNER JOIN vendor v ON v.`id` = k.`Supplier_id`
+        WHERE logic_status = 0
+        ORDER BY pr.`price`
+    </select>
+    <!--查询总记录数-->
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from goodsku
+    </select>
+    <!--查询全部-->
+    <select id="findAllGoodsku" resultMap="umap">
+        SELECT k.id,
+        k.sku_name,
+        k.sku_desc,
+        k.sales_volume,
+        p.brand,
+        p.`status`,
+        s.`sort_name` ,
+        c.`color_name` ,
+        pr.`price`,
+        w.`stock_number` ,
+        un.`units_name` ,
+        k.`manufacturer` ,
+        v.`vendor_name` ,
+        v.`tel`,
+        u.`username` ,
+	    k.`create_time` ,
+	    us.`username` userrenewname ,
+        k.`renew_time`
+        FROM goodsku k
+        INNER JOIN goodspu p ON k.spu_id= p.`id`
+        INNER JOIN sort s ON s.`id` = p.`sort_id`
+        INNER JOIN `user` u ON u.`id` = k.`create_user_id`
+        INNER JOIN `user` us ON us.`id` = k.`user_renewId`
+        INNER JOIN color c ON k.color_id = c.`id`
+        INNER JOIN price pr ON pr.`id` = k.price_id
+        INNER JOIN warehouse w ON w.`id`=k.stock_id
+        INNER JOIN units un ON un.id = k.company_id
+        INNER JOIN vendor v ON v.`id` = k.`Supplier_id`
+        WHERE logic_status = 0
+        ORDER BY pr.`price`
+    </select>
+    <!--根据商品名或分类查询-->
+    <select id="fingByskuNameorSortName" resultMap="umap">
+        SELECT k.id,
+        k.sku_name,
+        k.sku_desc,
+        k.sales_volume,
+        p.brand,
+        p.`status`,
+        s.`sort_name` ,
+        c.`color_name` ,
+        pr.`price`,
+        w.`stock_number` ,
+        un.`units_name` ,
+        k.`manufacturer` ,
+        v.`vendor_name` ,
+        v.`tel`,
+        u.`username` ,
+        k.`create_time` ,
+        us.`username` userrenewname ,
+        k.`renew_time`
+        FROM goodsku k
+        INNER JOIN goodspu p ON k.spu_id= p.`id`
+        INNER JOIN sort s ON s.`id` = p.`sort_id`
+        INNER JOIN `user` u ON u.`id` = k.`create_user_id`
+        INNER JOIN `user` us ON us.`id` = k.`user_renewId`
+        INNER JOIN color c ON k.color_id = c.`id`
+        INNER JOIN price pr ON pr.`id` = k.price_id
+        INNER JOIN warehouse w ON w.`id`=k.stock_id
+        INNER JOIN units un ON un.id = k.company_id
+        INNER JOIN vendor v ON v.`id` = k.`Supplier_id`
+        WHERE logic_status = 0
+        <if test="skuName != null">
+            <![CDATA[
+            AND k.`sku_name` LIKE concat ('%',#{skuName},'%')
+            ]]>
+        </if>
+        <if test="sortName != null">
+            <![CDATA[
+            AND s.`sort_name` LIKE concat('%',#{sortName},'%')
+            ]]>
+        </if>
+    </select>
+    <select id="findWarehouseTwo" resultType="java.lang.Integer">
+        select count(id) from warehouse where stock_number = #{stockNumber}
+    </select>
+    <select id="findVendor" resultType="java.lang.Integer">
+        select count(id) from vendor where vendor_name = #{vendorName}
+    </select>
+    <select id="findVendorTwo" resultType="com.zb.pojo.Vendor">
+        select id from vendor where vendor_name = #{vendorName}
+    </select>
+
+</mapper>

@@ -74,6 +74,7 @@ public class stokeController {
         /**设置详情表*/
         DetailedPurchase d = new DetailedPurchase();
         /** 进货单id*/
+        // TODO: 2022/8/21 干啥的 
         Integer purchaseId = stokeServicec.listMaxPurchaseId();
         d.setPurchaseId(Long.valueOf(purchaseId) + 1);
         /** 用时间戳记录批次*/
