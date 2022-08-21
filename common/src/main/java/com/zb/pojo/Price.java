@@ -19,8 +19,17 @@ public class Price {
     private Integer id;
     /** sku ID*/
     private Integer skuId;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     /** 价格*/
-    private double price;
+    private BigDecimal price;
 
     private Integer createUserId;
     private Date createTime;
@@ -43,13 +52,6 @@ public class Price {
         this.skuId = skuId;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public Integer getCreateUserId() {
         return createUserId;

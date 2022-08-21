@@ -3,6 +3,7 @@ package com.zb.service;
 
 import com.zb.pojo.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface GoodService {
@@ -127,14 +128,14 @@ public interface GoodService {
      * @param price
      * @return
      */
-    int findPrice(double price);
+    int findPrice(BigDecimal price);
 
     /**
      * 查找价格
      * @param price
      * @return
      */
-    Price findPriceTwo(double price);
+    Price findPriceTwo(BigDecimal price);
 
     /**
      * 查找库存

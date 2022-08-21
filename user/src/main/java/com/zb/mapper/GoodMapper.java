@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
@@ -156,14 +157,14 @@ public interface GoodMapper {
      * @param price
      * @return
      */
-    int findPrice(double price);
+    int findPrice(BigDecimal price);
 
     /**
      * 查找价格
      * @param price
      * @return
      */
-    Price findPriceTwo(double price);
+    Price findPriceTwo(BigDecimal price);
     /**
      * 修改spu
      * @return

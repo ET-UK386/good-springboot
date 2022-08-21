@@ -10,10 +10,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 @Service
 @Transactional
 public class GoodServiceImpl implements GoodService {
+    /**
+     * 查找价格id
+     *
+     * @param price
+     * @return
+     */
+    @Override
+    public int findPrice(BigDecimal price) {
+        return goodMapper.findPrice(price);
+    }
+
     /**
      * 查询所有商品
      *
@@ -123,7 +135,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public Price findPriceTwo(double price) {
+    public Price findPriceTwo(BigDecimal price) {
         return goodMapper.findPriceTwo(price);
     }
 
@@ -192,18 +204,6 @@ public class GoodServiceImpl implements GoodService {
     public int updateGoodskuPrice(Goodsku g) {
         return goodMapper.updateGoodskuPrice(g);
     }
-
-    /**
-     * 查找价格id
-     *
-     * @param price
-     * @return
-     */
-    @Override
-    public int findPrice(double price) {
-        return goodMapper.findPrice(price);
-    }
-
     /**
      * 修改价格
      *
