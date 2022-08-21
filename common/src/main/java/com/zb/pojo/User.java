@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Transient;
 
 import java.util.Date;
 
@@ -14,7 +15,6 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class User {
 
     private Long id;
@@ -33,7 +33,8 @@ public class User {
     private Date createTime;
     private Long userRenewId;
     private Date renewTime;
-
+    @Transient
+    private String userRenewName;
     public Long getId() {
         return id;
     }
@@ -112,5 +113,13 @@ public class User {
 
     public void setRenewTime(Date renewTime) {
         this.renewTime = renewTime;
+    }
+
+    public String getUserRenewName() {
+        return userRenewName;
+    }
+
+    public void setUserRenewName(String userRenewName) {
+        this.userRenewName = userRenewName;
     }
 }

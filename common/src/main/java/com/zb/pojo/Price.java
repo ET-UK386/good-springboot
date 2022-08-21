@@ -15,15 +15,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class Price {
 
   private Integer id;
   /** sku ID*/
   private Integer skuId;
   /** 价格*/
-  private BigDecimal price;
-
+  private double price;
   private Integer createUserId;
   private Date createTime;
   private Integer userRenewId;
@@ -45,11 +43,11 @@ public class Price {
     this.skuId = skuId;
   }
 
-  public BigDecimal getPrice() {
+  public double getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(double price) {
     this.price = price;
   }
 

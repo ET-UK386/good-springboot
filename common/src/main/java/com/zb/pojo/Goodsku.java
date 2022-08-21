@@ -1,5 +1,6 @@
 package com.zb.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,6 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class Goodsku {
 
   private Integer id;
@@ -39,8 +39,10 @@ public class Goodsku {
   private Integer supplierId;
 
   private Integer createUserId;
+  @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date createTime;
   private Integer userRenewId;
+  @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
   private Goodspu goodspu;
   private Sort sort;
