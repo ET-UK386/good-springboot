@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.UploadImagesMapper">
+
+    <resultMap id="imageFKMap" type="com.zb.pojo.ImagesFk">
+        <result property="id" column="i_id"/>
+        <result property="skuId" column="i_sku_id"/>
+        <result property="spuId" column="i_spu_id"/>
+        <result property="imagesPathId" column="i_images_path_id"/>
+        <result property="isLook" column="i_is_look"/>
+        <association property="imagesPath" javaType="com.zb.pojo.ImagesPath">
+            <result property="id" column="ip_id"/>
+            <result property="imagesName" column="ip_images_name"/>
+            <result property="path" column="ip_path"/>
+            <result property="isLook" column="ip_is_look"/>
+        </association>
+    </resultMap>
+    <insert id="insertImagesFK">
+        insert into images_fk
+        (id, sku_id, spu_id, images_path_id, is_look)
+        VALUE
+        (default,
+        #{skuId},
+        <if test="spuId != null">#{spuId},</if>
+        <if test="spuId == null">null,</if>
+        #{imagesPathId},
+        default
+        )
+    </insert>
+    <insert id="insertImagesPath" useGeneratedKeys="true" keyProperty="id" parameterType="com.zb.pojo.ImagesPath">
+        insert into images_path
+            (id, images_name, path, is_look)
+            value
+            (default, #{imagesName}, #{path}, default)
+    </insert>
+
+
+    <select id="selectById" resultMap="imageFKMap">
+        select i.id             as i_id,
+               i.sku_id         as i_sku_id,
+               i.spu_id         as i_spu_id,
+               i.images_path_id as i_images_path_id,
+               i.is_look        as i_is_look,
+
+               ip.id            as ip_id,
+               ip.images_name   as ip_images_name,
+               ip.path          as ip_path,
+               ip.is_look       as ip_is_look
+        from images_fk i
+                 left join images_path ip on ip.id = i.images_path_id and i.sku_id = #{id}
+    </select>
+
+
+</mapper>

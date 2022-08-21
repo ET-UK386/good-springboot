@@ -18,4 +18,6 @@ public class ImagesFk {
   private Long imagesPathId;
   private Integer isLook;
 
+  private ImagesPath imagesPath;
+
 }

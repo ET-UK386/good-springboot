@@ -9,6 +9,10 @@ spring:
     host: localhost
     database: 0
     port: 6379
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
 
 
 server:
@@ -22,6 +26,3 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   # 配置mapper文件映射
   mapper-locations: classpath:com.zb.mapper/*.xml
-
-
-
