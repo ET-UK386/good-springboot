@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -118,6 +119,14 @@ public class WarehousingController {
      */
     @PutMapping("checkBeforeStorage")
     public Result checkBeforeStorage(@RequestBody Warehousing warehousing) {
+
+        if(warehousing.getWarehousingNumber() < 1){
+            return new Result().setMessage("入库数量不合法").setCode(500);
+        }
+        if(warehousing.getDetailedPurchase().getPurchasePrice().compareTo(new BigDecimal(1)) == -1){
+            return new Result().setMessage("商品价格不合法").setCode(500);
+        }
+
         String token = warehousing.getToken();
         // 获取当前登录用户
         User loginUser = (User) redisTemplate.opsForValue().get(token);
@@ -141,6 +150,16 @@ public class WarehousingController {
      */
     @PutMapping("inventoryAudit")
     public Result inventoryAudit(@RequestBody Warehousing warehousing) {
+
+
+        if(warehousing.getWarehousingNumber() < 1){
+            return new Result().setMessage("入库数量不合法").setCode(500);
+        }
+        if(warehousing.getDetailedPurchase().getPurchasePrice().compareTo(new BigDecimal(1)) == -1){
+            return new Result().setMessage("商品价格不合法").setCode(500);
+        }
+
+
         String token = warehousing.getToken();
         // 获取当前登录用户
         User loginUser = (User) redisTemplate.opsForValue().get(token);
