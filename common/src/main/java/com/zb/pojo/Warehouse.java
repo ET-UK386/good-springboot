@@ -13,10 +13,9 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class Warehouse {
 
-  private Long id;
+  private Integer id;
   /** 进货详细单ID*/
   private Long detailedPurchaseId;
   /** 库存数量*/
