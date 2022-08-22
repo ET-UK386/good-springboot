@@ -34,6 +34,15 @@ public class User {
     private String con2;
     private String con3;
     private String token;
+    private String userRenewName;
+
+    public String getUserRenewName() {
+        return userRenewName;
+    }
+
+    public void setUserRenewName(String userRenewName) {
+        this.userRenewName = userRenewName;
+    }
 
     public String getToken() {
         return token;

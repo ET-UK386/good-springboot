@@ -91,7 +91,7 @@ public class stokeController {
         /** 数量 */
         d.setNumber(Integer.valueOf(number));
         /**创建订单时订单状态为1*/
-        d.setStatus(5);
+        d.setStatus(0);
         /**设置创建人和时间*/
         d.setCreateUserId(o.getId());
         d.setCreateTime(new Date());

@@ -54,46 +54,49 @@
         </association>
     </resultMap>
     <insert id="addPurchase">
-        INSERT INTO `purchase` VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, #{examineUserId}, #{examineTime}, #{examineOpinion}, #{status},#{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
+        INSERT INTO `purchase`
+        VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, #{examineUserId}, #{examineTime}, #{examineOpinion},
+                #{status}, #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
     </insert>
     <insert id="addDetailedPurchase">
-        INSERT into detailed_purchase VALUES(DEFAULT,#{purchaseId},#{vendorId},#{skuId},#{batch},#{purchasePrice},#{number},#{status},#{createUserId},#{createTime},#{userRenewId},#{renewTime},DEFAULT,DEFAULT,DEFAULT)
+        INSERT into detailed_purchase
+        VALUES (DEFAULT, #{purchaseId}, #{vendorId}, #{skuId}, #{batch}, #{purchasePrice}, #{number}, #{status},
+                #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, DEFAULT, DEFAULT, DEFAULT)
     </insert>
     <update id="updatePurchaseById">
-      UPDATE purchase
+        UPDATE purchase
         set examine_user_id = #{userId},
-        examine_time = #{exDate},
-        examine_opinion= #{opinion},
-        examine_status = #{status},
-        user_renew_id = #{renewUserId},
-        renew_time= #{renDate}
-        where id =#{id}
+            examine_time    = #{exDate},
+            examine_opinion= #{opinion},
+            examine_status  = #{status},
+            user_renew_id   = #{renewUserId},
+            renew_time= #{renDate}
+        where id = #{id}
     </update>
     <update id="updateDetailedPurchase">
-        UPDATE detailed_purchase set
-        `status` = #{status},
-        user_renew_id=#{renewId},
-        renew_time = #{reTime}
-        where purchase_id =#{puId}
+        UPDATE detailed_purchase
+        set `status`     = #{status},
+            user_renew_id=#{renewId},
+            renew_time   = #{reTime}
+        where purchase_id = #{puId}
     </update>
 
     <select id="listPurchase" resultMap="listPurchase">
-            SELECT
-            p.id as p_id,
-            p.purchase_desc as p_purchase_desc,
-            p.purchase_number as p_purchase_number,
-            u.username as u_username,
-            p.examine_time as p_examine_time,
-            p.examine_opinion as p_examine_opinion,
-            p.status as p_examine_status,
-            s.username as s_username,
-            p.create_time as p_create_time,
-            e.username as e_username,
-            p.renew_time as p_renew_time
-            from `purchase` p
-            INNER JOIN `user` u on p.examine_user_id = u.id
-            INNER JOIN `user` s on p.create_user_id = s.id
-            INNER JOIN `user` e on p.user_renew_id = e.id
+        SELECT p.id              as p_id,
+               p.purchase_desc   as p_purchase_desc,
+               p.purchase_number as p_purchase_number,
+               u.username        as u_username,
+               p.examine_time    as p_examine_time,
+               p.examine_opinion as p_examine_opinion,
+               p.examine_status  as p_examine_status,
+               s.username        as s_username,
+               p.create_time     as p_create_time,
+               e.username        as e_username,
+               p.renew_time      as p_renew_time
+        from `purchase` p
+                 INNER JOIN `user` u on p.examine_user_id = u.id
+                 INNER JOIN `user` s on p.create_user_id = s.id
+                 INNER JOIN `user` e on p.user_renew_id = e.id
     </select>
 
     <resultMap id="listPurchaseDetailedPurchase" type="com.zb.pojo.DetailedPurchase">
@@ -184,62 +187,67 @@
     </resultMap>
 
     <select id="listPurchaseDetailedPurchase" resultMap="listPurchaseDetailedPurchase">
-            SELECT
-                d.id as d_id,
-                p.id as p_id,
-                v.id as v_id,
-                g.id as g_id,
-                d.batch as d_batch,
-                d.purchase_price as d_purchase_price,
-                d.number as d_number,
-                d.`status` as d_status,
-                u.username as u_username,
-                d.create_time as d_create_time,
-                s.user_renew_id as s_user_renew_id,
-                d.renew_time as d_renew_time
-                from `detailed_purchase` as d
-                INNER JOIN `purchase` as p on d.purchase_id = p.id
-                INNER JOIN `vendor` as v on d.vendor_id = v.id
-                INNER JOIN `goodsku` as g on d.sku_id = g.id
-                INNER JOIN `user` as u on d.create_user_id = u.id
-                INNER JOIN `user` as s on d.user_renew_id = s.id
+        SELECT d.id             as d_id,
+               p.id             as p_id,
+               v.id             as v_id,
+               g.id             as g_id,
+               d.batch          as d_batch,
+               d.purchase_price as d_purchase_price,
+               d.number         as d_number,
+               d.`status`       as d_status,
+               u.username       as u_username,
+               d.create_time    as d_create_time,
+               s.user_renew_id  as s_user_renew_id,
+               d.renew_time     as d_renew_time
+        from `detailed_purchase` as d
+                 INNER JOIN `purchase` as p on d.purchase_id = p.id
+                 INNER JOIN `vendor` as v on d.vendor_id = v.id
+                 INNER JOIN `goodsku` as g on d.sku_id = g.id
+                 INNER JOIN `user` as u on d.create_user_id = u.id
+                 INNER JOIN `user` as s on d.user_renew_id = s.id
     </select>
 
     <select id="listPurchaseDetailedPurchaseBylistPurchaseId" resultMap="listPurchaseDetailedPurchase">
-                    SELECT
-                    d.id as d_id,
-                    p.id as p_id,
-                    v.id as v_id,
-                    g.id as g_id,
-                    d.batch as d_batch,
-                    d.purchase_price as d_purchase_price,
-                    d.number as d_number,
-                    d.`status` as d_status,
-                    u.username as u_username,
-                    d.create_time as d_create_time,
-                    s.username as s_username,
-                    d.renew_time as d_renew_time
-                    from `detailed_purchase` as d
-                    INNER JOIN `purchase` as p on d.purchase_id = p.id
-                    INNER JOIN `vendor` as v on d.vendor_id = v.id
-                    INNER JOIN `goodsku` as g on d.sku_id = g.id
-                    INNER JOIN `user` as u on d.create_user_id = u.id
-                    INNER JOIN `user` as s on d.user_renew_id = s.id
-                    where p.id=#{id}
+        SELECT d.id             as d_id,
+               p.id             as p_id,
+               v.id             as v_id,
+               g.id             as g_id,
+               d.batch          as d_batch,
+               d.purchase_price as d_purchase_price,
+               d.number         as d_number,
+               d.`status`       as d_status,
+               u.username       as u_username,
+               d.create_time    as d_create_time,
+               s.username       as s_username,
+               d.renew_time     as d_renew_time
+        from `detailed_purchase` as d
+                 INNER JOIN `purchase` as p on d.purchase_id = p.id
+                 INNER JOIN `vendor` as v on d.vendor_id = v.id
+                 INNER JOIN `goodsku` as g on d.sku_id = g.id
+                 INNER JOIN `user` as u on d.create_user_id = u.id
+                 INNER JOIN `user` as s on d.user_renew_id = s.id
+        where p.id = #{id}
     </select>
     <select id="listGoodSku" resultType="com.zb.pojo.Goodsku">
-        SELECT * FROM `goodsku`
+        SELECT *
+        FROM `goodsku`
     </select>
     <select id="listVendor" resultType="com.zb.pojo.Vendor">
-        SELECT * from vendor
+        SELECT *
+        from vendor
     </select>
     <select id="listGoodSkuById" resultType="com.zb.pojo.Goodsku">
-        SELECT * FROM `goodsku` where id=#{id}
+        SELECT *
+        FROM `goodsku`
+        where id = #{id}
     </select>
     <select id="listPriceById" resultType="com.zb.pojo.Price">
-        SELECT * FROM `price` where id=#{id}
+        SELECT *
+        FROM `price`
+        where id = #{id}
     </select>
     <select id="listMaxPurchaseId" resultType="java.lang.Integer">
-        SELECT max(id) from purchase
+        SELECT max(id)
+        from purchase
     </select>
 </mapper>
