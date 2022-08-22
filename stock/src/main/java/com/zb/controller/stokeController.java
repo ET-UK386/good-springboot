@@ -73,10 +73,7 @@ public class stokeController {
         User o = (User) redisTemplate.opsForValue().get(token);
         /**设置详情表*/
         DetailedPurchase d = new DetailedPurchase();
-        /** 进货单id*/
-        // TODO: 2022/8/21 干啥的 
-        Integer purchaseId = stokeServicec.listMaxPurchaseId();
-        d.setPurchaseId(Long.valueOf(purchaseId) + 1);
+
         /** 用时间戳记录批次*/
         String TradeNo = String.valueOf(System.currentTimeMillis());
         d.setBatch(TradeNo);
@@ -127,6 +124,15 @@ public class stokeController {
 //        System.out.println("===================================================================");
 //
 //        System.out.println(d);
+
+
+        /** 进货单id*/
+        Integer purchaseId = stokeServicec.listMaxPurchaseId();
+        if(purchaseId==null){
+            purchaseId = 1;
+        }
+        d.setPurchaseId(Long.valueOf(purchaseId));
+
         return stokeServicec.addDetailedPurchase(d);
     }
 
