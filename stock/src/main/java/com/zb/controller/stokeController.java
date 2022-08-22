@@ -126,9 +126,10 @@ public class stokeController {
 //        System.out.println(d);
 
 
-        /** 进货单id*/
+        /** 详情单里面绑定的进货单id*/
         Integer purchaseId = stokeServicec.listMaxPurchaseId();
-        if(purchaseId==null){
+        //如果数据库为空  详情单里面绑定的进货单id设置为1
+        if (purchaseId == null) {
             purchaseId = 1;
         }
         d.setPurchaseId(Long.valueOf(purchaseId));
@@ -174,7 +175,7 @@ public class stokeController {
         if (status == 1) {
             stokeServicec.updateDetailedPurchase(status2, userId, date, id);
         }
-        if(status == 2){
+        if (status == 2) {
             stokeServicec.updateDetailedPurchase(1, userId, date, id);
         }
         return stokeServicec.updatePurchaseById(userId, o.getId(), id, status, opinion, date, date);
