@@ -168,6 +168,9 @@ public class stokeController {
         if (status == 1) {
             stokeServicec.updateDetailedPurchase(status2, userId, date, id);
         }
+        if(status == 2){
+            stokeServicec.updateDetailedPurchase(1, userId, date, id);
+        }
         return stokeServicec.updatePurchaseById(userId, o.getId(), id, status, opinion, date, date);
     }
 }
