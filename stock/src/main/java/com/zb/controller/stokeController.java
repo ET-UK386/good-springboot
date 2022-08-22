@@ -91,7 +91,7 @@ public class stokeController {
         /** 数量 */
         d.setNumber(Integer.valueOf(number));
         /**创建订单时订单状态为1*/
-        d.setStatus(5);
+        d.setStatus(0);
         /**设置创建人和时间*/
         d.setCreateUserId(o.getId());
         d.setCreateTime(new Date());
@@ -167,6 +167,9 @@ public class stokeController {
         }
         if (status == 1) {
             stokeServicec.updateDetailedPurchase(status2, userId, date, id);
+        }
+        if(status == 2){
+            stokeServicec.updateDetailedPurchase(1, userId, date, id);
         }
         return stokeServicec.updatePurchaseById(userId, o.getId(), id, status, opinion, date, date);
     }
