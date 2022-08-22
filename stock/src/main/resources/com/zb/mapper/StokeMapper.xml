@@ -85,7 +85,7 @@
             u.username as u_username,
             p.examine_time as p_examine_time,
             p.examine_opinion as p_examine_opinion,
-            p.examine_status as p_examine_status,
+            p.status as p_examine_status,
             s.username as s_username,
             p.create_time as p_create_time,
             e.username as e_username,
