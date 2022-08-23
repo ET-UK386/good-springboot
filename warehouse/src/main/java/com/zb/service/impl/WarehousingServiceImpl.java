@@ -68,7 +68,7 @@ public class WarehousingServiceImpl implements WarehousingService {
      * @return
      */
     @Override
-    public Map<String, Object> createWarehousing(Purchase purchase) {
+    public Map<String, StringBuilder> createWarehousing(Purchase purchase) {
         Warehousing warehousing = new Warehousing();
         // 根据进货单id获取所有的进货详细单
         List<DetailedPurchase> detailedPurchases = stokeServicec.listPurchaseDetailedPurchaseBylistPurchaseId(purchase.getId());
@@ -77,7 +77,7 @@ public class WarehousingServiceImpl implements WarehousingService {
         StringBuilder errorBatchs = new StringBuilder();
 
         for (DetailedPurchase detailedPurchase : detailedPurchases) {
-            if (detailedPurchase.getStatus() == 4) {
+            if (detailedPurchase.getStatus() == 1) {
                 if(detailedPurchase.getNumber() <= 0){
                     errorBatchs.append(detailedPurchase.getBatch() + "批次,创建失败， 详细订单进货数量不合法");
                 }
@@ -94,7 +94,7 @@ public class WarehousingServiceImpl implements WarehousingService {
                 }
             }
         }
-        Map<String, Object> map = new HashMap<>();
+        Map<String, StringBuilder> map = new HashMap<>();
         map.put("success", successBatchs);
         map.put("error", errorBatchs);
         return map;

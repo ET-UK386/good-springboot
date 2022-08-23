@@ -28,7 +28,7 @@ public interface WarehousingService {
      * @param purchase 进货订单
      * @return
      */
-    Map<String, Object> createWarehousing(Purchase purchase);
+    Map<String, StringBuilder> createWarehousing(Purchase purchase);
 
     /**
      * 入库审核

@@ -48,7 +48,7 @@
                ip.path          as ip_path,
                ip.is_look       as ip_is_look
         from images_fk i
-                 left join images_path ip on ip.id = i.images_path_id and i.sku_id = #{id}
+                 join images_path ip on ip.id = i.images_path_id and i.sku_id = #{id}
     </select>
 
 

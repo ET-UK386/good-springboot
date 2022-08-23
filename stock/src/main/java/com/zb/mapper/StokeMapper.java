@@ -11,6 +11,8 @@ import java.util.List;
 public interface StokeMapper {
     List<Purchase> listPurchase();
 
+    Purchase listPurchaseById();
+
     List<DetailedPurchase> listPurchaseDetailedPurchase();
 
     List<DetailedPurchase> listPurchaseDetailedPurchaseBylistPurchaseId(Long id);
