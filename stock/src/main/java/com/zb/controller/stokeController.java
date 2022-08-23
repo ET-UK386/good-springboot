@@ -116,6 +116,8 @@ public class stokeController {
         //审核意见
         p.setExamineOpinion("无");
         stokeServicec.addPurchase(p);
+
+
         /** 华丽的分界线 */
 //        for (int i = 0; i <= 5; i++) {
 //            System.out.println("===================================================================");
@@ -127,12 +129,7 @@ public class stokeController {
 
 
         /** 详情单里面绑定的进货单id*/
-        Integer purchaseId = stokeServicec.listMaxPurchaseId();
-        //如果数据库为空  详情单里面绑定的进货单id设置为1
-        if (purchaseId == null) {
-            purchaseId = 1;
-        }
-        d.setPurchaseId(Long.valueOf(purchaseId));
+        d.setPurchaseId(p.getId());
 
         return stokeServicec.addDetailedPurchase(d);
     }
@@ -157,27 +154,28 @@ public class stokeController {
         //获得更改用户的信息
         User o = (User) redisTemplate.opsForValue().get(token);
         long roleId = o.getRoleId();
-        map.put("roleId", roleId);
-        return map;
-    }
+            map.put("roleId", roleId);
+            return map;
+        }
 
-    @RequestMapping("updatePurchaseById")
-    @ResponseBody
-    public Integer updatePurchaseById(String token, Integer status, String opinion, Integer id, @RequestParam(required = false) Integer status2) {
-        System.out.println("============================" + status);
-        //获得更改用户的信息
-        User o = (User) redisTemplate.opsForValue().get(token);
-        long userId = o.getId();
-        Date date = new Date();
-        if (opinion == "") {
-            opinion = "无";
+        @RequestMapping("updatePurchaseById")
+        @ResponseBody
+        public Integer updatePurchaseById (String token, Integer status, String opinion, Integer
+        id, @RequestParam(required = false) Integer status2){
+            System.out.println("============================" + status);
+            //获得更改用户的信息
+            User o = (User) redisTemplate.opsForValue().get(token);
+            long userId = o.getId();
+            Date date = new Date();
+            if (opinion == "") {
+                opinion = "无";
+            }
+            if (status == 1) {
+                stokeServicec.updateDetailedPurchase(status2, userId, date, id);
+            }
+            if (status == 2) {
+                stokeServicec.updateDetailedPurchase(1, userId, date, id);
+            }
+            return stokeServicec.updatePurchaseById(userId, o.getId(), id, status, opinion, date, date);
         }
-        if (status == 1) {
-            stokeServicec.updateDetailedPurchase(status2, userId, date, id);
-        }
-        if (status == 2) {
-            stokeServicec.updateDetailedPurchase(1, userId, date, id);
-        }
-        return stokeServicec.updatePurchaseById(userId, o.getId(), id, status, opinion, date, date);
     }
-}

@@ -53,7 +53,7 @@
             <result property="renewTime" column="e_renew_time"/>
         </association>
     </resultMap>
-    <insert id="addPurchase">
+    <insert id="addPurchase" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `purchase` VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, #{examineUserId}, #{examineTime}, #{examineOpinion}, #{status},#{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
     </insert>
     <insert id="addDetailedPurchase">
