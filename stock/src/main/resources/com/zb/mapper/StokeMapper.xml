@@ -53,10 +53,8 @@
             <result property="renewTime" column="e_renew_time"/>
         </association>
     </resultMap>
-    <insert id="addPurchase">
-        INSERT INTO `purchase`
-        VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, #{examineUserId}, #{examineTime}, #{examineOpinion},
-                #{status}, #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
+    <insert id="addPurchase" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `purchase` VALUES (DEFAULT, #{purchaseDesc}, #{purchaseNumber}, #{examineUserId}, #{examineTime}, #{examineOpinion}, #{status},#{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, NULL, NULL, NULL);
     </insert>
     <insert id="addDetailedPurchase">
         INSERT into detailed_purchase
@@ -82,21 +80,22 @@
     </update>
 
     <select id="listPurchase" resultMap="listPurchase">
-        SELECT p.id              as p_id,
-               p.purchase_desc   as p_purchase_desc,
-               p.purchase_number as p_purchase_number,
-               u.username        as u_username,
-               p.examine_time    as p_examine_time,
-               p.examine_opinion as p_examine_opinion,
-               p.examine_status  as p_examine_status,
-               s.username        as s_username,
-               p.create_time     as p_create_time,
-               e.username        as e_username,
-               p.renew_time      as p_renew_time
-        from `purchase` p
-                 INNER JOIN `user` u on p.examine_user_id = u.id
-                 INNER JOIN `user` s on p.create_user_id = s.id
-                 INNER JOIN `user` e on p.user_renew_id = e.id
+            SELECT
+            p.id as p_id,
+            p.purchase_desc as p_purchase_desc,
+            p.purchase_number as p_purchase_number,
+            u.username as u_username,
+            p.examine_time as p_examine_time,
+            p.examine_opinion as p_examine_opinion,
+            p.examine_status as p_examine_status,
+            s.username as s_username,
+            p.create_time as p_create_time,
+            e.username as e_username,
+            p.renew_time as p_renew_time
+            from `purchase` p
+            INNER JOIN `user` u on p.examine_user_id = u.id
+            INNER JOIN `user` s on p.create_user_id = s.id
+            INNER JOIN `user` e on p.user_renew_id = e.id
     </select>
 
     <resultMap id="listPurchaseDetailedPurchase" type="com.zb.pojo.DetailedPurchase">

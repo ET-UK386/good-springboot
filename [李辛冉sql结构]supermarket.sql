@@ -11,7 +11,7 @@
  Target Server Version : 50560
  File Encoding         : 65001
 
- Date: 22/08/2022 20:17:02
+ Date: 22/08/2022 21:23:14
 */
 
 SET NAMES utf8mb4;
@@ -60,16 +60,11 @@ CREATE TABLE `detailed_purchase`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买详情' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买详情' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of detailed_purchase
 -- ----------------------------
-INSERT INTO `detailed_purchase` VALUES (1, 1, 1, 1, '100001', 3.00, 2, 3, 1, '2022-08-04 10:27:50', 1, '2022-08-22 20:09:44', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (24, 3, 1, 1, '1660965210835', 3.50, 100, 2, 1, '2022-08-20 11:13:30', 1, '2022-08-22 20:06:11', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (25, 4, 1, 1, '1660968972226', 3.50, 100, 3, 1, '2022-08-20 12:16:12', 1, '2022-08-21 15:00:53', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (26, 5, 1, 1, '1660982104857', 3.50, 200, 3, 1, '2022-08-20 15:55:04', 1, '2022-08-21 15:04:26', NULL, NULL, NULL);
-INSERT INTO `detailed_purchase` VALUES (27, 6, 1, 2, '1660982212579', 2.00, 1111, 3, 1, '2022-08-20 15:56:52', 1, '2022-08-22 20:14:46', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for goodsku
@@ -237,16 +232,11 @@ CREATE TABLE `purchase`  (
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购买表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of purchase
 -- ----------------------------
-INSERT INTO `purchase` VALUES (1, '可乐', 100, 1, '2022-08-22 20:09:44', 'ask理财目标v看这些百公里萨尔就好了', 1, 1, '2022-08-13 10:22:20', 1, '2022-08-22 20:09:44', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (3, '可乐缺货', 100, 1, '2022-08-22 20:06:11', '撒旦发生', 1, 1, '2022-08-20 11:13:30', 1, '2022-08-22 20:06:11', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (4, '可乐缺货', 100, 1, '2022-08-21 15:00:53', '手动阀手动阀手动阀手动阀手动阀手动阀', 1, 1, '2022-08-20 12:16:12', 1, '2022-08-21 15:00:53', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (5, '可乐缺货', 200, 1, '2022-08-21 15:04:26', '供应商没货', 1, 1, '2022-08-20 15:55:04', 1, '2022-08-21 15:04:26', NULL, NULL, NULL);
-INSERT INTO `purchase` VALUES (6, '巧克力', 1111, 1, '2022-08-22 20:14:46', '暗室逢灯现场v并存放于', 1, 1, '2022-08-20 15:56:52', 1, '2022-08-22 20:14:46', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for role
