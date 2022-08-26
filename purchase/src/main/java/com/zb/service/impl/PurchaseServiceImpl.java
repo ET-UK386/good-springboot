@@ -1,6 +1,7 @@
 package com.zb.service.impl;
 
 import com.zb.mapper.PurchaseMapper;
+import com.zb.pojo.DetailedPurchase;
 import com.zb.pojo.Purchase;
 import com.zb.pojo.User;
 import com.zb.service.DetailedPurchaseService;
@@ -30,6 +31,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+    public List<Purchase> findPurchaseNotReviewed() {
+        return purchaseMapper.selectByExamineStatus(0);
+    }
+
+    @Override
+    public List<Purchase> findPurchaseAudited() {
+        return purchaseMapper.selectByExamineStatus(-1);
+    }
+
+    @Override
     public Integer audit(Purchase purchase) {
         // 获取登录用户
         String token = purchase.getToken();
@@ -54,6 +65,25 @@ public class PurchaseServiceImpl implements PurchaseService {
             return 0;
         }
 
+        return 1;
+    }
+
+    @Override
+    public Integer modifyPurchase(Long purchaseId, List<DetailedPurchase> list) {
+        // 修改流程状态 改为0
+        Integer integer = purchaseMapper.updateStatusById(purchaseId);
+        if(integer <= 0){
+            return -1;
+        }
+        // 删除该流程下的详细订单
+        if(list.size() > 0){
+            Integer integer1 = detailedPurchaseService.deleteByPurchaseId(purchaseId);
+        }
+        // 创建详细订单
+        Integer integer2 = detailedPurchaseService.bulkAdd(list, purchaseId);
+        if(integer2 <= 0){
+            return -1;
+        }
         return 1;
     }
 }

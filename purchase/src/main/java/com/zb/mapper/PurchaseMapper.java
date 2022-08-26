@@ -16,6 +16,13 @@ public interface PurchaseMapper {
     List<Purchase> selectAll();
 
     /**
+     * 根据状态查询
+     * @param status 状态
+     * @return 实体类集合
+     */
+    List<Purchase> selectByExamineStatus(Integer status);
+
+    /**
      * 根据id查询
      *
      * @param id id
@@ -36,4 +43,11 @@ public interface PurchaseMapper {
      * @return 受影响行数
      */
     Integer insert(Purchase purchase);
+
+    /**
+     * 单纯根据id修改状态
+     * @param purchaseId
+     * @return
+     */
+    Integer updateStatusById(Long purchaseId);
 }

@@ -28,7 +28,7 @@ public interface DetailedPurchaseService {
      *
      * @return 搜影响行数
      */
-    Integer add(List<DetailedPurchase> List);
+    Integer addDetailedPurchaseAndPurchase(List<DetailedPurchase> List);
 
     /**
      * 查找所有经销商
@@ -44,4 +44,8 @@ public interface DetailedPurchaseService {
      * @return 成功或失败
      */
     Integer examinationPassed(Long purchaseId);
+
+    Integer deleteByPurchaseId(Long purchaseId);
+
+    Integer bulkAdd(List<DetailedPurchase> list,Long purchaseId);
 }

@@ -127,6 +127,11 @@
         </trim>
         where id = #{id};
     </update>
+    <delete id="deleteByPurchaseId">
+        delete
+        from detailed_purchase
+        where purchase_id = #{purchaseId};
+    </delete>
 
 
     <select id="selectById" resultMap="detailedPurchaseMap">

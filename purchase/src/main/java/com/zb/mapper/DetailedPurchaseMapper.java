@@ -47,4 +47,5 @@ public interface DetailedPurchaseMapper {
      */
     List<Vendor> selectVendor();
 
+    Integer deleteByPurchaseId(Long purchaseId);
 }

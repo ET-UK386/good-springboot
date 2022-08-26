@@ -85,6 +85,11 @@
         </trim>
         where id = #{id};
     </update>
+    <update id="updateStatusById">
+        update purchase
+        set examine_status = 0
+        where id=#{purchaseId};
+    </update>
 
     <select id="selectAll" resultMap="purchaseMap">
         select p.id              as p_id,
@@ -193,5 +198,65 @@
                  left join user c on c.id = p.create_user_id
                  left join user u on u.id = p.user_renew_id
         where p.id = #{id};
+    </select>
+    <select id="selectByExamineStatus" resultMap="purchaseMap">
+        select p.id as p_id,
+        p.purchase_desc as p_purchase_desc,
+        p.purchase_number as p_purchase_number,
+        p.examine_user_id as p_examine_user_id,
+        p.examine_time as p_examine_time,
+        p.examine_opinion as p_examine_opinion,
+        p.examine_status as p_examine_status,
+        p.sum_price as p_sum_price,
+        p.create_user_id as p_create_user_id,
+        p.create_time as p_create_time,
+        p.user_renew_id as p_user_renew_id,
+        p.renew_time as p_renew_time,
+
+        e.id as e_id,
+        e.role_id as e_role_id,
+        e.username as e_username,
+        e.password as e_password,
+        e.address as e_address,
+        e.phone as e_phone,
+        e.create_user_id as e_create_user_id,
+        e.create_time as e_create_time,
+        e.user_renew_id as e_user_renew_id,
+        e.renew_time as e_renew_time,
+
+        c.id as c_id,
+        c.role_id as c_role_id,
+        c.username as c_username,
+        c.password as c_password,
+        c.address as c_address,
+        c.phone as c_phone,
+        c.create_user_id as c_create_user_id,
+        c.create_time as c_create_time,
+        c.user_renew_id as c_user_renew_id,
+        c.renew_time as c_renew_time,
+
+
+        u.id as u_id,
+        u.role_id as u_role_id,
+        u.username as u_username,
+        u.password as u_password,
+        u.address as u_address,
+        u.phone as u_phone,
+        u.create_user_id as u_create_user_id,
+        u.create_time as u_create_time,
+        u.user_renew_id as u_user_renew_id,
+        u.renew_time as u_renew_time
+        from purchase p
+        left join user e on e.id = p.examine_user_id
+        left join user c on c.id = p.create_user_id
+        left join user u on u.id = p.user_renew_id
+        <where>
+            <if test="status == 0">
+                and p.examine_status = #{status}
+            </if>
+            <if test="status == -1">
+                and p.examine_status > 0
+            </if>
+        </where>
     </select>
 </mapper>

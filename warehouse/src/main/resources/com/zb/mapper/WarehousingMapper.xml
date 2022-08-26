@@ -27,7 +27,7 @@
             <result property="examineUserId" column="p_examine_user_id"/>
             <result property="examineTime" column="p_examine_time"/>
             <result property="examineOpinion" column="p_examine_opinion"/>
-            <result property="status" column="p_status"/>
+            <result property="examineStatus" column="p_status"/>
             <result property="createUserId" column="p_create_user_id"/>
             <result property="createTime" column="p_create_time"/>
             <result property="userRenewId" column="p_user_renew_id"/>
