@@ -1,0 +1,197 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.PurchaseMapper">
+
+    <resultMap id="purchaseMap" type="com.zb.pojo.Purchase">
+        <result property="id" column="p_id"/>
+        <result property="purchaseDesc" column="p_purchase_desc"/>
+        <result property="purchaseNumber" column="p_purchase_number"/>
+        <result property="examineUserId" column="p_examine_user_id"/>
+        <result property="examineTime" column="p_examine_time"/>
+        <result property="examineOpinion" column="p_examine_opinion"/>
+        <result property="examineStatus" column="p_examine_status"/>
+        <result property="sumPrice" column="p_sum_price"/>
+        <result property="createUserId" column="p_create_user_id"/>
+        <result property="createTime" column="p_create_time"/>
+        <result property="userRenewId" column="p_user_renew_id"/>
+        <result property="renewTime" column="p_renew_time"/>
+        <association property="examineUser" javaType="com.zb.pojo.User">
+            <result property="id" column="e_id"/>
+            <result property="roleId" column="e_role_id"/>
+            <result property="username" column="e_username"/>
+            <result property="password" column="e_password"/>
+            <result property="address" column="e_address"/>
+            <result property="phone" column="e_phone"/>
+            <result property="createUserId" column="e_create_user_id"/>
+            <result property="createTime" column="e_create_time"/>
+            <result property="userRenewId" column="e_user_renew_id"/>
+            <result property="renewTime" column="e_renew_time"/>
+        </association>
+        <association property="createUser" javaType="com.zb.pojo.User">
+            <result property="id" column="c_id"/>
+            <result property="roleId" column="c_role_id"/>
+            <result property="username" column="c_username"/>
+            <result property="password" column="c_password"/>
+            <result property="address" column="c_address"/>
+            <result property="phone" column="c_phone"/>
+            <result property="createUserId" column="c_create_user_id"/>
+            <result property="createTime" column="c_create_time"/>
+            <result property="userRenewId" column="c_user_renew_id"/>
+            <result property="renewTime" column="c_renew_time"/>
+        </association>
+        <association property="userRenew" javaType="com.zb.pojo.User">
+            <result property="id" column="u_id"/>
+            <result property="roleId" column="u_role_id"/>
+            <result property="username" column="u_username"/>
+            <result property="password" column="u_password"/>
+            <result property="address" column="u_address"/>
+            <result property="phone" column="u_phone"/>
+            <result property="createUserId" column="u_create_user_id"/>
+            <result property="createTime" column="u_create_time"/>
+            <result property="userRenewId" column="u_user_renew_id"/>
+            <result property="renewTime" column="u_renew_time"/>
+        </association>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into purchase (purchase_desc, purchase_number, examine_status, sum_price, create_time)
+        values (#{purchaseDesc}, #{purchaseNumber}, #{examineStatus}, #{sumPrice}, now());
+    </insert>
+
+    <update id="updateById">
+        update purchase
+        <trim prefix="set" suffixOverrides=",">
+            <if test="purchaseDesc != null">
+                purchase_desc = #{purchaseDesc},
+            </if>
+            <if test="purchaseNumber != null">
+                purchase_number = #{purchaseNumber},
+            </if>
+            <if test="examineUserId != null">
+                examine_user_id = #{examineUserId},
+            </if>
+            <if test="examineTime != null">
+                examine_time = #{examineTime},
+            </if>
+            <if test="examineOpinion != null">
+                examine_opinion = #{examineOpinion},
+            </if>
+            <if test="examineStatus != null">
+                examine_status = #{examineStatus},
+            </if>
+            <if test="sumPrice != null">
+                sum_price = #{sumPrice},
+            </if>
+        </trim>
+        where id = #{id};
+    </update>
+
+    <select id="selectAll" resultMap="purchaseMap">
+        select p.id              as p_id,
+               p.purchase_desc   as p_purchase_desc,
+               p.purchase_number as p_purchase_number,
+               p.examine_user_id as p_examine_user_id,
+               p.examine_time    as p_examine_time,
+               p.examine_opinion as p_examine_opinion,
+               p.examine_status  as p_examine_status,
+               p.sum_price       as p_sum_price,
+               p.create_user_id  as p_create_user_id,
+               p.create_time     as p_create_time,
+               p.user_renew_id   as p_user_renew_id,
+               p.renew_time      as p_renew_time,
+
+               e.id              as e_id,
+               e.role_id         as e_role_id,
+               e.username        as e_username,
+               e.password        as e_password,
+               e.address         as e_address,
+               e.phone           as e_phone,
+               e.create_user_id  as e_create_user_id,
+               e.create_time     as e_create_time,
+               e.user_renew_id   as e_user_renew_id,
+               e.renew_time      as e_renew_time,
+
+               c.id              as c_id,
+               c.role_id         as c_role_id,
+               c.username        as c_username,
+               c.password        as c_password,
+               c.address         as c_address,
+               c.phone           as c_phone,
+               c.create_user_id  as c_create_user_id,
+               c.create_time     as c_create_time,
+               c.user_renew_id   as c_user_renew_id,
+               c.renew_time      as c_renew_time,
+
+
+               u.id              as u_id,
+               u.role_id         as u_role_id,
+               u.username        as u_username,
+               u.password        as u_password,
+               u.address         as u_address,
+               u.phone           as u_phone,
+               u.create_user_id  as u_create_user_id,
+               u.create_time     as u_create_time,
+               u.user_renew_id   as u_user_renew_id,
+               u.renew_time      as u_renew_time
+        from purchase p
+                 left join user e on e.id = p.examine_user_id
+                 left join user c on c.id = p.create_user_id
+                 left join user u on u.id = p.user_renew_id
+        where p.examine_status = 0
+        order by p.create_time
+    </select>
+
+    <select id="selectById" resultMap="purchaseMap">
+        select p.id              as p_id,
+               p.purchase_desc   as p_purchase_desc,
+               p.purchase_number as p_purchase_number,
+               p.examine_user_id as p_examine_user_id,
+               p.examine_time    as p_examine_time,
+               p.examine_opinion as p_examine_opinion,
+               p.examine_status  as p_examine_status,
+               p.sum_price       as p_sum_price,
+               p.create_user_id  as p_create_user_id,
+               p.create_time     as p_create_time,
+               p.user_renew_id   as p_user_renew_id,
+               p.renew_time      as p_renew_time,
+
+               e.id              as e_id,
+               e.role_id         as e_role_id,
+               e.username        as e_username,
+               e.password        as e_password,
+               e.address         as e_address,
+               e.phone           as e_phone,
+               e.create_user_id  as e_create_user_id,
+               e.create_time     as e_create_time,
+               e.user_renew_id   as e_user_renew_id,
+               e.renew_time      as e_renew_time,
+
+               c.id              as c_id,
+               c.role_id         as c_role_id,
+               c.username        as c_username,
+               c.password        as c_password,
+               c.address         as c_address,
+               c.phone           as c_phone,
+               c.create_user_id  as c_create_user_id,
+               c.create_time     as c_create_time,
+               c.user_renew_id   as c_user_renew_id,
+               c.renew_time      as c_renew_time,
+
+
+               u.id              as u_id,
+               u.role_id         as u_role_id,
+               u.username        as u_username,
+               u.password        as u_password,
+               u.address         as u_address,
+               u.phone           as u_phone,
+               u.create_user_id  as u_create_user_id,
+               u.create_time     as u_create_time,
+               u.user_renew_id   as u_user_renew_id,
+               u.renew_time      as u_renew_time
+        from purchase p
+                 left join user e on e.id = p.examine_user_id
+                 left join user c on c.id = p.create_user_id
+                 left join user u on u.id = p.user_renew_id
+        where p.id = #{id};
+    </select>
+</mapper>

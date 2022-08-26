@@ -3,7 +3,6 @@ package com.zb.controller;
 import com.zb.pojo.Purchase;
 import com.zb.pojo.User;
 import com.zb.pojo.Warehousing;
-import com.zb.service.StokeServicec;
 import com.zb.service.WarehousingService;
 import com.zb.utils.Result;
 import org.apache.logging.log4j.util.Strings;
@@ -56,11 +55,7 @@ public class WarehousingController {
     @PostMapping("createWarehousing")
     public Result createWarehousing(@RequestBody Purchase purchase) {
         // 获取流程审核状态
-        Integer purchaseStatus = purchase.getStatus();
-
-        /*if(purchase.getPurchaseNumber() > 0){
-            return new Result().setCode(500).setMessage("采购数量不规范");
-        }*/
+        Integer purchaseStatus = purchase.getExamineStatus();
 
         Object data = null;
         String message = null;
@@ -124,7 +119,8 @@ public class WarehousingController {
         if(warehousing.getWarehousingNumber() < 1){
             return new Result().setMessage("入库数量不合法").setCode(500);
         }
-        if(warehousing.getDetailedPurchase().getPurchasePrice().compareTo(new BigDecimal(1)) == -1){
+
+        if(warehousing.getDetailedPurchase().getPurchasePrice().compareTo(new BigDecimal(0)) < 1){
             return new Result().setMessage("商品价格不合法").setCode(500);
         }
 

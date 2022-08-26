@@ -8,10 +8,10 @@
         <module>info</module>
         <module>menu</module>
         <module>start</module>
-        <module>stock</module>
         <module>user</module>
         <module>warehouse</module>
         <module>upload</module>
+        <module>purchase</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

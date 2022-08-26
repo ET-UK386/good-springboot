@@ -1,0 +1,311 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.DetailedPurchaseMapper">
+
+    <resultMap id="detailedPurchaseMap" type="com.zb.pojo.DetailedPurchase">
+        <result property="id" column="d_id"/>
+        <result property="purchaseId" column="d_purchase_id"/>
+        <result property="vendorId" column="d_vendor_id"/>
+        <result property="skuId" column="d_sku_id"/>
+        <result property="batch" column="d_batch"/>
+        <result property="purchasePrice" column="d_purchase_price"/>
+        <result property="number" column="d_number"/>
+        <result property="status" column="d_status"/>
+        <result property="createUserId" column="d_create_user_id"/>
+        <result property="createTime" column="d_create_time"/>
+        <result property="userRenewId" column="d_user_renew_id"/>
+        <result property="renewTime" column="d_renew_time"/>
+        <association property="purchase" javaType="com.zb.pojo.Purchase">
+            <result property="id" column="p_id"/>
+            <result property="purchaseDesc" column="p_purchase_desc"/>
+            <result property="purchaseNumber" column="p_purchase_number"/>
+            <result property="examineUserId" column="p_examine_user_id"/>
+            <result property="examineTime" column="p_examine_time"/>
+            <result property="examineOpinion" column="p_examine_opinion"/>
+            <result property="examineStatus" column="p_examine_status"/>
+            <result property="sumPrice" column="p_sum_price"/>
+            <result property="createUserId" column="p_create_user_id"/>
+            <result property="createTime" column="p_create_time"/>
+            <result property="userRenewId" column="p_user_renew_id"/>
+            <result property="renewTime" column="p_renew_time"/>
+        </association>
+        <association property="vendor" javaType="com.zb.pojo.Vendor">
+            <result property="id" column="v_id"/>
+            <result property="vendorName" column="v_vendor_name"/>
+            <result property="skuId" column="v_sku_id"/>
+            <result property="vendorAddress" column="v_vendor_address"/>
+            <result property="desc" column="v_desc"/>
+            <result property="principal" column="v_principal"/>
+            <result property="tel" column="v_tel"/>
+            <result property="createUserId" column="v_create_user_id"/>
+            <result property="createTime" column="v_create_time"/>
+            <result property="userRenewId" column="v_user_renew_id"/>
+            <result property="renewTime" column="v_renew_time"/>
+        </association>
+        <association property="goodsku" javaType="com.zb.pojo.Goodsku">
+            <result property="id" column="g_id"/>
+            <result property="spuId" column="g_spu_id"/>
+            <result property="skuName" column="g_sku_name"/>
+            <result property="skuDesc" column="g_sku_desc"/>
+            <result property="colorId" column="g_color_id"/>
+            <result property="priceId" column="g_price_id"/>
+            <result property="stockId" column="g_Stock_id"/>
+            <result property="salesVolume" column="g_sales_volume"/>
+            <result property="companyId" column="g_company_id"/>
+            <result property="manufacturer" column="g_manufacturer"/>
+            <result property="supplierId" column="g_Supplier_id"/>
+            <result property="createUserId" column="g_create_user_id"/>
+            <result property="createTime" column="g_create_time"/>
+            <result property="userRenewId" column="g_user_renewId"/>
+            <result property="renewTime" column="g_renew_time"/>
+            <result property="logic_status" column="g_logic_status"/>
+        </association>
+        <association property="createUser" javaType="com.zb.pojo.User">
+            <result property="id" column="c_id"/>
+            <result property="roleId" column="c_role_id"/>
+            <result property="username" column="c_username"/>
+            <result property="password" column="c_password"/>
+            <result property="address" column="c_address"/>
+            <result property="phone" column="c_phone"/>
+            <result property="createUserId" column="c_create_user_id"/>
+            <result property="createTime" column="c_create_time"/>
+            <result property="userRenewId" column="c_user_renew_id"/>
+            <result property="renewTime" column="c_renew_time"/>
+        </association>
+        <association property="userRenew" javaType="com.zb.pojo.User">
+            <result property="id" column="u_id"/>
+            <result property="roleId" column="u_role_id"/>
+            <result property="username" column="u_username"/>
+            <result property="password" column="u_password"/>
+            <result property="address" column="u_address"/>
+            <result property="phone" column="u_phone"/>
+            <result property="createUserId" column="u_create_user_id"/>
+            <result property="createTime" column="u_create_time"/>
+            <result property="userRenewId" column="u_user_renew_id"/>
+            <result property="renewTime" column="u_renew_time"/>
+        </association>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into detailed_purchase (purchase_id, vendor_id, sku_id, batch, purchase_price, number, status,
+                                       create_user_id, create_time)
+        values (#{purchaseId}, #{vendorId}, #{skuId}, #{batch}, #{purchasePrice}, #{number}, 0, #{createUserId},
+                now());
+    </insert>
+
+    <update id="updateById">
+        update detailed_purchase
+        <trim prefix="set" suffixOverrides=",">
+            <if test="purchaseId != null">
+                purchase_id = #{purchaseId},
+            </if>
+            <if test="vendorId != null">
+                vendor_id = #{vendorId},
+            </if>
+            <if test="skuId != null">
+                sku_id = #{skuId},
+            </if>
+            <if test="batch != null">
+                batch = #{batch},
+            </if>
+            <if test="purchasePrice != null">
+                purchase_price = #{purchasePrice},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="userRenewId != null">
+                user_renew_id = #{userRenewId},
+            </if>
+            <if test="renewTime != null">
+                renew_time = #{renewTime},
+            </if>
+        </trim>
+        where id = #{id};
+    </update>
+
+
+    <select id="selectById" resultMap="detailedPurchaseMap">
+        select d.id              as d_id,
+               d.purchase_id     as d_purchase_id,
+               d.vendor_id       as d_vendor_id,
+               d.sku_id          as d_sku_id,
+               d.batch           as d_batch,
+               d.purchase_price  as d_purchase_price,
+               d.number          as d_number,
+               d.status          as d_status,
+               d.create_user_id  as d_create_user_id,
+               d.create_time     as d_create_time,
+               d.user_renew_id   as d_user_renew_id,
+               d.renew_time      as d_renew_time,
+
+               p.id              as p_id,
+               p.purchase_desc   as p_purchase_desc,
+               p.purchase_number as p_purchase_number,
+               p.examine_user_id as p_examine_user_id,
+               p.examine_time    as p_examine_time,
+               p.examine_opinion as p_examine_opinion,
+               p.examine_status  as p_examine_status,
+               p.sum_price       as p_sum_price,
+               p.create_user_id  as p_create_user_id,
+               p.create_time     as p_create_time,
+               p.user_renew_id   as p_user_renew_id,
+               p.renew_time      as p_renew_time,
+
+               v.id              as v_id,
+               v.vendor_name     as v_vendor_name,
+               v.sku_id          as v_sku_id,
+               v.vendor_address  as v_vendor_address,
+               v.desc            as v_desc,
+               v.principal       as v_principal,
+               v.tel             as v_tel,
+               v.create_user_id  as v_create_user_id,
+               v.create_time     as v_create_time,
+               v.user_renew_id   as v_user_renew_id,
+               v.renew_time      as v_renew_time,
+               v.purchase_time   as v_purchase_time,
+
+               g.id              as g_id,
+               g.spu_id          as g_spu_id,
+               g.sku_name        as g_sku_name,
+               g.sku_desc        as g_sku_desc,
+               g.color_id        as g_color_id,
+               g.price_id        as g_price_id,
+               g.Stock_id        as g_Stock_id,
+               g.sales_volume    as g_sales_volume,
+               g.company_id      as g_company_id,
+               g.manufacturer    as g_manufacturer,
+               g.Supplier_id     as g_Supplier_id,
+               g.create_user_id  as g_create_user_id,
+               g.create_time     as g_create_time,
+               g.user_renewId    as g_user_renewId,
+               g.renew_time      as g_renew_time,
+               g.logic_status    as g_logic_status,
+
+               c.id              as c_id,
+               c.role_id         as c_role_id,
+               c.username        as c_username,
+               c.password        as c_password,
+               c.address         as c_address,
+               c.phone           as c_phone,
+               c.create_user_id  as c_create_user_id,
+               c.create_time     as c_create_time,
+               c.user_renew_id   as c_user_renew_id,
+               c.renew_time      as c_renew_time,
+
+               u.id              as u_id,
+               u.role_id         as u_role_id,
+               u.username        as u_username,
+               u.password        as u_password,
+               u.address         as u_address,
+               u.phone           as u_phone,
+               u.create_user_id  as u_create_user_id,
+               u.create_time     as u_create_time,
+               u.user_renew_id   as u_user_renew_id,
+               u.renew_time      as u_renew_time
+        from detailed_purchase d
+                 left join purchase p on d.purchase_id = p.id
+                 left join vendor v on d.vendor_id = v.id
+                 left join goodsku g on d.sku_id = g.id
+                 left join user c on c.id = d.create_user_id
+                 left join user u on u.id = d.user_renew_id
+        where d.id = #{id};
+    </select>
+
+    <select id="selectVendor" resultType="com.zb.pojo.Vendor">
+        select *
+        from vendor;
+    </select>
+
+    <select id="selectByPurchaseId" resultMap="detailedPurchaseMap">
+        select d.id              as d_id,
+               d.purchase_id     as d_purchase_id,
+               d.vendor_id       as d_vendor_id,
+               d.sku_id          as d_sku_id,
+               d.batch           as d_batch,
+               d.purchase_price  as d_purchase_price,
+               d.number          as d_number,
+               d.status          as d_status,
+               d.create_user_id  as d_create_user_id,
+               d.create_time     as d_create_time,
+               d.user_renew_id   as d_user_renew_id,
+               d.renew_time      as d_renew_time,
+
+               p.id              as p_id,
+               p.purchase_desc   as p_purchase_desc,
+               p.purchase_number as p_purchase_number,
+               p.examine_user_id as p_examine_user_id,
+               p.examine_time    as p_examine_time,
+               p.examine_opinion as p_examine_opinion,
+               p.examine_status  as p_examine_status,
+               p.sum_price       as p_sum_price,
+               p.create_user_id  as p_create_user_id,
+               p.create_time     as p_create_time,
+               p.user_renew_id   as p_user_renew_id,
+               p.renew_time      as p_renew_time,
+
+               v.id              as v_id,
+               v.vendor_name     as v_vendor_name,
+               v.sku_id          as v_sku_id,
+               v.vendor_address  as v_vendor_address,
+               v.desc            as v_desc,
+               v.principal       as v_principal,
+               v.tel             as v_tel,
+               v.create_user_id  as v_create_user_id,
+               v.create_time     as v_create_time,
+               v.user_renew_id   as v_user_renew_id,
+               v.renew_time      as v_renew_time,
+               v.purchase_time   as v_purchase_time,
+
+               g.id              as g_id,
+               g.spu_id          as g_spu_id,
+               g.sku_name        as g_sku_name,
+               g.sku_desc        as g_sku_desc,
+               g.color_id        as g_color_id,
+               g.price_id        as g_price_id,
+               g.Stock_id        as g_Stock_id,
+               g.sales_volume    as g_sales_volume,
+               g.company_id      as g_company_id,
+               g.manufacturer    as g_manufacturer,
+               g.Supplier_id     as g_Supplier_id,
+               g.create_user_id  as g_create_user_id,
+               g.create_time     as g_create_time,
+               g.user_renewId    as g_user_renewId,
+               g.renew_time      as g_renew_time,
+               g.logic_status    as g_logic_status,
+
+               c.id              as c_id,
+               c.role_id         as c_role_id,
+               c.username        as c_username,
+               c.password        as c_password,
+               c.address         as c_address,
+               c.phone           as c_phone,
+               c.create_user_id  as c_create_user_id,
+               c.create_time     as c_create_time,
+               c.user_renew_id   as c_user_renew_id,
+               c.renew_time      as c_renew_time,
+
+               u.id              as u_id,
+               u.role_id         as u_role_id,
+               u.username        as u_username,
+               u.password        as u_password,
+               u.address         as u_address,
+               u.phone           as u_phone,
+               u.create_user_id  as u_create_user_id,
+               u.create_time     as u_create_time,
+               u.user_renew_id   as u_user_renew_id,
+               u.renew_time      as u_renew_time
+        from detailed_purchase d
+                 left join purchase p on d.purchase_id = p.id
+                 left join vendor v on d.vendor_id = v.id
+                 left join goodsku g on d.sku_id = g.id
+                 left join user c on c.id = d.create_user_id
+                 left join user u on u.id = d.user_renew_id
+        where d.purchase_id = #{purchaseId}
+                 and d.logic_del = 0;
+    </select>
+</mapper>

@@ -2,7 +2,7 @@ package com.zb.service.impl;
 
 import com.zb.mapper.WarehousingMapper;
 import com.zb.pojo.*;
-import com.zb.service.StokeServicec;
+import com.zb.service.DetailedPurchaseService;
 import com.zb.service.WarehouseService;
 import com.zb.service.WarehousingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +23,9 @@ public class WarehousingServiceImpl implements WarehousingService {
     @Autowired
     private WarehousingMapper warehousingMapper;
     @Autowired
-    private StokeServicec stokeServicec;
-    @Autowired
     private WarehouseService warehouseService;
+    @Autowired
+    private DetailedPurchaseService detailedPurchaseService;
 
     /**
      * 查询全部
@@ -45,6 +46,14 @@ public class WarehousingServiceImpl implements WarehousingService {
      */
     @Override
     public Integer checkBeforeStorage(Warehousing warehousing, User loginUser) {
+
+        Long detailedPurchaseId = warehousing.getDetailedPurchaseId();
+        BigDecimal purchasePrice = warehousing.getDetailedPurchase().getPurchasePrice();
+
+        // 修改详细订单价格
+        // TODO: 2022/8/25 完善
+        // stokeServicec.updatePriceById(detailedPurchaseId, purchasePrice);
+
         warehousing.setExamineUserId(loginUser.getId());
         warehousing.setExamineTime(new Date(System.currentTimeMillis()));
         return warehousingMapper.checkBeforeStorage(warehousing);
@@ -71,14 +80,15 @@ public class WarehousingServiceImpl implements WarehousingService {
     public Map<String, StringBuilder> createWarehousing(Purchase purchase) {
         Warehousing warehousing = new Warehousing();
         // 根据进货单id获取所有的进货详细单
-        List<DetailedPurchase> detailedPurchases = stokeServicec.listPurchaseDetailedPurchaseBylistPurchaseId(purchase.getId());
+        // TODO: 2022/8/25 完善
+        List<DetailedPurchase> detailedPurchases = detailedPurchaseService.selectByPurchaseId(purchase.getId());
 
         StringBuilder successBatchs = new StringBuilder();
         StringBuilder errorBatchs = new StringBuilder();
 
         for (DetailedPurchase detailedPurchase : detailedPurchases) {
             if (detailedPurchase.getStatus() == 1) {
-                if(detailedPurchase.getNumber() <= 0){
+                if (detailedPurchase.getNumber() <= 0) {
                     errorBatchs.append(detailedPurchase.getBatch() + "批次,创建失败， 详细订单进货数量不合法");
                 }
                 warehousing.setPurchaseId(purchase.getId())
@@ -89,6 +99,8 @@ public class WarehousingServiceImpl implements WarehousingService {
                 Integer res = warehousingMapper.insert(warehousing);
                 if (res > 0) {
                     successBatchs.append(detailedPurchase.getBatch()).append(",");
+                    detailedPurchase.setStatus(4);
+                    detailedPurchaseService.modifyById(detailedPurchase);
                 } else {
                     errorBatchs.append(detailedPurchase.getBatch()).append(",");
                 }
@@ -134,12 +146,12 @@ public class WarehousingServiceImpl implements WarehousingService {
             if (add > 0) {
                 // 仓库数据创建成功
                 res = 1;
-            } else{
+            } else {
                 // 仓库数据创建失败
                 res = 0;
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             }
-        }else{
+        } else {
             // 入库流程审核不通过
             res = -1;
         }

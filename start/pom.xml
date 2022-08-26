@@ -49,7 +49,7 @@
 
         <dependency>
             <groupId>com.zb</groupId>
-            <artifactId>stock</artifactId>
+            <artifactId>purchase</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
