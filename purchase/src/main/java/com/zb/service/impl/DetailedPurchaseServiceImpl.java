@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -40,6 +41,15 @@ public class DetailedPurchaseServiceImpl implements DetailedPurchaseService {
         return 1;
     }
 
+    public Integer add(DetailedPurchase detailedPurchase){
+        // 通过UUID获取批次
+        String substring = UUID.randomUUID().toString().substring(0, 6);
+
+        detailedPurchase.setBatch(substring);
+
+        return detailedPurchaseMapper.insert(detailedPurchase);
+    }
+
 
     @Override
     public Integer addDetailedPurchaseAndPurchase(List<DetailedPurchase> list) {
@@ -66,7 +76,7 @@ public class DetailedPurchaseServiceImpl implements DetailedPurchaseService {
                 // 计算总进货价
                 sum = sum.add(price.multiply(num));
                 // 添加详细订单
-                Integer insert1 = detailedPurchaseMapper.insert(detailedPurchase);
+                Integer insert1 = this.add(detailedPurchase);
                 if (insert1 <= 0) {
                     return -1;
                 }
@@ -102,7 +112,7 @@ public class DetailedPurchaseServiceImpl implements DetailedPurchaseService {
                 // 设置PurchaseId
                 detailedPurchase.setPurchaseId(purchaseId);
                 // 添加详细订单
-                Integer insert1 = detailedPurchaseMapper.insert(detailedPurchase);
+                Integer insert1 = this.add(detailedPurchase);
                 if (insert1 <= 0) {
                     return -1;
                 }

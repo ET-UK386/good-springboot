@@ -87,7 +87,7 @@
     </update>
     <update id="updateStatusById">
         update purchase
-        set examine_status = 0
+        set examine_status = 0, examine_opinion = null
         where id=#{purchaseId};
     </update>
 

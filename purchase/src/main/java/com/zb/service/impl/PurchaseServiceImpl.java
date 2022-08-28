@@ -70,7 +70,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public Integer modifyPurchase(Long purchaseId, List<DetailedPurchase> list) {
-        // 修改流程状态 改为0
+        // 修改流程状态 改为0,并清空审核意见
         Integer integer = purchaseMapper.updateStatusById(purchaseId);
         if(integer <= 0){
             return -1;

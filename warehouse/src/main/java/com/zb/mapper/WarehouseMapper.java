@@ -9,12 +9,6 @@ import java.util.List;
 public interface WarehouseMapper {
 
     /**
-     * 查询全部
-     * @return
-     */
-    List<Warehouse> selectAll();
-
-    /**
      * 根据skuid分组查询
      * @return
      */

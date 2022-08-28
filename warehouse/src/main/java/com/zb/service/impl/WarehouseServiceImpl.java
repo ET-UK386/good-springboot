@@ -18,11 +18,6 @@ public class WarehouseServiceImpl implements WarehouseService {
 
 
     @Override
-    public List<Warehouse> findAll() {
-        return warehouseMapper.selectAll();
-    }
-
-    @Override
     public Integer add(Warehouse warehouse) {
         return warehouseMapper.insert(warehouse);
     }

@@ -248,4 +248,15 @@ public class Goodsku {
   public void setVendor(Vendor vendor) {
     this.vendor = vendor;
   }
+
+  /**
+   * 不能删
+   * @return
+   */
+  public String getSkuNameStr(){
+    if(getColor() == null){
+      return null;
+    }
+    return this.getSkuName() + "-" + this.getColor().getColorName();
+  }
 }
