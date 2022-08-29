@@ -264,4 +264,15 @@ public class Goodsku {
 
     return Objects.hash(id, spuId, skuName, skuDesc, colorId, priceId, salesVolume, companyId, manufacturer, supplierId, createUserId, createTime, userRenewId, renewTime, logic_status, goodspu, sort, user, color, price, units, result);
   }
+
+  /**
+   * 不能删
+   * @return
+   */
+  public String getSkuNameStr(){
+    if(getColor() == null){
+      return null;
+    }
+    return this.getSkuName() + "-" + this.getColor().getColorName();
+  }
 }

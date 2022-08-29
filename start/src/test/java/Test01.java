@@ -13,10 +13,4 @@ public class Test01 {
     @Autowired
     private WarehouseService warehouseService;
 
-    @Test
-    void test(){
-        List<Warehouse> all = warehouseService.findAll();
-        System.out.println(all);
-    }
-
 }

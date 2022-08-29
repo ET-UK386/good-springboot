@@ -34,6 +34,10 @@ public class DetailedPurchase {
     private Integer number;
     /** 状态*/
     private Integer status;
+    /** 逻辑删除*/
+    private Integer logicDel;
+
+
     /**创建人id*/
     private Long createUserId;
     /**创建时间*/
@@ -52,5 +56,21 @@ public class DetailedPurchase {
     /**创建人*/
     private User createUser;
     /**更新人*/
-    private User renewUser;
+    private User userRenew;
+
+    public String getStatusStr(){
+        Integer status = this.getStatus();
+        switch (status) {
+            case 0:
+                return "审核中";
+            case 1:
+                return "同意";
+            case 2:
+                return "驳回";
+            case 3:
+                return "供应商没货";
+            default:
+                return null;
+        }
+    }
 }

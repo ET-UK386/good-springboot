@@ -1,7 +1,9 @@
 package com.zb.mapper;
 
+import com.zb.pojo.DetailedWarehousing;
 import com.zb.pojo.Warehousing;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -34,4 +36,18 @@ public interface WarehousingMapper {
      * @return
      */
     List<Warehousing> selectByStatus(Integer[] status);
+
+    /**
+     * 添加入库审核详细订单
+     * @param detailedWarehousing
+     * @return
+     */
+    Integer insertDetailedWarehousing(DetailedWarehousing detailedWarehousing);
+
+    Integer update(Warehousing warehousing);
+
+
+    List<DetailedWarehousing> selectDetailedWarehousingByWarehousingId(Long warehousingId);
+
+    Integer UpdateDetailedWarehousing(DetailedWarehousing detailedWarehousing);
 }

@@ -1,5 +1,6 @@
 package com.zb.controller;
 
+import com.zb.pojo.Price;
 import com.zb.pojo.Purchase;
 import com.zb.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class PriceController {
 
     @RequestMapping("/listPrice")
 
-    public List<Purchase.Price> listPrice(@RequestBody Purchase.Price price){
+    public List<Price> listPrice(@RequestBody Price price){
         return priceService.listPrice(price.getSkuId());
     }
 }

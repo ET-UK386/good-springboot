@@ -15,8 +15,8 @@ import java.util.Date;
 public class Warehouse {
 
   private Integer id;
-  /** 进货详细单ID*/
-  private Long detailedPurchaseId;
+  /** 入库详细单ID*/
+  private Long detailedWarehousingId;
   /** 库存数量*/
   private Integer stockNumber;
   /** 仓库地址*/
@@ -30,9 +30,18 @@ public class Warehouse {
   private Date createTime;
   private Long userRenewId;
   private Date renewTime;
+  /** 批次*/
+  private String batch;
 
-  private DetailedPurchase detailedPurchase;
+  private DetailedWarehousing detailedWarehousing;
   private Goodsku goodsku;
   private User createUser;
   private User userRenew;
+
+  public String getSkuNameStr(){
+    if(goodsku == null || goodsku.getColor() == null){
+      return null;
+    }
+    return goodsku.getSkuName() + "-" + goodsku.getColor().getColorName();
+  }
 }

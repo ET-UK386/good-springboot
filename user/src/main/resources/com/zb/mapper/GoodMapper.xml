@@ -59,9 +59,10 @@
     <insert id="insertGood">
         insert into goodsku values
         (default ,#{spuId},#{skuName},#{skuDesc},#{priceId},#{colorId},#{companyId},#{createUserId},#{createTime},#{userRenewId},#{renewTime},0,default,default)
+
     </insert>
     <insert id="insertprice" useGeneratedKeys="true" keyProperty="id">
-        insert into price (sku_id,price) value (#{skuId},#{price})
+        insert into price (sku_id, price) value (#{skuId}, #{price})
     </insert>
     <insert id="insertSort" useGeneratedKeys="true" keyProperty="id">
         insert into sort(id,sort_name,create_user_id,create_time,user_renew_id,renew_time) values (default ,#{sortName},#{createUserId},#{createTime},#{userRenewId},#{renewTime})
@@ -71,19 +72,28 @@
     </insert>
     <insert id="insertUnits">
         insert into units (id,units_name,create_user_id,create_time,user_renew_id,renew_time) values (default ,#{unitsName},#{createUserId},#{createTime},#{userRenewId},#{renewTime})
+
     </insert>
-    <select id="findSort"  resultType="com.zb.pojo.Sort" >
-        SELECT id FROM sort WHERE sort_name = #{sortName}
+    <select id="findSort" resultType="com.zb.pojo.Sort">
+        SELECT id
+        FROM sort
+        WHERE sort_name = #{sortName}
     </select>
     <select id="findColor" resultType="com.zb.pojo.Color">
-        select id from color where color_name = #{colorName}
+        select id
+        from color
+        where color_name = #{colorName}
     </select>
     <select id="findUnits" resultType="com.zb.pojo.Units">
-        select id from units where units_name = #{unitsName}
+        select id
+        from units
+        where units_name = #{unitsName}
     </select>
     <!--逻辑删除-->
     <update id="updateLogic_status">
-          update goodsku set logic_status = 1 where id = #{id}
+        update goodsku
+        set logic_status = 1
+        where id = #{id}
     </update>
     <!--修改-->
     <update id="updateGood">
@@ -100,30 +110,48 @@
     </update>
     <update id="updateSpu" useGeneratedKeys="true" keyProperty="id">
         update goodspu set brand = #{brand},sort_id = #{sortId} where id = #{id}
+
     </update>
     <update id="updateSort" useGeneratedKeys="true" keyProperty="id">
-        update sort set sort_name = #{sortName} where id = #{id}
+        update sort
+        set sort_name = #{sortName}
+        where id = #{id}
     </update>
     <update id="updatePrice" useGeneratedKeys="true" keyProperty="id">
-        update price set price = #{price} where id = #{id}
+        update price
+        set price = #{price}
+        where id = #{id}
     </update>
     <update id="updateColor" useGeneratedKeys="true" keyProperty="id">
-        update color set color_name = #{colorName} where id = #{id}
+        update color
+        set color_name = #{colorName}
+        where id = #{id}
     </update>
+
     <update id="updateGoodskuPrice">
-        update goodsku set price_id = #{priceId} where id = #{id}
+        update goodsku
+        set price_id = #{priceId}
+        where id = #{id}
     </update>
     <update id="updateUnits">
-        update units set units_name = #{unitsName} where id = #{id}
+        update units
+        set units_name = #{unitsName}
+        where id = #{id}
     </update>
     <select id="findspu" resultType="com.zb.pojo.Goodspu">
-        select id from goodspu where id = #{id}
+        select id
+        from goodspu
+        where id = #{id}
     </select>
     <select id="findPrice" resultType="java.lang.Integer">
-        SELECT COUNT(id) FROM price WHERE price = #{price}
+        SELECT COUNT(id)
+        FROM price
+        WHERE price = #{price}
     </select>
     <select id="findPriceTwo" resultType="com.zb.pojo.Price">
-        select id from price where price = #{price}
+        select id
+        from price
+        where price = #{price}
     </select>
     <!--查询全部-->
     <select id="listGood" resultMap="umap">
@@ -154,7 +182,8 @@
     </select>
     <!--查询总记录数-->
     <select id="count" resultType="java.lang.Integer">
-        select count(*) from goodsku
+        select count(*)
+        from goodsku
     </select>
     <!--查询全部-->
     <select id="findAllGoodsku" resultMap="umap">
@@ -210,19 +239,25 @@
             ]]>
         </if>
         <if test="sortName != null">
-        <![CDATA[
+            <![CDATA[
             AND s.`sort_name` LIKE concat ('%',#{sortName},'%')
             ]]>
-    </if>
+        </if>
     </select>
     <select id="findWarehouseTwo" resultType="java.lang.Integer">
-        select count(id) from warehouse where stock_number = #{stockNumber}
+        select count(id)
+        from warehouse
+        where stock_number = #{stockNumber}
     </select>
     <select id="findVendor" resultType="java.lang.Integer">
-        select count(id) from vendor where vendor_name = #{vendorName}
+        select count(id)
+        from vendor
+        where vendor_name = #{vendorName}
     </select>
     <select id="findVendorTwo" resultType="com.zb.pojo.Vendor">
-        select id from vendor where vendor_name = #{vendorName}
+        select id
+        from vendor
+        where vendor_name = #{vendorName}
     </select>
     <select id="listGoodSpu" resultMap="smap">
          SELECT g.id,g.good_name,g.brand,s.`sort_name`,u.`username`,g.create_time,us.`username` userrenewname,g.renew_time FROM goodspu g INNER JOIN sort s ON s.`id` = g.sort_id
