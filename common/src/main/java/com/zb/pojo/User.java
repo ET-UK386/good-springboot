@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Transient;
 
 import java.util.Date;
 
@@ -18,16 +16,16 @@ import java.util.Date;
 @AllArgsConstructor
 public class User {
 
-    private Long id;
-    private Long roleId;
+    private Integer id;
+    private Integer roleId;
     private String username;
     private String password;
     private String address;
     private String phone;
-    private Long createUserId;
+    private Integer createUserId;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
-    private Long userRenewId;
+    private Integer userRenewId;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date renewTime;
     private String con1;
@@ -62,19 +60,19 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -110,11 +108,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Long getCreateUserId() {
+    public Integer getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Long createUserId) {
+    public void setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -126,11 +124,11 @@ public class User {
         this.createTime = createTime;
     }
 
-    public Long getUserRenewId() {
+    public Integer getUserRenewId() {
         return userRenewId;
     }
 
-    public void setUserRenewId(Long userRenewId) {
+    public void setUserRenewId(Integer userRenewId) {
         this.userRenewId = userRenewId;
     }
 

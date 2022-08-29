@@ -4,7 +4,6 @@ package com.zb.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -28,6 +27,16 @@ public class Sort {
   private Date createTime;
   private Integer userRenewId;
   private Date renewTime;
+
+  private String token;
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
 
   public Integer getId() {
     return id;

@@ -1,52 +1,55 @@
 package com.zb.pojo;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.sql.Timestamp;
 import java.util.Date;
-
-/**
- * spu
- */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class Goodspu {
 
   private Integer id;
-  /** 商品名称*/
   private String goodName;
-  /** 品牌*/
   private String brand;
   private Integer sortId;
   private Integer status;
   private Integer createUserId;
+  @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date createTime;
   private Integer userRenewId;
+  @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
+  private Integer colorId;
+  private Integer priceId;
+  private Integer companyId;
+  private String con3;
   private Sort sort;
+  private Color color;
+  private Units units;
   private User user;
-  private String statusStr;
-  public String getStatusStr() {
-    switch (status){
-      case 0 : statusStr ="上架";
-      break;
-      case 1 : statusStr ="下架";
-      break;
-      case 2 : statusStr ="售罄";
-      break;
-      default:
-        break;
-    }
-    return statusStr;
+  private Price price;
+
+  public Integer getPriceId() {
+    return priceId;
   }
 
-  public void setStatusStr(String statusStr) {
-    this.statusStr = statusStr;
+  public void setPriceId(Integer priceId) {
+    this.priceId = priceId;
+  }
+
+  public Price getPrice() {
+    return price;
+  }
+
+  public void setPrice(Price price) {
+    this.price = price;
+  }
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public Integer getId() {
@@ -97,13 +100,7 @@ public class Goodspu {
     this.createUserId = createUserId;
   }
 
-  public Date getCreateTime() {
-    return createTime;
-  }
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
 
   public Integer getUserRenewId() {
     return userRenewId;
@@ -111,6 +108,14 @@ public class Goodspu {
 
   public void setUserRenewId(Integer userRenewId) {
     this.userRenewId = userRenewId;
+  }
+
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
   }
 
   public Date getRenewTime() {
@@ -121,6 +126,30 @@ public class Goodspu {
     this.renewTime = renewTime;
   }
 
+  public Integer getColorId() {
+    return colorId;
+  }
+
+  public void setColorId(Integer colorId) {
+    this.colorId = colorId;
+  }
+
+  public Integer getCompanyId() {
+    return companyId;
+  }
+
+  public void setCompanyId(Integer companyId) {
+    this.companyId = companyId;
+  }
+
+  public String getCon3() {
+    return con3;
+  }
+
+  public void setCon3(String con3) {
+    this.con3 = con3;
+  }
+
   public Sort getSort() {
     return sort;
   }
@@ -129,11 +158,19 @@ public class Goodspu {
     this.sort = sort;
   }
 
-  public User getUser() {
-    return user;
+  public Color getColor() {
+    return color;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setColor(Color color) {
+    this.color = color;
+  }
+
+  public Units getUnits() {
+    return units;
+  }
+
+  public void setUnits(Units units) {
+    this.units = units;
   }
 }

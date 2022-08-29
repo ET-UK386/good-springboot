@@ -26,6 +26,15 @@ public class Units {
   private Date createTime;
   private Integer userRenewId;
   private Date renewTime;
+  private String token;
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
 
   public Integer getId() {
     return id;

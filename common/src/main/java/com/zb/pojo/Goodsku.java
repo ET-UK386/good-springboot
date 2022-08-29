@@ -1,12 +1,13 @@
 package com.zb.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zb.utils.Result;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * sku
@@ -27,8 +28,6 @@ public class Goodsku {
   private Integer colorId;
   /** 价表ID*/
   private Integer priceId;
-  /** 库存表ID*/
-  private Integer stockId;
   /** 销量*/
   private Integer salesVolume;
   /** 单位ID*/
@@ -52,10 +51,16 @@ public class Goodsku {
   private User user;
   private Color color;
   private Price price;
-  private Warehouse warehouse;
   private Units units;
-  private Vendor vendor;
+  private Result result;
 
+  public Result getResult() {
+    return result;
+  }
+
+  public void setResult(Result result) {
+    this.result = result;
+  }
 
   public Integer getId() {
     return id;
@@ -103,14 +108,6 @@ public class Goodsku {
 
   public void setPriceId(Integer priceId) {
     this.priceId = priceId;
-  }
-
-  public Integer getStockId() {
-    return stockId;
-  }
-
-  public void setStockId(Integer stockId) {
-    this.stockId = stockId;
   }
 
   public Integer getSalesVolume() {
@@ -225,14 +222,6 @@ public class Goodsku {
     this.price = price;
   }
 
-  public Warehouse getWarehouse() {
-    return warehouse;
-  }
-
-  public void setWarehouse(Warehouse warehouse) {
-    this.warehouse = warehouse;
-  }
-
   public Units getUnits() {
     return units;
   }
@@ -241,11 +230,38 @@ public class Goodsku {
     this.units = units;
   }
 
-  public Vendor getVendor() {
-    return vendor;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Goodsku)) return false;
+    Goodsku goodsku = (Goodsku) o;
+    return Objects.equals(id, goodsku.id) &&
+            Objects.equals(spuId, goodsku.spuId) &&
+            Objects.equals(skuName, goodsku.skuName) &&
+            Objects.equals(skuDesc, goodsku.skuDesc) &&
+            Objects.equals(colorId, goodsku.colorId) &&
+            Objects.equals(priceId, goodsku.priceId) &&
+            Objects.equals(salesVolume, goodsku.salesVolume) &&
+            Objects.equals(companyId, goodsku.companyId) &&
+            Objects.equals(manufacturer, goodsku.manufacturer) &&
+            Objects.equals(supplierId, goodsku.supplierId) &&
+            Objects.equals(createUserId, goodsku.createUserId) &&
+            Objects.equals(createTime, goodsku.createTime) &&
+            Objects.equals(userRenewId, goodsku.userRenewId) &&
+            Objects.equals(renewTime, goodsku.renewTime) &&
+            Objects.equals(logic_status, goodsku.logic_status) &&
+            Objects.equals(goodspu, goodsku.goodspu) &&
+            Objects.equals(sort, goodsku.sort) &&
+            Objects.equals(user, goodsku.user) &&
+            Objects.equals(color, goodsku.color) &&
+            Objects.equals(price, goodsku.price) &&
+            Objects.equals(units, goodsku.units) &&
+            Objects.equals(result, goodsku.result);
   }
 
-  public void setVendor(Vendor vendor) {
-    this.vendor = vendor;
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, spuId, skuName, skuDesc, colorId, priceId, salesVolume, companyId, manufacturer, supplierId, createUserId, createTime, userRenewId, renewTime, logic_status, goodspu, sort, user, color, price, units, result);
   }
 }

@@ -60,9 +60,9 @@ public class Warehousing {
   /** 入库人*/
   private User warehousingUser;
   /** 商品sku*/
-  private  Goodsku goodsku;
+  private Goodsku goodsku;
   /** 商品spu*/
-  private  Goodspu goodspu;
+  private Goodspu goodspu;
   private String token;
 
 
