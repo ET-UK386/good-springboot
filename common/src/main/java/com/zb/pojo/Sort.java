@@ -16,16 +16,16 @@ import java.util.Date;
 
 public class Sort {
 
-  private Integer id;
+  private Long id;
   /** 分类名称*/
   private String sortName;
   /** 所属上级分类ID*/
-  private Integer parentId;
+  private Long parentId;
   /** 属于什么模块（生活用品，智能家电）*/
   private String module;
-  private Integer createUserId;
+  private Long createUserId;
   private Date createTime;
-  private Integer userRenewId;
+  private Long userRenewId;
   private Date renewTime;
 
   private String token;
@@ -38,11 +38,11 @@ public class Sort {
     this.token = token;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -54,11 +54,11 @@ public class Sort {
     this.sortName = sortName;
   }
 
-  public Integer getParentId() {
+  public Long getParentId() {
     return parentId;
   }
 
-  public void setParentId(Integer parentId) {
+  public void setParentId(Long parentId) {
     this.parentId = parentId;
   }
 
@@ -70,11 +70,11 @@ public class Sort {
     this.module = module;
   }
 
-  public Integer getCreateUserId() {
+  public Long getCreateUserId() {
     return createUserId;
   }
 
-  public void setCreateUserId(Integer createUserId) {
+  public void setCreateUserId(Long createUserId) {
     this.createUserId = createUserId;
   }
 
@@ -86,11 +86,11 @@ public class Sort {
     this.createTime = createTime;
   }
 
-  public Integer getUserRenewId() {
+  public Long getUserRenewId() {
     return userRenewId;
   }
 
-  public void setUserRenewId(Integer userRenewId) {
+  public void setUserRenewId(Long userRenewId) {
     this.userRenewId = userRenewId;
   }
 

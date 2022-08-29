@@ -141,7 +141,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public Goodspu findGoodName(Integer id) {
+    public Goodspu findGoodName(Long id) {
         return goodMapper.findGoodName(id);
     }
 
@@ -234,7 +234,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public Goodspu findspu(Integer id) {
+    public Goodspu findspu(Long id) {
         return goodMapper.findspu(id);
     }
 
@@ -376,7 +376,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public Goodsku listBySkuName(String skuName,Integer colorId,Integer priceId) {
+    public Goodsku listBySkuName(String skuName,Long colorId,Long priceId) {
         return goodMapper.listBySkuName(skuName,colorId,priceId);
     }
 
@@ -387,7 +387,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public Goodsku listByid(Integer id) {
+    public Goodsku listByid(Long id) {
         return goodMapper.listByid(id);
     }
 

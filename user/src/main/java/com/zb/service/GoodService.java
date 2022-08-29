@@ -88,13 +88,13 @@ public interface GoodService {
      * @param skuName
      * @return
      */
-    Goodsku listBySkuName(String skuName,Integer colorId,Integer priceId);
+    Goodsku listBySkuName(String skuName,Long colorId,Long priceId);
     /**
      * 查找sku表
      * @param id
      * @return
      */
-    Goodsku listByid(Integer id);
+    Goodsku listByid(Long id);
     /**
      * 查找spu表信息用来跟添加作比较
      * @return
@@ -121,7 +121,7 @@ public interface GoodService {
      * @param id
      * @return
      */
-    Goodspu findGoodName(Integer id);
+    Goodspu findGoodName(Long id);
 
 
     /**
@@ -193,7 +193,7 @@ public interface GoodService {
      * @param id
      * @return
      */
-    Goodspu findspu(Integer id);
+    Goodspu findspu(Long id);
     /**
      * 查找价格id
      * @param price

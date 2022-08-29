@@ -17,30 +17,30 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Goodsku {
 
-  private Integer id;
+  private Long id;
   /** spu ID*/
-  private Integer spuId;
+  private Long spuId;
   /** sku 名称*/
   private String skuName;
   /** 描述*/
   private String skuDesc;
   /** 颜色ID*/
-  private Integer colorId;
+  private Long colorId;
   /** 价表ID*/
-  private Integer priceId;
+  private Long priceId;
   /** 销量*/
   private Integer salesVolume;
   /** 单位ID*/
-  private Integer companyId;
+  private Long companyId;
   /** 生产商*/
   private String manufacturer;
   /** 供应商ID*/
-  private Integer supplierId;
+  private Long supplierId;
 
-  private Integer createUserId;
+  private Long createUserId;
   @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date createTime;
-  private Integer userRenewId;
+  private Long userRenewId;
   @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
 
@@ -54,27 +54,30 @@ public class Goodsku {
   private Units units;
   private Result result;
 
-  public Result getResult() {
-    return result;
+  /**
+   * 不能删
+   * @return
+   */
+  public String getSkuNameStr(){
+    if(getColor() == null){
+      return null;
+    }
+    return this.getSkuName() + "-" + this.getColor().getColorName();
   }
 
-  public void setResult(Result result) {
-    this.result = result;
-  }
-
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public Integer getSpuId() {
+  public Long getSpuId() {
     return spuId;
   }
 
-  public void setSpuId(Integer spuId) {
+  public void setSpuId(Long spuId) {
     this.spuId = spuId;
   }
 
@@ -94,19 +97,19 @@ public class Goodsku {
     this.skuDesc = skuDesc;
   }
 
-  public Integer getColorId() {
+  public Long getColorId() {
     return colorId;
   }
 
-  public void setColorId(Integer colorId) {
+  public void setColorId(Long colorId) {
     this.colorId = colorId;
   }
 
-  public Integer getPriceId() {
+  public Long getPriceId() {
     return priceId;
   }
 
-  public void setPriceId(Integer priceId) {
+  public void setPriceId(Long priceId) {
     this.priceId = priceId;
   }
 
@@ -118,11 +121,11 @@ public class Goodsku {
     this.salesVolume = salesVolume;
   }
 
-  public Integer getCompanyId() {
+  public Long getCompanyId() {
     return companyId;
   }
 
-  public void setCompanyId(Integer companyId) {
+  public void setCompanyId(Long companyId) {
     this.companyId = companyId;
   }
 
@@ -134,19 +137,19 @@ public class Goodsku {
     this.manufacturer = manufacturer;
   }
 
-  public Integer getSupplierId() {
+  public Long getSupplierId() {
     return supplierId;
   }
 
-  public void setSupplierId(Integer supplierId) {
+  public void setSupplierId(Long supplierId) {
     this.supplierId = supplierId;
   }
 
-  public Integer getCreateUserId() {
+  public Long getCreateUserId() {
     return createUserId;
   }
 
-  public void setCreateUserId(Integer createUserId) {
+  public void setCreateUserId(Long createUserId) {
     this.createUserId = createUserId;
   }
 
@@ -158,11 +161,11 @@ public class Goodsku {
     this.createTime = createTime;
   }
 
-  public Integer getUserRenewId() {
+  public Long getUserRenewId() {
     return userRenewId;
   }
 
-  public void setUserRenewId(Integer userRenewId) {
+  public void setUserRenewId(Long userRenewId) {
     this.userRenewId = userRenewId;
   }
 
@@ -230,49 +233,11 @@ public class Goodsku {
     this.units = units;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Goodsku)) return false;
-    Goodsku goodsku = (Goodsku) o;
-    return Objects.equals(id, goodsku.id) &&
-            Objects.equals(spuId, goodsku.spuId) &&
-            Objects.equals(skuName, goodsku.skuName) &&
-            Objects.equals(skuDesc, goodsku.skuDesc) &&
-            Objects.equals(colorId, goodsku.colorId) &&
-            Objects.equals(priceId, goodsku.priceId) &&
-            Objects.equals(salesVolume, goodsku.salesVolume) &&
-            Objects.equals(companyId, goodsku.companyId) &&
-            Objects.equals(manufacturer, goodsku.manufacturer) &&
-            Objects.equals(supplierId, goodsku.supplierId) &&
-            Objects.equals(createUserId, goodsku.createUserId) &&
-            Objects.equals(createTime, goodsku.createTime) &&
-            Objects.equals(userRenewId, goodsku.userRenewId) &&
-            Objects.equals(renewTime, goodsku.renewTime) &&
-            Objects.equals(logic_status, goodsku.logic_status) &&
-            Objects.equals(goodspu, goodsku.goodspu) &&
-            Objects.equals(sort, goodsku.sort) &&
-            Objects.equals(user, goodsku.user) &&
-            Objects.equals(color, goodsku.color) &&
-            Objects.equals(price, goodsku.price) &&
-            Objects.equals(units, goodsku.units) &&
-            Objects.equals(result, goodsku.result);
+  public Result getResult() {
+    return result;
   }
 
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(id, spuId, skuName, skuDesc, colorId, priceId, salesVolume, companyId, manufacturer, supplierId, createUserId, createTime, userRenewId, renewTime, logic_status, goodspu, sort, user, color, price, units, result);
-  }
-
-  /**
-   * 不能删
-   * @return
-   */
-  public String getSkuNameStr(){
-    if(getColor() == null){
-      return null;
-    }
-    return this.getSkuName() + "-" + this.getColor().getColorName();
+  public void setResult(Result result) {
+    this.result = result;
   }
 }

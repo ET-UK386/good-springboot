@@ -16,16 +16,16 @@ import java.util.Date;
 @AllArgsConstructor
 public class User {
 
-    private Integer id;
-    private Integer roleId;
+    private Long id;
+    private Long roleId;
     private String username;
     private String password;
     private String address;
     private String phone;
-    private Integer createUserId;
+    private Long createUserId;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
-    private Integer userRenewId;
+    private Long userRenewId;
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date renewTime;
     private String con1;
@@ -60,19 +60,19 @@ public class User {
         this.role = role;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -108,11 +108,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Integer getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -124,11 +124,11 @@ public class User {
         this.createTime = createTime;
     }
 
-    public Integer getUserRenewId() {
+    public Long getUserRenewId() {
         return userRenewId;
     }
 
-    public void setUserRenewId(Integer userRenewId) {
+    public void setUserRenewId(Long userRenewId) {
         this.userRenewId = userRenewId;
     }
 

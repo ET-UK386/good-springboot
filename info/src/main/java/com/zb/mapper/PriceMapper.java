@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface PriceMapper {
     //查询
-    List<Price> listPrice(Integer sku_id);
+    List<Price> listPrice(Long sku_id);
 }

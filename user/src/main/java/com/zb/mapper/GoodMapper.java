@@ -86,7 +86,7 @@ public interface GoodMapper {
      * @param id
      * @return
      */
-    Goodspu findGoodName(Integer id);
+    Goodspu findGoodName(Long id);
     /**
      * 修改商品
      * @param g
@@ -162,20 +162,20 @@ public interface GoodMapper {
      * @param id
      * @return
      */
-    Goodsku listByid(Integer id);
+    Goodsku listByid(Long id);
 
     /**
      * 查找sku表
      * @param skuName
      * @return
      */
-    Goodsku listBySkuName(@Param("skuName") String skuName,@Param("colorId") Integer colorId,@Param("priceId")Integer priceId);
+    Goodsku listBySkuName(@Param("skuName") String skuName,@Param("colorId") Long colorId,@Param("priceId")Long priceId);
     /**
      * 查找spu
      * @param id
      * @return
      */
-    Goodspu findspu(Integer id);
+    Goodspu findspu(Long id);
 
     /**
      * 查找颜色ID

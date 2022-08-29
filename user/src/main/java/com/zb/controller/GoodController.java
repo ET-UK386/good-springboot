@@ -93,9 +93,9 @@ public class GoodController {
         }
         p.setGoodName(p.getGoodName());
         p.setBrand(p.getBrand());
-        p.setCreateUserId(1);
+        p.setCreateUserId(1L);
         p.setCreateTime(new Date());
-        p.setUserRenewId(1);
+        p.setUserRenewId(1L);
         p.setRenewTime(new Date());
         return goodService.insertGoodspu(p);
     }
@@ -238,9 +238,9 @@ public class GoodController {
             g.getUnits().setId(units.getId());
             g.setCompanyId(g.getUnits().getId());
         }
-        g.setCreateUserId(1);
+        g.setCreateUserId(1L);
         g.setCreateTime(new Date());
-        g.setUserRenewId(1);
+        g.setUserRenewId(1L);
         g.setRenewTime(new Date());
         int i =  goodService.insertGood(g);
         if(i == 1){
@@ -297,7 +297,7 @@ public class GoodController {
                 g.setPriceId(priceTwo.getId());
             }
         }
-       g.setUserRenewId(1);
+       g.setUserRenewId(1L);
        g.setRenewTime(new Date());
         g.setId(g.getId());
        return goodService.updateGood(g);
