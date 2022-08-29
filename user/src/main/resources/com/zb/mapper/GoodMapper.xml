@@ -157,7 +157,6 @@
     <select id="listGood" resultMap="umap">
            SELECT k.id,
           p.id,
-          p.good_name,
         k.sku_name,
         k.sku_desc,
         p.brand,
@@ -213,7 +212,7 @@
     <!--根据商品名或分类查询-->
     <select id="fingByskuNameorSortName" resultMap="umap">
         SELECT k.id,
-        p.good_name,
+        k.sku_name,
         k.sku_desc,
         p.brand,
         s.`sort_name`,

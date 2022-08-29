@@ -225,9 +225,9 @@ public class GoodController {
             }
         }
         Goodspu goodName = goodService.findGoodName(g.getSpuId());
-        g.setSkuName(goodName.getGoodName());
+        g.setSkuName(g.getSkuName());
         Goodsku goodsku = goodService.listBySkuName(g.getSkuName(),g.getColorId(),g.getPriceId());
-        if(goodsku != null && goodsku.getSkuName().equals(goodName.getGoodName()) && goodsku.getColorId().equals(g.getColorId()) && goodsku.getPriceId().equals(g.getPriceId())){
+        if(goodsku != null && goodsku.getSkuName().equals(g.getSkuName()) && goodsku.getColorId().equals(g.getColorId()) && goodsku.getPriceId().equals(g.getPriceId())){
             Result result = new Result();
             result.setMessage("该商品已存在");
             result.setCode(404);
