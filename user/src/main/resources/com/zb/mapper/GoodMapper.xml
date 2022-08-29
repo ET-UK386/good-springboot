@@ -205,7 +205,7 @@
         INNER JOIN `user` us ON us.`id` = k.`user_renewId`
         INNER JOIN price pr ON pr.`id` = k.price_id
         INNER JOIN color c ON c.id = k.color_id
-        INNER JOIN units un ON un.`id` = p.`company_id`
+        INNER JOIN units un ON un.`id` = k.`company_id`
         INNER JOIN sort s ON s.`id` = p.sort_id
         WHERE logic_status = 0
         ORDER BY pr.`price`

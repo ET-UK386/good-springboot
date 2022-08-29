@@ -94,7 +94,6 @@
             <result property="skuDesc" column="gs_sku_desc"/>
             <result property="colorId" column="gs_color_id"/>
             <result property="priceId" column="gs_price_id"/>
-            <result property="stockId" column="gs_Stock_id"/>
             <result property="salesVolume" column="gs_sales_volume"/>
             <result property="companyId" column="gs_company_id"/>
             <result property="manufacturer" column="gs_manufacturer"/>
@@ -166,7 +165,6 @@
                gs.sku_desc               as gs_sku_desc,
                gs.color_id               as gs_color_id,
                gs.price_id               as gs_price_id,
-               gs.Stock_id               as gs_Stock_id,
                gs.sales_volume           as gs_sales_volume,
                gs.company_id             as gs_company_id,
                gs.manufacturer           as gs_manufacturer,
@@ -291,7 +289,6 @@
                gs.sku_desc               as gs_sku_desc,
                gs.color_id               as gs_color_id,
                gs.price_id               as gs_price_id,
-               gs.Stock_id               as gs_Stock_id,
                gs.sales_volume           as gs_sales_volume,
                gs.company_id             as gs_company_id,
                gs.manufacturer           as gs_manufacturer,

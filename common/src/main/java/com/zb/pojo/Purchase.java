@@ -65,4 +65,140 @@ public class Purchase {
                 return null;
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPurchaseDesc() {
+        return purchaseDesc;
+    }
+
+    public void setPurchaseDesc(String purchaseDesc) {
+        this.purchaseDesc = purchaseDesc;
+    }
+
+    public Integer getPurchaseNumber() {
+        return purchaseNumber;
+    }
+
+    public void setPurchaseNumber(Integer purchaseNumber) {
+        this.purchaseNumber = purchaseNumber;
+    }
+
+    public Long getExamineUserId() {
+        return examineUserId;
+    }
+
+    public void setExamineUserId(Long examineUserId) {
+        this.examineUserId = examineUserId;
+    }
+
+    public Date getExamineTime() {
+        return examineTime;
+    }
+
+    public void setExamineTime(Date examineTime) {
+        this.examineTime = examineTime;
+    }
+
+    public String getExamineOpinion() {
+        return examineOpinion;
+    }
+
+    public void setExamineOpinion(String examineOpinion) {
+        this.examineOpinion = examineOpinion;
+    }
+
+    public Integer getExamineStatus() {
+        return examineStatus;
+    }
+
+    public void setExamineStatus(Integer examineStatus) {
+        this.examineStatus = examineStatus;
+    }
+
+    public BigDecimal getSumPrice() {
+        return sumPrice;
+    }
+
+    public void setSumPrice(BigDecimal sumPrice) {
+        this.sumPrice = sumPrice;
+    }
+
+    public Integer getLogicDel() {
+        return logicDel;
+    }
+
+    public void setLogicDel(Integer logicDel) {
+        this.logicDel = logicDel;
+    }
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getUserRenewId() {
+        return userRenewId;
+    }
+
+    public void setUserRenewId(Long userRenewId) {
+        this.userRenewId = userRenewId;
+    }
+
+    public Date getRenewTime() {
+        return renewTime;
+    }
+
+    public void setRenewTime(Date renewTime) {
+        this.renewTime = renewTime;
+    }
+
+    public User getExamineUser() {
+        return examineUser;
+    }
+
+    public void setExamineUser(User examineUser) {
+        this.examineUser = examineUser;
+    }
+
+    public User getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(User createUser) {
+        this.createUser = createUser;
+    }
+
+    public User getUserRenew() {
+        return userRenew;
+    }
+
+    public void setUserRenew(User userRenew) {
+        this.userRenew = userRenew;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
