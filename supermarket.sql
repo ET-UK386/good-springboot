@@ -295,7 +295,6 @@ CREATE TABLE `menu`  (
 
 -- ----------------------------
 -- Records of menu
--- ----------------------------
 INSERT INTO `menu` VALUES (1, '首页', NULL, 0, '/Home', 'el-icon-s-home');
 INSERT INTO `menu` VALUES (2, '零售', NULL, 0, '/Retail', 'el-icon-goods');
 INSERT INTO `menu` VALUES (3, '采购', NULL, 0, '/Purchase', 'el-icon-s-shop');
@@ -304,25 +303,26 @@ INSERT INTO `menu` VALUES (5, '商品管理', NULL, 0, '/Commodity', 'el-icon-s-
 INSERT INTO `menu` VALUES (6, '财务', NULL, 0, '/Finance', 'el-icon-s-finance');
 INSERT INTO `menu` VALUES (7, '供应商', NULL, 0, '/Supplier', 'el-icon-s-custom');
 INSERT INTO `menu` VALUES (8, '员工管理', NULL, 0, '/Employee', 'el-icon-user');
-INSERT INTO `menu` VALUES (9, '上架管理', NULL, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (9, '上架管理', NULL, 0, '/Goodrise', 'el-icon-document-add');
 INSERT INTO `menu` VALUES (101, '零售出库', '2', 1, '/Retail/Outbound', NULL);
 INSERT INTO `menu` VALUES (102, '零售退货', '2', 2, '/Retail/Returns', NULL);
-INSERT INTO `menu` VALUES (103, '采购商品', '3', 1, '/Purchase/Stock', NULL);
-INSERT INTO `menu` VALUES (104, '待审列表', '3', 1, '/Purchase/Detail', NULL);
-INSERT INTO `menu` VALUES (105, '流程列表', '3', 2, '/Purchase/Statistics', NULL);
-INSERT INTO `menu` VALUES (106, '流程列表', '4', 1, '/Warehouse/Detail', NULL);
-INSERT INTO `menu` VALUES (107, '商品信息', '5', 1, '/Commodity/Message', NULL);
-INSERT INTO `menu` VALUES (108, '收入', '6', 1, '/Finance/Income', NULL);
-INSERT INTO `menu` VALUES (109, '支出', '6', 2, '/Finance/Expend', NULL);
-INSERT INTO `menu` VALUES (110, '供应商信息', '7', 1, '/Supplier/Message', NULL);
-INSERT INTO `menu` VALUES (111, '收银员', '8', 1, '/Employee/Cashier', NULL);
-INSERT INTO `menu` VALUES (112, '验货员', '8', 2, '/Employee/Inspector', NULL);
-INSERT INTO `menu` VALUES (113, '理货员', '8', 3, '/Employee/TallyClerk', NULL);
-INSERT INTO `menu` VALUES (114, '验货审核', '4', 2, '/Warehouse/CheckAudit', NULL);
-INSERT INTO `menu` VALUES (115, '入库审核', '4', 3, '/Warehouse/StorageAudit', NULL);
-INSERT INTO `menu` VALUES (116, '库存列表', '4', 4, '/Warehouse/warehouseList', NULL);
-INSERT INTO `menu` VALUES (117, '商品spu信息', '5', 2, '/Commodity/goodspu', NULL);
-INSERT INTO `menu` VALUES (118, '商品上架', '9', 1, '/goodrise', NULL);
+INSERT INTO `menu` VALUES (103, '订单详情', '2', 3, '/Retail/LineItem', NULL);
+INSERT INTO `menu` VALUES (104, '采购商品', '3', 1, '/Purchase/Stock', NULL);
+INSERT INTO `menu` VALUES (105, '待审列表', '3', 1, '/Purchase/Detail', NULL);
+INSERT INTO `menu` VALUES (106, '流程列表', '3', 2, '/Purchase/Statistics', NULL);
+INSERT INTO `menu` VALUES (107, '流程列表', '4', 1, '/Warehouse/Detail', NULL);
+INSERT INTO `menu` VALUES (108, '商品信息', '5', 1, '/Commodity/Message', NULL);
+INSERT INTO `menu` VALUES (109, '收入', '6', 1, '/Finance/Income', NULL);
+INSERT INTO `menu` VALUES (110, '支出', '6', 2, '/Finance/Expend', NULL);
+INSERT INTO `menu` VALUES (111, '供应商信息', '7', 1, '/Supplier/Message', NULL);
+INSERT INTO `menu` VALUES (112, '收银员', '8', 1, '/Employee/Cashier', NULL);
+INSERT INTO `menu` VALUES (113, '验货员', '8', 2, '/Employee/Inspector', NULL);
+INSERT INTO `menu` VALUES (114, '理货员', '8', 3, '/Employee/TallyClerk', NULL);
+INSERT INTO `menu` VALUES (115, '验货审核', '4', 2, '/Warehouse/CheckAudit', NULL);
+INSERT INTO `menu` VALUES (116, '入库审核', '4', 3, '/Warehouse/StorageAudit', NULL);
+INSERT INTO `menu` VALUES (117, '库存列表', '4', 4, '/Warehouse/WarehouseList', NULL);
+INSERT INTO `menu` VALUES (118, '商品spu信息', '5', 2, '/Commodity/Goodspu', NULL);
+INSERT INTO `menu` VALUES (119, '商品上架', '9', 1, '/Goodrise/Goodrise', NULL);
 
 -- ----------------------------
 -- Table structure for power
