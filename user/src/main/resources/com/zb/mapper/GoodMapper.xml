@@ -3,75 +3,80 @@
 <mapper namespace="com.zb.mapper.GoodMapper">
     <!--手动映射-->
     <resultMap id="umap" type="com.zb.pojo.Goodsku">
-        <result property="id" column="id"></result>
-        <result property="skuName" column="sku_name"></result>
-        <result property="skuDesc" column="sku_desc"></result>
-        <result property="createTime" column="create_time"></result>
-        <result property="renewTime" column="renew_time"></result>
+        <result property="id" column="id"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="skuDesc" column="sku_desc"/>
+        <result property="createTime" column="create_time"/>
+        <result property="renewTime" column="renew_time"/>
         <association property="goodspu" javaType="com.zb.pojo.Goodspu">
-            <result property="goodName" column="good_name"></result>
-            <result property="id" column="id"></result>
-            <result property="brand" column="brand"></result>
+            <result property="goodName" column="good_name"/>
+            <result property="id" column="id"/>
+            <result property="brand" column="brand"/>
         </association>
         <association property="sort" javaType="com.zb.pojo.Sort">
-            <result property="sortName" column="sort_name"></result>
+            <result property="sortName" column="sort_name"/>
         </association>
         <association property="color" javaType="com.zb.pojo.Color">
-            <result property="colorName" column="color_name"></result>
+            <result property="colorName" column="color_name"/>
         </association>
         <association property="price" javaType="com.zb.pojo.Price">
-            <result property="price" column="price"></result>
+            <result property="price" column="price"/>
         </association>
         <association property="units" javaType="com.zb.pojo.Units">
-            <result property="unitsName" column="units_name"></result>
+            <result property="unitsName" column="units_name"/>
         </association>
         <collection property="user" ofType="com.zb.pojo.User">
-            <result property="username" column="username"></result>
-            <result property="userRenewName" column="userrenewname"></result>
+            <result property="username" column="username"/>
+            <result property="userRenewName" column="userrenewname"/>
         </collection>
     </resultMap>
 
 
     <resultMap id="smap" type="com.zb.pojo.Goodspu">
-        <result property="id" column="id"></result>
-        <result property="goodName" column="good_name"></result>
-        <result property="brand" column="brand"></result>
-        <result property="createTime" column="create_time"></result>
-        <result property="renewTime" column="renew_time"></result>
+        <result property="id" column="id"/>
+        <result property="goodName" column="good_name"/>
+        <result property="brand" column="brand"/>
+        <result property="createTime" column="create_time"/>
+        <result property="renewTime" column="renew_time"/>
         <association property="sort" javaType="com.zb.pojo.Sort">
-            <result property="sortName" column="sort_name"></result>
+            <result property="sortName" column="sort_name"/>
         </association>
         <association property="color" javaType="com.zb.pojo.Color">
-            <result property="colorName" column="color_name"></result>
+            <result property="colorName" column="color_name"/>
         </association>
         <association property="units" javaType="com.zb.pojo.Units">
-            <result property="unitsName" column="units_name"></result>
+            <result property="unitsName" column="units_name"/>
         </association>
         <collection property="user" ofType="com.zb.pojo.User">
-            <result property="username" column="username"></result>
-            <result property="userRenewName" column="userrenewname"></result>
+            <result property="username" column="username"/>
+            <result property="userRenewName" column="userrenewname"/>
         </collection>
     </resultMap>
     <!--添加-->
     <insert id="insertGoodspu" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO goodspu values (default,#{goodName},#{brand},#{sortId},#{createUserId},#{createTime},#{userRenewId},#{renewTime})
+        INSERT INTO goodspu (id, good_name, brand, sort_id, create_user_id, create_time, user_renew_id, renew_time)
+        values (default, #{goodName}, #{brand}, #{sortId}, #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime})
     </insert>
     <insert id="insertGood">
-        insert into goodsku values
-        (default ,#{spuId},#{skuName},#{skuDesc},#{priceId},#{colorId},#{companyId},#{createUserId},#{createTime},#{userRenewId},#{renewTime},0,default,default)
+        insert into goodsku (id, spu_id, sku_name, sku_desc, color_id, price_id, company_id,create_user_id, create_time, user_renewId, renew_time, logic_status, con2, con3)
+        values (default, #{spuId}, #{skuName}, #{skuDesc}, #{colorId}, #{priceId}, #{companyId}, #{createUserId},#{createTime}, #{userRenewId}, #{renewTime}, 0, default, default)
 
     </insert>
     <insert id="insertprice" useGeneratedKeys="true" keyProperty="id">
         insert into price (sku_id, price) value (#{skuId}, #{price})
     </insert>
     <insert id="insertSort" useGeneratedKeys="true" keyProperty="id">
-        insert into sort(id,sort_name,create_user_id,create_time,user_renew_id,renew_time) values (default ,#{sortName},#{createUserId},#{createTime},#{userRenewId},#{renewTime})
+        insert into sort(id, sort_name, create_user_id, create_time, user_renew_id, renew_time)
+        values (default, #{sortName}, #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime})
     </insert>
     <insert id="insertColor">
-        insert into color values(default,#{colorName},#{createUserId},#{createTime},#{userRenewId},#{renewTime},default,default,default)
+        insert into color
+        values (default, #{colorName}, #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime}, default, default,
+                default)
     </insert>
     <insert id="insertUnits">
-        insert into units (id,units_name,create_user_id,create_time,user_renew_id,renew_time) values (default ,#{unitsName},#{createUserId},#{createTime},#{userRenewId},#{renewTime})
+        insert into units (id, units_name, create_user_id, create_time, user_renew_id, renew_time)
+        values (default, #{unitsName}, #{createUserId}, #{createTime}, #{userRenewId}, #{renewTime})
 
     </insert>
     <select id="findSort" resultType="com.zb.pojo.Sort">
@@ -97,19 +102,22 @@
     </update>
     <!--修改-->
     <update id="updateGood">
-        UPDATE goodsku SET
-        spu_id = #{spuId},
-        sku_name = #{skuName},
-        sku_desc = #{skuDesc},
-        color_id = #{colorId},
-        company_id = #{companyId},
-        price_id = #{priceId},
-        user_renewId = #{userRenewId},
-        renew_time = #{renewTime}
+        UPDATE goodsku
+        SET spu_id       = #{spuId},
+            sku_name     = #{skuName},
+            sku_desc     = #{skuDesc},
+            color_id     = #{colorId},
+            company_id   = #{companyId},
+            price_id     = #{priceId},
+            user_renewId = #{userRenewId},
+            renew_time   = #{renewTime}
         WHERE id = #{id}
     </update>
     <update id="updateSpu" useGeneratedKeys="true" keyProperty="id">
-        update goodspu set brand = #{brand},sort_id = #{sortId} where id = #{id}
+        update goodspu
+        set brand   = #{brand},
+            sort_id = #{sortId}
+        where id = #{id}
 
     </update>
     <update id="updateSort" useGeneratedKeys="true" keyProperty="id">
@@ -155,27 +163,27 @@
     </select>
     <!--查询全部-->
     <select id="listGood" resultMap="umap">
-           SELECT k.id,
-          p.id,
-        k.sku_name,
-        k.sku_desc,
-        p.brand,
-        s.`sort_name`,
-        pr.`price`,
-        c.`color_name`,
-        un.`units_name`,
-        u.`username` ,
-	k.`create_time` ,
-	us.`username` userrenewname ,
-        k.`renew_time`
+        SELECT k.id,
+               p.id,
+               k.sku_name,
+               k.sku_desc,
+               p.brand,
+               s.`sort_name`,
+               pr.`price`,
+               c.`color_name`,
+               un.`units_name`,
+               u.`username`,
+               k.`create_time`,
+               us.`username` userrenewname,
+               k.`renew_time`
         FROM goodsku k
-        LEFT JOIN goodspu p ON k.spu_id= p.`id`
-        LEFT JOIN `user` u ON u.`id` = k.`create_user_id`
-        LEFT JOIN `user` us ON us.`id` = k.`user_renewId`
-        LEFT JOIN price pr ON pr.`id` = k.price_id
-        LEFT JOIN color c ON c.id = k.color_id
-        LEFT JOIN units un ON un.`id` = k.`company_id`
-        LEFT JOIN sort s ON s.`id` = p.sort_id
+                 LEFT JOIN goodspu p ON k.spu_id = p.`id`
+                 LEFT JOIN `user` u ON u.`id` = k.`create_user_id`
+                 LEFT JOIN `user` us ON us.`id` = k.`user_renewId`
+                 LEFT JOIN price pr ON pr.`id` = k.price_id
+                 LEFT JOIN color c ON c.id = k.color_id
+                 LEFT JOIN units un ON un.`id` = k.`company_id`
+                 LEFT JOIN sort s ON s.`id` = p.sort_id
         WHERE logic_status = 0
         ORDER BY pr.`price`
     </select>
@@ -187,25 +195,25 @@
     <!--查询全部-->
     <select id="findAllGoodsku" resultMap="umap">
         SELECT k.id,
-        k.sku_name,
-        k.sku_desc,
-        p.brand,
-        s.`sort_name`,
-        pr.`price`,
-        c.`color_name`,
-        un.`units_name`,
-        u.`username` ,
-	    k.`create_time` ,
-	    us.`username` userrenewname ,
-        k.`renew_time`
+               k.sku_name,
+               k.sku_desc,
+               p.brand,
+               s.`sort_name`,
+               pr.`price`,
+               c.`color_name`,
+               un.`units_name`,
+               u.`username`,
+               k.`create_time`,
+               us.`username` userrenewname,
+               k.`renew_time`
         FROM goodsku k
-        INNER JOIN goodspu p ON k.spu_id= p.`id`
-        INNER JOIN `user` u ON u.`id` = k.`create_user_id`
-        INNER JOIN `user` us ON us.`id` = k.`user_renewId`
-        INNER JOIN price pr ON pr.`id` = k.price_id
-        INNER JOIN color c ON c.id = k.color_id
-        INNER JOIN units un ON un.`id` = k.`company_id`
-        INNER JOIN sort s ON s.`id` = p.sort_id
+                 INNER JOIN goodspu p ON k.spu_id = p.`id`
+                 INNER JOIN `user` u ON u.`id` = k.`create_user_id`
+                 INNER JOIN `user` us ON us.`id` = k.`user_renewId`
+                 INNER JOIN price pr ON pr.`id` = k.price_id
+                 INNER JOIN color c ON c.id = k.color_id
+                 INNER JOIN units un ON un.`id` = k.`company_id`
+                 INNER JOIN sort s ON s.`id` = p.sort_id
         WHERE logic_status = 0
         ORDER BY pr.`price`
     </select>
@@ -259,63 +267,92 @@
         where vendor_name = #{vendorName}
     </select>
     <select id="listGoodSpu" resultMap="smap">
-         SELECT g.id,g.good_name,g.brand,s.`sort_name`,u.`username`,g.create_time,us.`username` userrenewname,g.renew_time FROM goodspu g INNER JOIN sort s ON s.`id` = g.sort_id
-         INNER JOIN `user` u ON u.`id` = g.`create_user_id`
-         INNER JOIN `user` us ON us.`id` = g.`user_renew_Id`
+        SELECT g.id,
+               g.good_name,
+               g.brand,
+               s.`sort_name`,
+               u.`username`,
+               g.create_time,
+               us.`username` userrenewname,
+               g.renew_time
+        FROM goodspu g
+                 INNER JOIN sort s ON s.`id` = g.sort_id
+                 INNER JOIN `user` u ON u.`id` = g.`create_user_id`
+                 INNER JOIN `user` us ON us.`id` = g.`user_renew_Id`
     </select>
     <select id="findGoodName" resultType="com.zb.pojo.Goodspu">
-        SELECT good_name FROM goodspu WHERE id = #{id}
+        SELECT good_name
+        FROM goodspu
+        WHERE id = #{id}
     </select>
     <select id="listGoodskuMessage" resultType="com.zb.pojo.Goodsku">
-        SELECT spu_id FROM goodsku g INNER JOIN goodspu  p ON g.spu_id = p.id
+        SELECT spu_id
+        FROM goodsku g
+                 INNER JOIN goodspu p ON g.spu_id = p.id
     </select>
     <select id="listGoodspu" resultType="com.zb.pojo.Goodspu">
-        SELECT * FROM goodspu
+        SELECT *
+        FROM goodspu
     </select>
 
     <resultMap id="amap" type="com.zb.pojo.Goodsku">
-        <result property="id" column="id"></result>
-        <result property="skuName" column="sku_name"></result>
-        <result property="skuDesc" column="sku_desc"></result>
-        <result property="priceId" column="price_id"></result>
-        <result property="colorId" column="color_id"></result>
-        <result property="companyId" column="company_id"></result>
-        <result property="spuId" column="spu_id"></result>
+        <result property="id" column="id"/>
+        <result property="skuName" column="sku_name"/>
+        <result property="skuDesc" column="sku_desc"/>
+        <result property="priceId" column="price_id"/>
+        <result property="colorId" column="color_id"/>
+        <result property="companyId" column="company_id"/>
+        <result property="spuId" column="spu_id"/>
         <association property="price" javaType="com.zb.pojo.Price">
-            <result property="price" column="price"></result>
+            <result property="price" column="price"/>
         </association>
         <association property="goodspu" javaType="com.zb.pojo.Goodspu">
-            <result property="goodName" column="good_name"></result>
-            <result property="brand" column="brand"></result>
-            <result property="sortId" column="sort_id"></result>
+            <result property="goodName" column="good_name"/>
+            <result property="brand" column="brand"/>
+            <result property="sortId" column="sort_id"/>
         </association>
     </resultMap>
 
     <select id="listByid" resultMap="amap">
-            SELECT g.*,p.price,sp.brand,sp.sort_id FROM goodsku g INNER JOIN price p ON p.id = g.price_id
-        INNER JOIN goodspu sp ON sp.id = g.spu_id
+        SELECT g.*, p.price, sp.brand, sp.sort_id
+        FROM goodsku g
+                 INNER JOIN price p ON p.id = g.price_id
+                 INNER JOIN goodspu sp ON sp.id = g.spu_id
         WHERE g.id = #{id}
     </select>
     <select id="listBySkuName" resultType="com.zb.pojo.Goodsku">
-        select sku_name,color_id,price_id FROM goodsku WHERE sku_name = #{skuName} AND price_id = #{priceId} and color_id = #{colorId}
+        select sku_name, color_id, price_id
+        FROM goodsku
+        WHERE sku_name = #{skuName}
+          AND price_id = #{priceId}
+          and color_id = #{colorId}
     </select>
     <select id="listColor" resultType="com.zb.pojo.Color">
-        select * from color
+        select *
+        from color
     </select>
     <select id="listSort" resultType="com.zb.pojo.Sort">
-        select * from sort
+        select *
+        from sort
     </select>
     <select id="listUnits" resultType="com.zb.pojo.Units">
-        select * from units
+        select *
+        from units
     </select>
     <select id="findColorTwo" resultType="com.zb.pojo.Color">
-        SELECT * FROM color WHERE color_name = #{colorName}
+        SELECT *
+        FROM color
+        WHERE color_name = #{colorName}
     </select>
     <select id="findSortTwo" resultType="com.zb.pojo.Sort">
-        SELECT * FROM sort WHERE sort_name = #{sortName}
+        SELECT *
+        FROM sort
+        WHERE sort_name = #{sortName}
     </select>
     <select id="findUnitsTwo" resultType="com.zb.pojo.Units">
-        SELECT * FROM units WHERE units_name = #{unitsName}
+        SELECT *
+        FROM units
+        WHERE units_name = #{unitsName}
     </select>
 
 </mapper>

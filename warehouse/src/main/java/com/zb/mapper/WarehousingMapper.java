@@ -44,10 +44,31 @@ public interface WarehousingMapper {
      */
     Integer insertDetailedWarehousing(DetailedWarehousing detailedWarehousing);
 
+    /**
+     * 修改入库流程单
+     * @param warehousing
+     * @return
+     */
     Integer update(Warehousing warehousing);
 
-
+    /**
+     * 根据入库流程单展示入库详细单
+     * @param warehousingId
+     * @return
+     */
     List<DetailedWarehousing> selectDetailedWarehousingByWarehousingId(Long warehousingId);
 
+    /**
+     * 修改入库详细单
+     * @param detailedWarehousing
+     * @return
+     */
     Integer UpdateDetailedWarehousing(DetailedWarehousing detailedWarehousing);
+
+    /**
+     * 修改入库详细单状态
+     * @param detailedWarehousing
+     * @return
+     */
+    Integer UpdateDetailedWarehousingStatus(DetailedWarehousing detailedWarehousing);
 }

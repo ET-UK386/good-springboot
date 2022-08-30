@@ -44,18 +44,23 @@ public class WarehousingServiceImpl implements WarehousingService {
     @Override
     public Integer checkBeforeStorage(Warehousing warehousing, User loginUser) {
 
-        Long detailedPurchaseId = warehousing.getDetailedPurchaseId();
-
-        Integer result = 0;
         List<DetailedWarehousing> detailedWarehousingList = warehousing.getDetailedWarehousingList();
-        for (DetailedWarehousing detailedWarehousing : detailedWarehousingList) {
-            result += warehousingMapper.UpdateDetailedWarehousing(detailedWarehousing);
+        if (warehousing.getStatus() != -1) {
+            Integer result = 0;
+            for (DetailedWarehousing detailedWarehousing : detailedWarehousingList) {
+                result += warehousingMapper.UpdateDetailedWarehousing(detailedWarehousing);
+            }
+            warehousing.setStatus(result > 0 ? 2 : 3);
+        } else {
+            warehousing.setStatus(1);
+            for (DetailedWarehousing detailedWarehousing : detailedWarehousingList) {
+                detailedWarehousing.setStatus(-1);
+                this.UpdateDetailedWarehousingStatus(detailedWarehousing);
+            }
         }
-
 
         warehousing.setExamineUserId(loginUser.getId());
         warehousing.setExamineTime(new Date(System.currentTimeMillis()));
-        warehousing.setStatus(result > 0 ? 2 : 3);
         return warehousingMapper.checkBeforeStorage(warehousing);
     }
 
@@ -137,30 +142,38 @@ public class WarehousingServiceImpl implements WarehousingService {
 
         warehousing.setWarehousingUserId(loginUser.getId());
         warehousing.setWarehousingTime(new Date(System.currentTimeMillis()));
-        warehousing.setStatus(200);
+
+        List<DetailedWarehousing> detailedWarehousingList = warehousing.getDetailedWarehousingList();
+
+        if (warehousing.getStatus() != -1) {
+            warehousing.setStatus(200);
+            for (DetailedWarehousing detailedWarehousing : detailedWarehousingList) {
+                detailedWarehousing.setStatus(1);
+
+                Warehouse w = new Warehouse();
+                w.setCreateUserId(loginUser.getId());
+                w.setCreateTime(new Date(System.currentTimeMillis()));
+                w.setPhone(loginUser.getPhone());
+                w.setDetailedWarehousingId(detailedWarehousing.getId());
+                w.setStockNumber(detailedWarehousing.getNumber());
+                w.setWarehouseAddress("1号仓库");
+                w.setSkuId(detailedWarehousing.getSkuId());
+                w.setBatch(UUID.randomUUID().toString().replaceAll("-", ""));
+                w.setCreateUserId(warehousing.getWarehousingUserId());
+
+                warehouseService.add(w);
+                warehousingMapper.UpdateDetailedWarehousing(detailedWarehousing);
+
+            }
+        } else {
+            warehousing.setStatus(4);
+            for (DetailedWarehousing detailedWarehousing : detailedWarehousingList) {
+                detailedWarehousing.setStatus(-1);
+                this.UpdateDetailedWarehousingStatus(detailedWarehousing);
+            }
+        }
         // 入库审核
         Integer insert = warehousingMapper.checkBeforeStorage(warehousing);
-
-        //
-        List<DetailedWarehousing> detailedWarehousingList = warehousing.getDetailedWarehousingList();
-        for (DetailedWarehousing detailedWarehousing : detailedWarehousingList) {
-            detailedWarehousing.setStatus(1);
-
-            Warehouse w = new Warehouse();
-            w.setCreateUserId(loginUser.getId());
-            w.setCreateTime(new Date(System.currentTimeMillis()));
-            w.setPhone(loginUser.getPhone());
-            w.setDetailedWarehousingId(detailedWarehousing.getId());
-            w.setStockNumber(detailedWarehousing.getNumber());
-            w.setWarehouseAddress("1号仓库");
-            w.setSkuId(detailedWarehousing.getSkuId());
-            w.setBatch(UUID.randomUUID().toString().replaceAll("-", ""));
-            w.setCreateUserId(warehousing.getWarehousingUserId());
-
-            warehouseService.add(w);
-            warehousingMapper.UpdateDetailedWarehousing(detailedWarehousing);
-
-        }
 
         return 1;
     }
@@ -197,5 +210,10 @@ public class WarehousingServiceImpl implements WarehousingService {
     @Override
     public List<DetailedWarehousing> findDetailedWarehousingByWarehousingId(Long warehousingId) {
         return warehousingMapper.selectDetailedWarehousingByWarehousingId(warehousingId);
+    }
+
+    @Override
+    public Integer UpdateDetailedWarehousingStatus(DetailedWarehousing detailedWarehousing) {
+        return warehousingMapper.UpdateDetailedWarehousingStatus(detailedWarehousing);
     }
 }

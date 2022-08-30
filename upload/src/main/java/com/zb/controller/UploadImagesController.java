@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -20,9 +21,9 @@ public class UploadImagesController {
     private UploadImagesService uploadImagesService;
 
     @GetMapping("findBySkuId/{skuId}")
-    public String[] findBySkuId(@PathVariable("skuId") Long skuId){
-        String[] strings = uploadImagesService.selectBySkuIdToUrl(skuId);
-        return strings;
+    public List<String> findBySkuId(@PathVariable("skuId") Long skuId){
+        List<String> urls = uploadImagesService.selectBySkuIdToUrl(skuId);
+        return urls;
     }
 
     /**

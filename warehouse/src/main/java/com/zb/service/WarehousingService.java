@@ -59,4 +59,12 @@ public interface WarehousingService {
     Integer insertDetailedWarehousing(DetailedWarehousing detailedWarehousing);
 
     List<DetailedWarehousing> findDetailedWarehousingByWarehousingId(Long warehousingId);
+
+
+    /**
+     * 修改入库详细单状态
+     * @param detailedWarehousing
+     * @return
+     */
+    Integer UpdateDetailedWarehousingStatus(DetailedWarehousing detailedWarehousing);
 }

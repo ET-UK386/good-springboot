@@ -280,6 +280,11 @@
         </trim>
         where id = #{id};
     </update>
+    <update id="UpdateDetailedWarehousingStatus">
+        update detailed_warehousing
+        set status = #{status}
+        where id = #{id};
+    </update>
 
     <select id="selectAll" resultMap="warehouseMap">
         select w.id                   as w_id,

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,11 +21,11 @@ public class UploadImagesServiceImpl implements UploadImagesService {
     private UploadImagesMapper uploadImagesMapper;
 
     @Override
-    public String[] selectBySkuIdToUrl(Long id) {
+    public List<String> selectBySkuIdToUrl(Long id) {
         List<ImagesFk> imagesFks = uploadImagesMapper.selectById(id);
-        String[] urls = new String[imagesFks.size()];
-        for (int i = 0; i < imagesFks.size(); i++) {
-            urls[i] = imagesFks.get(i).getImagesPath().getPath();
+        List<String> urls = new ArrayList<>();
+        for (ImagesFk imagesFk : imagesFks) {
+            urls.add(imagesFk.getImagesPath().getPath());
         }
         return urls;
     }
