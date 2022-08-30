@@ -108,18 +108,25 @@ public class PurchaseController {
     @PutMapping("purchaseAudit")
     public Result purchaseAudit(@RequestBody Purchase purchase) {
 
-        if(!(purchase.getExamineStatus() == 1 || purchase.getExamineStatus() == 2)){
+        if (!(purchase.getExamineStatus() == 1 || purchase.getExamineStatus() == 2)) {
             return new Result().setMessage("流程状态不对，请确认").setCode(404);
         }
+        
 
         // 调用service实现审核
         Integer audit = purchaseService.audit(purchase);
         if (audit == -1) {
             return new Result().setMessage("error").setCode(500);
-        }else if(audit == 0){
+        } else if (audit == 0) {
             return new Result().setCode(404).setMessage("success,审核不通过").setData(purchase);
         }
         return new Result().setCode(200).setMessage("success，审核通过").setData(purchase);
+    }
+
+    @GetMapping("getAllPurchase")
+    public Result selectAllPurchase() {
+        List<Purchase> list = purchaseService.selectAllPurchase();
+        return new Result().setCode(200).setMessage("success").setData(list);
     }
 
 }

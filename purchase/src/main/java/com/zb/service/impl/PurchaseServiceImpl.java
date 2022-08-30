@@ -21,6 +21,12 @@ public class PurchaseServiceImpl implements PurchaseService {
     private PurchaseMapper purchaseMapper;
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+
+    @Override
+    public List<Purchase> selectAllPurchase() {
+        return purchaseMapper.selectAllPurchase();
+    }
+
     @Autowired
     private DetailedPurchaseService detailedPurchaseService;
 
@@ -50,7 +56,7 @@ public class PurchaseServiceImpl implements PurchaseService {
             }
         } else if (integer <= 0) {
             return -1;
-        }else if(purchase.getExamineStatus() == 2){
+        } else if (purchase.getExamineStatus() == 2) {
             return 0;
         }
 

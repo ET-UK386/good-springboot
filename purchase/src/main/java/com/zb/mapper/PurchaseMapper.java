@@ -25,6 +25,7 @@ public interface PurchaseMapper {
 
     /**
      * 根据id修改Purchase
+     *
      * @return 受影响行数
      */
     Integer updateById(Purchase purchase);
@@ -36,4 +37,10 @@ public interface PurchaseMapper {
      * @return 受影响行数
      */
     Integer insert(Purchase purchase);
+
+    /**
+     * 查询所有内容，包括审核过的和未审核的
+     * @return
+     */
+    List<Purchase> selectAllPurchase();
 }
