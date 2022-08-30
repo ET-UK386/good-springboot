@@ -16,22 +16,31 @@ import java.util.Date;
 @AllArgsConstructor
 public class Units {
 
-  private Integer id;
+  private Long id;
   /** 单位名称（时 分 秒， 千克 克 。。。）*/
   private String unitsName;
   /** 属于什么计量单位*/
   private String module;
 
-  private Integer createUserId;
+  private Long createUserId;
   private Date createTime;
-  private Integer userRenewId;
+  private Long userRenewId;
   private Date renewTime;
+  private String token;
 
-  public Integer getId() {
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -51,11 +60,11 @@ public class Units {
     this.module = module;
   }
 
-  public Integer getCreateUserId() {
+  public Long getCreateUserId() {
     return createUserId;
   }
 
-  public void setCreateUserId(Integer createUserId) {
+  public void setCreateUserId(Long createUserId) {
     this.createUserId = createUserId;
   }
 
@@ -67,11 +76,11 @@ public class Units {
     this.createTime = createTime;
   }
 
-  public Integer getUserRenewId() {
+  public Long getUserRenewId() {
     return userRenewId;
   }
 
-  public void setUserRenewId(Integer userRenewId) {
+  public void setUserRenewId(Long userRenewId) {
     this.userRenewId = userRenewId;
   }
 

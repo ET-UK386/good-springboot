@@ -1,5 +1,6 @@
 package com.zb.service;
 
+import com.zb.pojo.DetailedWarehousing;
 import com.zb.pojo.Purchase;
 import com.zb.pojo.User;
 import com.zb.pojo.Warehousing;
@@ -28,7 +29,7 @@ public interface WarehousingService {
      * @param purchase 进货订单
      * @return
      */
-    Map<String, StringBuilder> createWarehousing(Purchase purchase);
+    Integer createWarehousing(Purchase purchase);
 
     /**
      * 入库审核
@@ -49,4 +50,21 @@ public interface WarehousingService {
      * @return
      */
     List<Warehousing> findInventoryAudit();
+
+    /**
+     * 添加入库审核详细订单
+     * @param detailedWarehousing
+     * @return
+     */
+    Integer insertDetailedWarehousing(DetailedWarehousing detailedWarehousing);
+
+    List<DetailedWarehousing> findDetailedWarehousingByWarehousingId(Long warehousingId);
+
+
+    /**
+     * 修改入库详细单状态
+     * @param detailedWarehousing
+     * @return
+     */
+    Integer UpdateDetailedWarehousingStatus(DetailedWarehousing detailedWarehousing);
 }

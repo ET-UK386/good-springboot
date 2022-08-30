@@ -3,7 +3,6 @@ package com.zb.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -16,20 +15,29 @@ import java.util.Date;
 @AllArgsConstructor
 public class Color {
 
-  private Integer id;
+  private Long id;
   /** 颜色名称*/
   private String colorName;
 
-  private Integer createUserId;
+  private Long createUserId;
   private Date createTime;
-  private Integer userRenewId;
+  private Long userRenewId;
   private Date renewTime;
+  private String token;
 
-  public Integer getId() {
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -41,11 +49,11 @@ public class Color {
     this.colorName = colorName;
   }
 
-  public Integer getCreateUserId() {
+  public Long getCreateUserId() {
     return createUserId;
   }
 
-  public void setCreateUserId(Integer createUserId) {
+  public void setCreateUserId(Long createUserId) {
     this.createUserId = createUserId;
   }
 
@@ -57,11 +65,11 @@ public class Color {
     this.createTime = createTime;
   }
 
-  public Integer getUserRenewId() {
+  public Long getUserRenewId() {
     return userRenewId;
   }
 
-  public void setUserRenewId(Integer userRenewId) {
+  public void setUserRenewId(Long userRenewId) {
     this.userRenewId = userRenewId;
   }
 

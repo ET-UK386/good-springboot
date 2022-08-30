@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.GoodskuWarehouseMapper">
+
+    <select id="selectAll" resultType="com.zb.pojo.GoodskuWarehouse">
+        SELECT `goodsku`.`id`                        AS `gid`,
+               `warehouse`.`id`                      AS `wid`,
+               `warehouse`.`detailed_Warehousing_id` AS `detailed_Warehousing_id`,
+               `goodsku`.`sku_name`                  AS `sku_name`,
+               `goodsku`.`sku_desc`                  AS `sku_desc`,
+               `goodsku`.`color_id`                  AS `color_id`,
+               `goodsku`.`price_id`                  AS `price_id`,
+               `goodsku`.`spu_id`                    AS `spu_id`,
+               `goodsku`.`Stock_id`                  AS `Stock_id`,
+               `goodsku`.`sales_volume`              AS `sales_volume`,
+               `goodsku`.`company_id`                AS `company_id`,
+               `goodsku`.`manufacturer`              AS `manufacturer`,
+               `goodsku`.`Supplier_id`               AS `Supplier_id`,
+               `goodsku`.`logic_status`              AS `logic_status`,
+               sum(`warehouse`.`stock_number`)            AS `stock_number`,
+               `warehouse`.`warehouse_address`       AS `warehouse_address`,
+               `warehouse`.`phone`                   AS `phone`,
+               `warehouse`.`sku_id`                  AS `sku_id`,
+               `warehouse`.`batch`                   AS `batch`
+        FROM `goodsku`
+                 JOIN `warehouse` ON `goodsku`.`id` = `warehouse`.`sku_id`
+        group by `warehouse`.`sku_id`
+
+    </select>
+</mapper>

@@ -4,7 +4,6 @@ package com.zb.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,9 +15,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Price {
-    private Integer id;
+    private Long id;
     /** sku ID*/
-    private Integer skuId;
+    private Long skuId;
 
     public BigDecimal getPrice() {
         return price;
@@ -31,33 +30,33 @@ public class Price {
     /** 价格*/
     private BigDecimal price;
 
-    private Integer createUserId;
+    private Long createUserId;
     private Date createTime;
-    private Integer userRenewId;
+    private Long userRenewId;
     private Date renewTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getSkuId() {
+    public Long getSkuId() {
         return skuId;
     }
 
-    public void setSkuId(Integer skuId) {
+    public void setSkuId(Long skuId) {
         this.skuId = skuId;
     }
 
 
-    public Integer getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -69,11 +68,11 @@ public class Price {
         this.createTime = createTime;
     }
 
-    public Integer getUserRenewId() {
+    public Long getUserRenewId() {
         return userRenewId;
     }
 
-    public void setUserRenewId(Integer userRenewId) {
+    public void setUserRenewId(Long userRenewId) {
         this.userRenewId = userRenewId;
     }
 

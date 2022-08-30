@@ -18,6 +18,14 @@ public interface GoodMapper {
     List<Goodsku> listGood();
 
     /**
+     * 查询商品spu
+      * @return
+     */
+    List<Goodspu> listGoodSpu();
+
+
+
+    /**
      * 查询所有条数
      * @return
      */
@@ -41,7 +49,6 @@ public interface GoodMapper {
      * 根据商品名或分类查询
      *
      * @param skuName
-     * @param sortName
      * @return
      */
     List<Goodsku> fingByskuNameorSortName(@Param("skuName") String skuName,@Param("sortName") String sortName);
@@ -54,13 +61,32 @@ public interface GoodMapper {
     int insertGood(Goodsku g);
 
     /**
+     * 添加颜色
+     * @param c
+     * @return
+     */
+    int insertColor(Color c);
+
+
+    /**
+     * 根据颜色查找
+     * @param colorName
+     * @return
+     */
+    Color findColorTwo(String colorName);
+    /**
      * 向spu添加数据
      * @param sp
      * @return
      */
     int insertGoodspu(Goodspu sp);
 
-
+    /**
+     * 查找商品spu名
+     * @param id
+     * @return
+     */
+    Goodspu findGoodName(Long id);
     /**
      * 修改商品
      * @param g
@@ -75,20 +101,9 @@ public interface GoodMapper {
      */
     int insertprice(Price p);
 
-    /**
-     * 添加供应商
-     * @param v
-     * @return
-     */
-    int insertvendor(Vendor v);
 
 
-    /**
-     * 添加库存
-     * @param w
-     * @return
-     */
-    int insertStock(Warehouse w);
+
 
     /**
      * 添加分类
@@ -104,12 +119,63 @@ public interface GoodMapper {
      */
     Sort findSort(String sortName);
 
+
+    /**
+     *查找所属分类
+     * @param sortName
+     * @return
+     */
+    Sort findSortTwo(String sortName);
+    /**
+     * 查询全部分类
+     * @return
+     */
+    List<Sort> listSort();
+
+    /**
+     * 查询全部单位
+     * @return
+     */
+    List<Units> listUnits();
+
+    /**
+     * 查找sku表信息用来跟添加作比较
+     * @return
+     */
+    List<Goodsku> listGoodskuMessage();
+
+    /**
+     * 查找spu表信息用来跟添加作比较
+     * @return
+     */
+    List<Goodspu> listGoodspu();
+
+    /**
+     * 添加单位
+     * @param u
+     * @return
+     */
+    int insertUnits(Units u);
+
+    /**
+     * 查找sku表
+     * @param id
+     * @return
+     */
+    Goodsku listByid(Long id);
+
+    /**
+     * 查找sku表
+     * @param skuName
+     * @return
+     */
+    Goodsku listBySkuName(@Param("skuName") String skuName,@Param("colorId") Long colorId,@Param("priceId")Long priceId);
     /**
      * 查找spu
      * @param id
      * @return
      */
-    Goodspu findspu(Integer id);
+    Goodspu findspu(Long id);
 
     /**
      * 查找颜色ID
@@ -118,6 +184,11 @@ public interface GoodMapper {
      */
     Color findColor(String colorName);
 
+    /**
+     * 查询全部颜色
+     * @return
+     */
+    List<Color> listColor();
 
     /**
      * 查找单位
@@ -126,12 +197,14 @@ public interface GoodMapper {
      */
     Units findUnits(String unitsName);
 
+
+
     /**
-     * 查找库存
-     * @param stockNumber
+     * 查找单位
+     * @param unitsName
      * @return
      */
-    Warehouse findWarehouse(Integer stockNumber);
+    Units findUnitsTwo(String unitsName);
     /**
      * 查找库存
      * @param stockNumber
@@ -185,6 +258,7 @@ public interface GoodMapper {
      */
     int updateSort(Sort s);
 
+
     /**
      * 修改价格
      * @param p
@@ -199,19 +273,6 @@ public interface GoodMapper {
      */
     int updateColor(Color c);
 
-    /**
-     * 修改库存
-     * @param w
-     * @return
-     */
-    int updateWarehouse(Warehouse w);
-
-    /**
-     * 修改经销商
-     * @param v
-     * @return
-     */
-    int updateVendor(Vendor v);
 
     /**
      * 修改单位

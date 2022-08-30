@@ -1,139 +1,182 @@
 package com.zb.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.sql.Timestamp;
 import java.util.Date;
-
-/**
- * spu
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Accessors(chain = true)
 public class Goodspu {
 
-  private Integer id;
-  /** 商品名称*/
-  private String goodName;
-  /** 品牌*/
-  private String brand;
-  private Integer sortId;
-  private Integer status;
-  private Integer createUserId;
-  private Date createTime;
-  private Integer userRenewId;
-  private Date renewTime;
-  private Sort sort;
-  private User user;
-  private String statusStr;
-  public String getStatusStr() {
-    switch (status){
-      case 0 : statusStr ="上架";
-      break;
-      case 1 : statusStr ="下架";
-      break;
-      case 2 : statusStr ="售罄";
-      break;
-      default:
-        break;
+    private Long id;
+    private String goodName;
+    private String brand;
+    private Long sortId;
+    private Integer status;
+    private Long createUserId;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date createTime;
+    private Long userRenewId;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date renewTime;
+    private Long colorId;
+    private Long priceId;
+    private Long companyId;
+    private String con3;
+    private Sort sort;
+    private Color color;
+    private Units units;
+    private User user;
+    private Price price;
+
+    public Long getId() {
+        return id;
     }
-    return statusStr;
-  }
 
-  public void setStatusStr(String statusStr) {
-    this.statusStr = statusStr;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public String getGoodName() {
+        return goodName;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
 
-  public String getGoodName() {
-    return goodName;
-  }
+    public String getBrand() {
+        return brand;
+    }
 
-  public void setGoodName(String goodName) {
-    this.goodName = goodName;
-  }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-  public String getBrand() {
-    return brand;
-  }
+    public Long getSortId() {
+        return sortId;
+    }
 
-  public void setBrand(String brand) {
-    this.brand = brand;
-  }
+    public void setSortId(Long sortId) {
+        this.sortId = sortId;
+    }
 
-  public Integer getSortId() {
-    return sortId;
-  }
+    public Integer getStatus() {
+        return status;
+    }
 
-  public void setSortId(Integer sortId) {
-    this.sortId = sortId;
-  }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-  public Integer getStatus() {
-    return status;
-  }
+    public Long getCreateUserId() {
+        return createUserId;
+    }
 
-  public void setStatus(Integer status) {
-    this.status = status;
-  }
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
 
-  public Integer getCreateUserId() {
-    return createUserId;
-  }
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-  public void setCreateUserId(Integer createUserId) {
-    this.createUserId = createUserId;
-  }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-  public Date getCreateTime() {
-    return createTime;
-  }
+    public Long getUserRenewId() {
+        return userRenewId;
+    }
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
+    public void setUserRenewId(Long userRenewId) {
+        this.userRenewId = userRenewId;
+    }
 
-  public Integer getUserRenewId() {
-    return userRenewId;
-  }
+    public Date getRenewTime() {
+        return renewTime;
+    }
 
-  public void setUserRenewId(Integer userRenewId) {
-    this.userRenewId = userRenewId;
-  }
+    public void setRenewTime(Date renewTime) {
+        this.renewTime = renewTime;
+    }
 
-  public Date getRenewTime() {
-    return renewTime;
-  }
+    public Long getColorId() {
+        return colorId;
+    }
 
-  public void setRenewTime(Date renewTime) {
-    this.renewTime = renewTime;
-  }
+    public void setColorId(Long colorId) {
+        this.colorId = colorId;
+    }
 
-  public Sort getSort() {
-    return sort;
-  }
+    public Long getPriceId() {
+        return priceId;
+    }
 
-  public void setSort(Sort sort) {
-    this.sort = sort;
-  }
+    public void setPriceId(Long priceId) {
+        this.priceId = priceId;
+    }
 
-  public User getUser() {
-    return user;
-  }
+    public Long getCompanyId() {
+        return companyId;
+    }
 
-  public void setUser(User user) {
-    this.user = user;
-  }
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getCon3() {
+        return con3;
+    }
+
+    public void setCon3(String con3) {
+        this.con3 = con3;
+    }
+
+    public Sort getSort() {
+        return sort;
+    }
+
+    public void setSort(Sort sort) {
+        this.sort = sort;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(Units units) {
+        this.units = units;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 }

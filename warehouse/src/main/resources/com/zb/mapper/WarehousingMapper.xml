@@ -27,7 +27,7 @@
             <result property="examineUserId" column="p_examine_user_id"/>
             <result property="examineTime" column="p_examine_time"/>
             <result property="examineOpinion" column="p_examine_opinion"/>
-            <result property="status" column="p_status"/>
+            <result property="examineStatus" column="p_status"/>
             <result property="createUserId" column="p_create_user_id"/>
             <result property="createTime" column="p_create_time"/>
             <result property="userRenewId" column="p_user_renew_id"/>
@@ -78,7 +78,6 @@
             <result property="skuDesc" column="sku_sku_desc"/>
             <result property="colorId" column="sku_color_id"/>
             <result property="priceId" column="sku_price_id"/>
-            <result property="stockId" column="sku_Stock_id"/>
             <result property="salesVolume" column="sku_sales_volume"/>
             <result property="companyId" column="sku_company_id"/>
             <result property="manufacturer" column="sku_manufacturer"/>
@@ -100,9 +99,93 @@
             <result property="renewTime" column="spu_renew_time"/>
         </association>
     </resultMap>
-    <insert id="insert">
+
+    <resultMap id="dwmap" type="com.zb.pojo.DetailedWarehousing">
+        <result property="id" column="dw_id"/>
+        <result property="warehousingId" column="dw_warehousing_id"/>
+        <result property="vendorId" column="dw_vendor_id"/>
+        <result property="skuId" column="dw_sku_id"/>
+        <result property="batch" column="dw_batch"/>
+        <result property="purchasePrice" column="dw_purchase_price"/>
+        <result property="number" column="dw_number"/>
+        <result property="status" column="dw_status"/>
+        <result property="logicDel" column="dw_logic_del"/>
+        <result property="createUserId" column="dw_create_user_id"/>
+        <result property="createTime" column="dw_create_time"/>
+        <result property="userRenewId" column="dw_user_renew_id"/>
+        <result property="renewTime" column="dw_renew_time"/>
+
+        <association property="warehousing" javaType="com.zb.pojo.Warehousing">
+            <result property="id" column="w_id"/>
+            <result property="purchaseId" column="w_purchase_id"/>
+            <result property="detailedPurchaseId" column="w_detailed_purchase_id"/>
+            <result property="examineUserId" column="w_examine_user_id"/>
+            <result property="examineTime" column="w_examine_time"/>
+            <result property="warehousingUserId" column="w_Warehousing_user_id"/>
+            <result property="warehousingTime" column="w_Warehousing_time"/>
+            <result property="warehousingNumber" column="w_Warehousing_number"/>
+            <result property="status" column="w_status"/>
+            <result property="createUserId" column="w_create_user_id"/>
+            <result property="createTime" column="w_create_time"/>
+            <result property="userRenewId" column="w_user_renew_id"/>
+            <result property="renewTime" column="w_renew_time"/>
+            <result property="signingDetails" column="w_signing_details"/>
+            <result property="inventoryDetails" column="w_inventory_details"/>
+        </association>
+
+        <association property="goodsku" javaType="com.zb.pojo.Goodsku">
+            <result property="id" column="g_id"/>
+            <result property="spuId" column="g_spu_id"/>
+            <result property="skuName" column="g_sku_name"/>
+            <result property="skuDesc" column="g_sku_desc"/>
+            <result property="colorId" column="g_color_id"/>
+            <result property="priceId" column="g_price_id"/>
+            <result property="salesVolume" column="g_sales_volume"/>
+            <result property="companyId" column="g_company_id"/>
+            <result property="manufacturer" column="g_manufacturer"/>
+            <result property="supplierId" column="g_Supplier_id"/>
+            <result property="createUserId" column="g_create_user_id"/>
+            <result property="createTime" column="g_create_time"/>
+            <result property="userRenewId" column="g_user_renewId"/>
+            <result property="renewTime" column="g_renew_time"/>
+            <result property="logic_status" column="g_logic_status"/>
+            <association property="color" javaType="com.zb.pojo.Color">
+                <result property="id" column="c_id"/>
+                <result property="colorName" column="c_color_name"/>
+                <result property="createUserId" column="c_create_user_id"/>
+                <result property="createTime" column="c_create_time"/>
+                <result property="userRenewId" column="c_user_renew_id"/>
+                <result property="renewTime" column="c_renew_time"/>
+            </association>
+        </association>
+
+        <association property="vendor" javaType="com.zb.pojo.Vendor">
+            <result property="id" column="v_id"/>
+            <result property="vendorName" column="v_vendor_name"/>
+            <result property="skuId" column="v_sku_id"/>
+            <result property="vendorAddress" column="v_vendor_address"/>
+            <result property="desc" column="v_desc"/>
+            <result property="principal" column="v_principal"/>
+            <result property="tel" column="v_tel"/>
+            <result property="createUserId" column="v_create_user_id"/>
+            <result property="createTime" column="v_create_time"/>
+            <result property="userRenewId" column="v_user_renew_id"/>
+            <result property="renewTime" column="v_renew_time"/>
+            <result property="purchaseTime" column="v_purchase_time"/>
+        </association>
+
+    </resultMap>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into warehousing (purchase_id, detailed_purchase_id, Warehousing_number, status, create_time)
         values (#{purchaseId}, #{detailedPurchaseId}, #{warehousingNumber}, #{status}, #{createTime});
+    </insert>
+    <insert id="insertDetailedWarehousing" useGeneratedKeys="true" keyProperty="id">
+        insert into detailed_warehousing
+        (warehousing_id, vendor_id, sku_id, batch, purchase_price, number, status,
+         logic_del, create_time)
+        values (#{warehousingId}, #{vendorId}, #{skuId}, #{batch}, #{purchasePrice}, #{number}, 0, 0, now());
     </insert>
     <update id="checkBeforeStorage">
         update warehousing
@@ -140,6 +223,68 @@
         </trim>
         where id = #{id}
     </update>
+    <update id="update">
+        update warehousing
+        <trim prefix="set" suffixOverrides=",">
+            <if test="examineUserId != null">
+                examine_user_id = #{examineUserId},
+            </if>
+            <if test="examineTime != null">
+                examine_time = #{examineTime},
+            </if>
+            <if test="warehousingUserId!=null">
+                Warehousing_user_id = #{warehousingUserId},
+            </if>
+            <if test="warehousingTime!=null">
+                Warehousing_time = #{warehousingTime},
+            </if>
+            <if test="warehousingNumber!=null">
+                Warehousing_number = #{warehousingNumber},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+            <if test="renewTime">
+                renew_time = #{c},
+            </if>
+            <if test="signingDetails">
+                signing_details = #{signingDetails},
+            </if>
+            <if test="inventoryDetails">
+                inventory_details = #{inventoryDetails},
+            </if>
+        </trim>
+        where id=#{id};
+    </update>
+    <update id="UpdateDetailedWarehousing">
+        update detailed_warehousing
+        <trim prefix="set" suffixOverrides=",">
+            <if test="vendorId!=null">
+                vendor_id = #{vendorId},
+            </if>
+            <if test="skuId!=null">
+                sku_id = #{skuId},
+            </if>
+            <if test="purchasePrice!=null">
+                purchase_price = #{purchasePrice},
+            </if>
+            <if test="number!=null">
+                number = #{number},
+            </if>
+            <if test="status!=null">
+                status = #{status},
+            </if>
+            <if test="logicDel!=null">
+                logic_del = #{logicDel},
+            </if>
+        </trim>
+        where id = #{id};
+    </update>
+    <update id="UpdateDetailedWarehousingStatus">
+        update detailed_warehousing
+        set status = #{status}
+        where id = #{id};
+    </update>
 
     <select id="selectAll" resultMap="warehouseMap">
         select w.id                   as w_id,
@@ -164,7 +309,7 @@
                p.examine_user_id      as p_examine_user_id,
                p.examine_time         as p_examine_time,
                p.examine_opinion      as p_examine_opinion,
-               p.examine_status               as p_status,
+               p.examine_status       as p_status,
                p.create_user_id       as p_create_user_id,
                p.create_time          as p_create_time,
                p.user_renew_id        as p_user_renew_id,
@@ -211,7 +356,6 @@
                sku.sku_desc           as sku_sku_desc,
                sku.color_id           as sku_color_id,
                sku.price_id           as sku_price_id,
-               sku.Stock_id           as sku_Stock_id,
                sku.sales_volume       as sku_sales_volume,
                sku.company_id         as sku_company_id,
                sku.manufacturer       as sku_manufacturer,
@@ -266,7 +410,7 @@
                p.examine_user_id      as p_examine_user_id,
                p.examine_time         as p_examine_time,
                p.examine_opinion      as p_examine_opinion,
-               p.examine_status               as p_status,
+               p.examine_status       as p_status,
                p.create_user_id       as p_create_user_id,
                p.create_time          as p_create_time,
                p.user_renew_id        as p_user_renew_id,
@@ -313,7 +457,6 @@
                sku.sku_desc           as sku_sku_desc,
                sku.color_id           as sku_color_id,
                sku.price_id           as sku_price_id,
-               sku.Stock_id           as sku_Stock_id,
                sku.sales_volume       as sku_sales_volume,
                sku.company_id         as sku_company_id,
                sku.manufacturer       as sku_manufacturer,
@@ -416,7 +559,6 @@
         sku.sku_desc as sku_sku_desc,
         sku.color_id as sku_color_id,
         sku.price_id as sku_price_id,
-        sku.Stock_id as sku_Stock_id,
         sku.sales_volume as sku_sales_volume,
         sku.company_id as sku_company_id,
         sku.manufacturer as sku_manufacturer,
@@ -453,5 +595,80 @@
             </foreach>
         </where>
         order by w.status;
+    </select>
+    <select id="selectDetailedWarehousingByWarehousingId" resultMap="dwmap">
+        select dw.id                  as dw_id,
+               dw.warehousing_id      as dw_warehousing_id,
+               dw.vendor_id           as dw_vendor_id,
+               dw.sku_id              as dw_sku_id,
+               dw.batch               as dw_batch,
+               dw.purchase_price      as dw_purchase_price,
+               dw.number              as dw_number,
+               dw.status              as dw_status,
+               dw.logic_del           as dw_logic_del,
+               dw.create_user_id      as dw_create_user_id,
+               dw.create_time         as dw_create_time,
+               dw.user_renew_id       as dw_user_renew_id,
+               dw.renew_time          as dw_renew_time,
+
+               w.id                   as w_id,
+               w.purchase_id          as w_purchase_id,
+               w.detailed_purchase_id as w_detailed_purchase_id,
+               w.examine_user_id      as w_examine_user_id,
+               w.examine_time         as w_examine_time,
+               w.Warehousing_user_id  as w_Warehousing_user_id,
+               w.Warehousing_time     as w_Warehousing_time,
+               w.Warehousing_number   as w_Warehousing_number,
+               w.status               as w_status,
+               w.create_user_id       as w_create_user_id,
+               w.create_time          as w_create_time,
+               w.user_renew_id        as w_user_renew_id,
+               w.renew_time           as w_renew_time,
+               w.signing_details      as w_signing_details,
+               w.inventory_details    as w_inventory_details,
+
+               g.id                   as g_id,
+               g.spu_id               as g_spu_id,
+               g.sku_name             as g_sku_name,
+               g.sku_desc             as g_sku_desc,
+               g.color_id             as g_color_id,
+               g.price_id             as g_price_id,
+               g.sales_volume         as g_sales_volume,
+               g.company_id           as g_company_id,
+               g.manufacturer         as g_manufacturer,
+               g.Supplier_id          as g_Supplier_id,
+               g.create_user_id       as g_create_user_id,
+               g.create_time          as g_create_time,
+               g.user_renewId         as g_user_renewId,
+               g.renew_time           as g_renew_time,
+               g.logic_status         as g_logic_status,
+
+               c.id                   as c_id,
+               c.color_name           as c_color_name,
+               c.create_user_id       as c_create_user_id,
+               c.create_time          as c_create_time,
+               c.user_renew_id        as c_user_renew_id,
+               c.renew_time           as c_renew_time,
+
+               v.id                   as v_id,
+               v.vendor_name          as v_vendor_name,
+               v.sku_id               as v_sku_id,
+               v.vendor_address       as v_vendor_address,
+               v.desc                 as v_desc,
+               v.principal            as v_principal,
+               v.tel                  as v_tel,
+               v.create_user_id       as v_create_user_id,
+               v.create_time          as v_create_time,
+               v.user_renew_id        as v_user_renew_id,
+               v.renew_time           as v_renew_time,
+               v.purchase_time        as v_purchase_time
+
+
+        from detailed_warehousing dw
+                 left join warehousing w on dw.warehousing_id = w.id
+                 left join vendor v on dw.vendor_id = v.id
+                 left join goodsku g on dw.sku_id = g.id
+                 left join color c on g.color_id = c.id
+        where dw.warehousing_id = #{warehousingId};
     </select>
 </mapper>

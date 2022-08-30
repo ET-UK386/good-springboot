@@ -14,11 +14,41 @@ public interface GoodService {
     List<Goodsku> listGood();
 
     /**
+     * 查询商品spu
+     * @return
+     */
+    List<Goodspu> listGoodSpu();
+    /**
      * 查询所有条数
      * @return
      */
     int count();
 
+    /**
+     * 添加颜色
+     * @param c
+     * @return
+     */
+    int insertColor(Color c);
+
+    /**
+     * 查询全部颜色
+     * @return
+     */
+    List<Color> listColor();
+
+
+    /**
+     * 查询全部分类
+     * @return
+     */
+    List<Sort> listSort();
+
+    /**
+     * 查询全部单位
+     * @return
+     */
+    List<Units> listUnits();
     /**
      * 逻辑删除
      * @param id
@@ -36,10 +66,9 @@ public interface GoodService {
      * 根据商品名或分类查询
      *
      * @param skuName
-     * @param sortName
      * @return
      */
-    List<Goodsku> fingByskuNameorSortName(String skuName, String sortName);
+    List<Goodsku> fingByskuNameorSortName(String skuName,String sortName);
 
     /**
      * 添加商品
@@ -48,6 +77,29 @@ public interface GoodService {
      */
     int insertGood(Goodsku g);
 
+    /**
+     * 查找sku表信息用来跟添加作比较
+     * @return
+     */
+    List<Goodsku> listGoodskuMessage();
+
+    /**
+     * 查找sku表
+     * @param skuName
+     * @return
+     */
+    Goodsku listBySkuName(String skuName,Long colorId,Long priceId);
+    /**
+     * 查找sku表
+     * @param id
+     * @return
+     */
+    Goodsku listByid(Long id);
+    /**
+     * 查找spu表信息用来跟添加作比较
+     * @return
+     */
+    List<Goodspu> listGoodspu();
     /**
      * 修改商品
      * @param g
@@ -63,12 +115,14 @@ public interface GoodService {
 
     int insertGoodspu(Goodspu sp);
 
+
     /**
-     * 添加供应商
-     * @param v
+     * 查找商品spu名
+     * @param id
      * @return
      */
-    int insertvendor(Vendor v);
+    Goodspu findGoodName(Long id);
+
 
     /**
      * 添加价格
@@ -77,14 +131,14 @@ public interface GoodService {
      */
     int insertprice(Price p);
 
+
+
     /**
-     * 添加库存
-     * @param w
+     * 根据颜色查找
+     * @param colorName
      * @return
      */
-    int insertStock(Warehouse w);
-
-
+    Color findColorTwo(String colorName);
 
     /**
      * 添加分类
@@ -101,7 +155,24 @@ public interface GoodService {
      */
     Sort findSort(String sortName);
 
-
+    /**
+     * 添加单位
+     * @param u
+     * @return
+     */
+    int insertUnits(Units u);
+    /**
+     * 查找单位
+     * @param unitsName
+     * @return
+     */
+    Units findUnitsTwo(String unitsName);
+    /**
+     *查找所属分类
+     * @param sortName
+     * @return
+     */
+    Sort findSortTwo(String sortName);
     /**
      * 查找颜色ID
      * @param colorName
@@ -122,7 +193,7 @@ public interface GoodService {
      * @param id
      * @return
      */
-    Goodspu findspu(Integer id);
+    Goodspu findspu(Long id);
     /**
      * 查找价格id
      * @param price
@@ -137,32 +208,9 @@ public interface GoodService {
      */
     Price findPriceTwo(BigDecimal price);
 
-    /**
-     * 查找库存
-     * @param stockNumber
-     * @return
-     */
-    Warehouse findWarehouse(Integer stockNumber);
 
-    /**
-     * 查找经销商
-     * @param vendorName
-     * @return
-     */
-    int findVendor(String vendorName);
 
-    /**
-     * 查找经销商
-     * @param vendorName
-     * @return
-     */
-    Vendor findVendorTwo(String vendorName);
-    /**
-     * 查找库存
-     * @param stockNumber
-     * @return
-     */
-    int findWarehouseTwo(Integer stockNumber);
+
     /**
      * 修改sku价格
      * @param g
@@ -203,16 +251,6 @@ public interface GoodService {
      */
     int updateColor(Color c);
 
-    /**
-     * 修改库存
-     * @param w
-     * @return
-     */
-    int updateWarehouse(Warehouse w);
-    /**
-     * 修改经销商
-     * @param v
-     * @return
-     */
-    int updateVendor(Vendor v);
+
+
 }

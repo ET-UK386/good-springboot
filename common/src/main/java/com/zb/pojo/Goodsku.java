@@ -1,12 +1,13 @@
 package com.zb.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zb.utils.Result;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * sku
@@ -16,32 +17,30 @@ import java.util.Date;
 @AllArgsConstructor
 public class Goodsku {
 
-  private Integer id;
+  private Long id;
   /** spu ID*/
-  private Integer spuId;
+  private Long spuId;
   /** sku 名称*/
   private String skuName;
   /** 描述*/
   private String skuDesc;
   /** 颜色ID*/
-  private Integer colorId;
+  private Long colorId;
   /** 价表ID*/
-  private Integer priceId;
-  /** 库存表ID*/
-  private Integer stockId;
+  private Long priceId;
   /** 销量*/
   private Integer salesVolume;
   /** 单位ID*/
-  private Integer companyId;
+  private Long companyId;
   /** 生产商*/
   private String manufacturer;
   /** 供应商ID*/
-  private Integer supplierId;
+  private Long supplierId;
 
-  private Integer createUserId;
+  private Long createUserId;
   @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date createTime;
-  private Integer userRenewId;
+  private Long userRenewId;
   @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
   private Date renewTime;
 
@@ -52,24 +51,33 @@ public class Goodsku {
   private User user;
   private Color color;
   private Price price;
-  private Warehouse warehouse;
   private Units units;
-  private Vendor vendor;
+  private Result result;
 
+  /**
+   * 不能删
+   * @return
+   */
+  public String getSkuNameStr(){
+    if(getColor() == null){
+      return null;
+    }
+    return this.getSkuName() + "-" + this.getColor().getColorName();
+  }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public Integer getSpuId() {
+  public Long getSpuId() {
     return spuId;
   }
 
-  public void setSpuId(Integer spuId) {
+  public void setSpuId(Long spuId) {
     this.spuId = spuId;
   }
 
@@ -89,28 +97,20 @@ public class Goodsku {
     this.skuDesc = skuDesc;
   }
 
-  public Integer getColorId() {
+  public Long getColorId() {
     return colorId;
   }
 
-  public void setColorId(Integer colorId) {
+  public void setColorId(Long colorId) {
     this.colorId = colorId;
   }
 
-  public Integer getPriceId() {
+  public Long getPriceId() {
     return priceId;
   }
 
-  public void setPriceId(Integer priceId) {
+  public void setPriceId(Long priceId) {
     this.priceId = priceId;
-  }
-
-  public Integer getStockId() {
-    return stockId;
-  }
-
-  public void setStockId(Integer stockId) {
-    this.stockId = stockId;
   }
 
   public Integer getSalesVolume() {
@@ -121,11 +121,11 @@ public class Goodsku {
     this.salesVolume = salesVolume;
   }
 
-  public Integer getCompanyId() {
+  public Long getCompanyId() {
     return companyId;
   }
 
-  public void setCompanyId(Integer companyId) {
+  public void setCompanyId(Long companyId) {
     this.companyId = companyId;
   }
 
@@ -137,19 +137,19 @@ public class Goodsku {
     this.manufacturer = manufacturer;
   }
 
-  public Integer getSupplierId() {
+  public Long getSupplierId() {
     return supplierId;
   }
 
-  public void setSupplierId(Integer supplierId) {
+  public void setSupplierId(Long supplierId) {
     this.supplierId = supplierId;
   }
 
-  public Integer getCreateUserId() {
+  public Long getCreateUserId() {
     return createUserId;
   }
 
-  public void setCreateUserId(Integer createUserId) {
+  public void setCreateUserId(Long createUserId) {
     this.createUserId = createUserId;
   }
 
@@ -161,11 +161,11 @@ public class Goodsku {
     this.createTime = createTime;
   }
 
-  public Integer getUserRenewId() {
+  public Long getUserRenewId() {
     return userRenewId;
   }
 
-  public void setUserRenewId(Integer userRenewId) {
+  public void setUserRenewId(Long userRenewId) {
     this.userRenewId = userRenewId;
   }
 
@@ -225,14 +225,6 @@ public class Goodsku {
     this.price = price;
   }
 
-  public Warehouse getWarehouse() {
-    return warehouse;
-  }
-
-  public void setWarehouse(Warehouse warehouse) {
-    this.warehouse = warehouse;
-  }
-
   public Units getUnits() {
     return units;
   }
@@ -241,11 +233,11 @@ public class Goodsku {
     this.units = units;
   }
 
-  public Vendor getVendor() {
-    return vendor;
+  public Result getResult() {
+    return result;
   }
 
-  public void setVendor(Vendor vendor) {
-    this.vendor = vendor;
+  public void setResult(Result result) {
+    this.result = result;
   }
 }

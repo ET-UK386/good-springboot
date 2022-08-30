@@ -28,4 +28,8 @@ public class Result {
      * */
     private Integer code;
 
+    public Result(String message, Integer code) {
+        this.message = message;
+        this.code = code;
+    }
 }

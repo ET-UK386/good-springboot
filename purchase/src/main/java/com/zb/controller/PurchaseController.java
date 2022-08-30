@@ -1,16 +1,21 @@
 package com.zb.controller;
 
-import com.zb.pojo.*;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.zb.pojo.DetailedPurchase;
+import com.zb.pojo.Goodsku;
+import com.zb.pojo.Purchase;
+import com.zb.pojo.Vendor;
 import com.zb.service.DetailedPurchaseService;
 import com.zb.service.GoodService;
 import com.zb.service.PurchaseService;
 import com.zb.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/purchase")
 @RestController
@@ -45,7 +50,7 @@ public class PurchaseController {
             }
         }
         // 添加数据
-        Integer add = detailedPurchaseService.add(list);
+        Integer add = detailedPurchaseService.addDetailedPurchaseAndPurchase(list);
 
         if (add == -1) {
             return new Result().setCode(500).setMessage("添加失败");
@@ -78,14 +83,25 @@ public class PurchaseController {
     }
 
     /**
-     * 查询所有进货流程表
+     * 查询未审核进货流程表
      *
      * @return
      */
-    @GetMapping("getPurchase")
-    public Result getPurchase() {
-        List<Purchase> all = purchaseService.findAll();
+    @GetMapping("getPurchaseNotReviewed")
+    public Result getPurchaseNotReviewed() {
+        List<Purchase> all = purchaseService.findPurchaseNotReviewed();
         return new Result().setCode(200).setMessage("success").setData(all);
+    }
+
+    /**
+     * 查询已审核进货流程表
+     *
+     * @return
+     */
+    @GetMapping("getPurchaseAudi")
+    public Result getPurchaseAudi() {
+        List<Purchase> purchaseAudited = purchaseService.findPurchaseAudited();
+        return new Result().setCode(200).setMessage("success").setData(purchaseAudited);
     }
 
     /**
@@ -111,7 +127,7 @@ public class PurchaseController {
         if (!(purchase.getExamineStatus() == 1 || purchase.getExamineStatus() == 2)) {
             return new Result().setMessage("流程状态不对，请确认").setCode(404);
         }
-        
+
 
         // 调用service实现审核
         Integer audit = purchaseService.audit(purchase);
@@ -123,10 +139,21 @@ public class PurchaseController {
         return new Result().setCode(200).setMessage("success，审核通过").setData(purchase);
     }
 
-    @GetMapping("getAllPurchase")
-    public Result selectAllPurchase() {
-        List<Purchase> list = purchaseService.selectAllPurchase();
-        return new Result().setCode(200).setMessage("success").setData(list);
+
+    /**
+     * 修改进货流程
+     */
+    @PutMapping("modifyPurchase")
+    public Result modifyPurchase(@RequestBody Map<String, Object> map) {
+
+        // 获取前端值
+        Long purchaseId = ((Integer) map.get("purchaseId")).longValue();
+        // 通过json反序列化成对应List集合 因为map.get("list")获取的集合值是LinkedHashMap类型
+        String jsonString = JSONObject.toJSONString(map.get("list"));
+        List<DetailedPurchase> list = JSONArray.parseArray(jsonString, DetailedPurchase.class);
+        purchaseService.modifyPurchase(purchaseId, list);
+
+        return new Result().setCode(200).setMessage("success");
     }
 
 }

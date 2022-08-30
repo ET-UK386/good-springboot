@@ -16,7 +16,7 @@ public class PriceServiceImpl implements PriceService {
     @Autowired(required = false)
     private PriceMapper priceMapper;
     @Override
-    public List<Price> listPrice(Integer sku_id) {
+    public List<Price> listPrice(Long sku_id) {
         return priceMapper.listPrice(sku_id);
     }
 }

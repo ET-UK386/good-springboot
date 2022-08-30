@@ -50,7 +50,6 @@
             <result property="skuDesc" column="g_sku_desc"/>
             <result property="colorId" column="g_color_id"/>
             <result property="priceId" column="g_price_id"/>
-            <result property="stockId" column="g_Stock_id"/>
             <result property="salesVolume" column="g_sales_volume"/>
             <result property="companyId" column="g_company_id"/>
             <result property="manufacturer" column="g_manufacturer"/>
@@ -60,6 +59,14 @@
             <result property="userRenewId" column="g_user_renewId"/>
             <result property="renewTime" column="g_renew_time"/>
             <result property="logic_status" column="g_logic_status"/>
+            <association property="color" javaType="com.zb.pojo.Color">
+                <result property="id" column="co_id"/>
+                <result property="colorName" column="co_color_name"/>
+                <result property="createUserId" column="co_create_user_id"/>
+                <result property="createTime" column="co_create_time"/>
+                <result property="userRenewId" column="co_user_renew_id"/>
+                <result property="renewTime" column="co_renew_time"/>
+            </association>
         </association>
         <association property="createUser" javaType="com.zb.pojo.User">
             <result property="id" column="c_id"/>
@@ -127,6 +134,11 @@
         </trim>
         where id = #{id};
     </update>
+    <delete id="deleteByPurchaseId">
+        delete
+        from detailed_purchase
+        where purchase_id = #{purchaseId};
+    </delete>
 
 
     <select id="selectById" resultMap="detailedPurchaseMap">
@@ -175,7 +187,6 @@
                g.sku_desc        as g_sku_desc,
                g.color_id        as g_color_id,
                g.price_id        as g_price_id,
-               g.Stock_id        as g_Stock_id,
                g.sales_volume    as g_sales_volume,
                g.company_id      as g_company_id,
                g.manufacturer    as g_manufacturer,
@@ -267,7 +278,6 @@
                g.sku_desc        as g_sku_desc,
                g.color_id        as g_color_id,
                g.price_id        as g_price_id,
-               g.Stock_id        as g_Stock_id,
                g.sales_volume    as g_sales_volume,
                g.company_id      as g_company_id,
                g.manufacturer    as g_manufacturer,
@@ -277,6 +287,13 @@
                g.user_renewId    as g_user_renewId,
                g.renew_time      as g_renew_time,
                g.logic_status    as g_logic_status,
+
+               co.id             as co_id,
+               co.color_name     as co_color_name,
+               co.create_user_id as co_create_user_id,
+               co.create_time    as co_create_time,
+               co.user_renew_id  as co_user_renew_id,
+               co.renew_time     as co_renew_time,
 
                c.id              as c_id,
                c.role_id         as c_role_id,
@@ -303,9 +320,10 @@
                  left join purchase p on d.purchase_id = p.id
                  left join vendor v on d.vendor_id = v.id
                  left join goodsku g on d.sku_id = g.id
+                 left join color co on g.color_id = co.id
                  left join user c on c.id = d.create_user_id
                  left join user u on u.id = d.user_renew_id
         where d.purchase_id = #{purchaseId}
-                 and d.logic_del = 0;
+          and d.logic_del = 0;
     </select>
 </mapper>

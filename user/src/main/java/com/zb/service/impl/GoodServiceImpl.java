@@ -3,48 +3,51 @@ package com.zb.service.impl;
 
 import com.zb.mapper.GoodMapper;
 import com.zb.pojo.*;
-
 import com.zb.service.GoodService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
+
 @Service
 @Transactional
 public class GoodServiceImpl implements GoodService {
+
+
+    @Resource
+    private GoodMapper goodMapper;
+
+
     /**
-     * 查找价格id
-     *
-     * @param price
+     * 查询商品
      * @return
      */
     @Override
-    public int findPrice(BigDecimal price) {
-        return goodMapper.findPrice(price);
+    public List<Goodsku> listGood() {
+        return goodMapper.listGood();
     }
 
     /**
-     * 查询所有商品
+     * 查询商品spu
      *
      * @return
      */
-
-    @Autowired(required = false)
-    private GoodMapper goodMapper;
+    @Override
+    public List<Goodspu> listGoodSpu() {
+        return goodMapper.listGoodSpu();
+    }
 
     /**
      * 根据商品名或分类查询
      *
      *
      * @param skuName
-     * @param sortName
      * @return
      */
     @Override
-    public List<Goodsku> fingByskuNameorSortName(String skuName, String sortName) {
+    public List<Goodsku> fingByskuNameorSortName(String skuName,String sortName) {
         return goodMapper.fingByskuNameorSortName(skuName,sortName);
     }
 
@@ -80,6 +83,47 @@ public class GoodServiceImpl implements GoodService {
     }
 
     /**
+     * 添加颜色
+     *
+     * @param c
+     * @return
+     */
+    @Override
+    public int insertColor(Color c) {
+        return goodMapper.insertColor(c);
+    }
+
+    /**
+     * 查询全部颜色
+     *
+     * @return
+     */
+    @Override
+    public List<Color> listColor() {
+        return goodMapper.listColor();
+    }
+
+    /**
+     * 查询全部分类
+     *
+     * @return
+     */
+    @Override
+    public List<Sort> listSort() {
+        return goodMapper.listSort();
+    }
+
+    /**
+     * 查询全部单位
+     *
+     * @return
+     */
+    @Override
+    public List<Units> listUnits() {
+        return goodMapper.listUnits();
+    }
+
+    /**
      * 向spu添加数据
      *
      * @param sp
@@ -90,10 +134,17 @@ public class GoodServiceImpl implements GoodService {
         return goodMapper.insertGoodspu(sp);
     }
 
+    /**
+     * 查找商品spu名
+     *
+     * @param id
+     * @return
+     */
     @Override
-    public List<Goodsku> listGood() {
-        return goodMapper.listGood();
+    public Goodspu findGoodName(Long id) {
+        return goodMapper.findGoodName(id);
     }
+
 
     /**
      * 修改颜色
@@ -106,27 +157,9 @@ public class GoodServiceImpl implements GoodService {
         return goodMapper.updateColor(c);
     }
 
-    /**
-     * 修改经销商
-     *
-     * @param v
-     * @return
-     */
-    @Override
-    public int updateVendor(Vendor v ) {
-        return goodMapper.updateVendor(v);
-    }
 
-    /**
-     * 修改库存
-     *
-     * @param w
-     * @return
-     */
-    @Override
-    public int updateWarehouse(Warehouse w) {
-        return goodMapper.updateWarehouse(w);
-    }
+
+
 
     /**
      * 查找价格
@@ -140,48 +173,16 @@ public class GoodServiceImpl implements GoodService {
     }
 
     /**
-     * 查找库存
+     * 查找价格id
      *
-     * @param stockNumber
+     * @param price
      * @return
      */
     @Override
-    public int findWarehouseTwo(Integer stockNumber) {
-        return goodMapper.findWarehouseTwo(stockNumber);
+    public int findPrice(BigDecimal price) {
+        return goodMapper.findPrice(price);
     }
 
-    /**
-     * 查找经销商
-     *
-     * @param vendorName
-     * @return
-     */
-    @Override
-    public Vendor findVendorTwo(String vendorName) {
-        return goodMapper.findVendorTwo(vendorName);
-    }
-
-    /**
-     * 查找经销商
-     *
-     * @param vendorName
-     * @return
-     */
-    @Override
-    public int findVendor(String vendorName) {
-        return goodMapper.findVendor(vendorName);
-    }
-
-    /**
-     * 查找库存
-     *
-     * @param stockNumber
-     * @return
-     */
-    @Override
-    public Warehouse findWarehouse(Integer stockNumber) {
-        return goodMapper.findWarehouse(stockNumber);
-    }
 
     /**
      * 修改单位
@@ -233,7 +234,7 @@ public class GoodServiceImpl implements GoodService {
      * @return
      */
     @Override
-    public Goodspu findspu(Integer id) {
+    public Goodspu findspu(Long id) {
         return goodMapper.findspu(id);
     }
 
@@ -256,17 +257,6 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public int updateGood(Goodsku g) {
         return goodMapper.updateGood(g);
-    }
-
-    /**
-     * 添加供应商
-     *
-     * @param v
-     * @return
-     */
-    @Override
-    public int insertvendor(Vendor v) {
-        return goodMapper.insertvendor(v);
     }
 
 
@@ -304,6 +294,39 @@ public class GoodServiceImpl implements GoodService {
     }
 
     /**
+     * 添加单位
+     *
+     * @param u
+     * @return
+     */
+    @Override
+    public int insertUnits(Units u) {
+        return goodMapper.insertUnits(u);
+    }
+
+    /**
+     * 查找单位
+     *
+     * @param unitsName
+     * @return
+     */
+    @Override
+    public Units findUnitsTwo(String unitsName) {
+        return goodMapper.findUnitsTwo(unitsName);
+    }
+
+    /**
+     * 查找所属分类
+     *
+     * @param sortName
+     * @return
+     */
+    @Override
+    public Sort findSortTwo(String sortName) {
+        return goodMapper.findSortTwo(sortName);
+    }
+
+    /**
      * 添加分类
      *
      * @param s
@@ -315,14 +338,14 @@ public class GoodServiceImpl implements GoodService {
     }
 
     /**
-     * 添加库存
+     * 根据颜色查找
      *
-     * @param w
+     * @param colorName
      * @return
      */
     @Override
-    public int insertStock(Warehouse w) {
-        return goodMapper.insertStock(w);
+    public Color findColorTwo(String colorName) {
+        return goodMapper.findColorTwo(colorName);
     }
 
     /**
@@ -334,6 +357,48 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public int insertGood(Goodsku g) {
         return goodMapper.insertGood(g);
+    }
+
+    /**
+     * 查找sku表信息用来跟添加作比较
+     *
+     * @return
+     */
+    @Override
+    public List<Goodsku> listGoodskuMessage() {
+        return goodMapper.listGoodskuMessage();
+    }
+
+    /**
+     * 查找sku表
+     *
+     * @param skuName
+     * @return
+     */
+    @Override
+    public Goodsku listBySkuName(String skuName,Long colorId,Long priceId) {
+        return goodMapper.listBySkuName(skuName,colorId,priceId);
+    }
+
+    /**
+     * 查找sku表
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Goodsku listByid(Long id) {
+        return goodMapper.listByid(id);
+    }
+
+    /**
+     * 查找spu表信息用来跟添加作比较
+     *
+     * @return
+     */
+    @Override
+    public List<Goodspu> listGoodspu() {
+        return goodMapper.listGoodspu();
     }
 
 

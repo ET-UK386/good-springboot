@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -40,9 +41,18 @@ public class DetailedPurchaseServiceImpl implements DetailedPurchaseService {
         return 1;
     }
 
+    public Integer add(DetailedPurchase detailedPurchase){
+        // 通过UUID获取批次
+        String substring = UUID.randomUUID().toString().substring(0, 6);
+
+        detailedPurchase.setBatch(substring);
+
+        return detailedPurchaseMapper.insert(detailedPurchase);
+    }
+
 
     @Override
-    public Integer add(List<DetailedPurchase> list) {
+    public Integer addDetailedPurchaseAndPurchase(List<DetailedPurchase> list) {
 
         // 获取添加几件商品
         int size = list.size();
@@ -66,7 +76,7 @@ public class DetailedPurchaseServiceImpl implements DetailedPurchaseService {
                 // 计算总进货价
                 sum = sum.add(price.multiply(num));
                 // 添加详细订单
-                Integer insert1 = detailedPurchaseMapper.insert(detailedPurchase);
+                Integer insert1 = this.add(detailedPurchase);
                 if (insert1 <= 0) {
                     return -1;
                 }
@@ -88,5 +98,25 @@ public class DetailedPurchaseServiceImpl implements DetailedPurchaseService {
     @Override
     public List<DetailedPurchase> selectByPurchaseId(Long purchaseId) {
         return detailedPurchaseMapper.selectByPurchaseId(purchaseId);
+    }
+
+    @Override
+    public Integer deleteByPurchaseId(Long purchaseId) {
+        return detailedPurchaseMapper.deleteByPurchaseId(purchaseId);
+    }
+
+    @Override
+    public Integer bulkAdd(List<DetailedPurchase> list,Long purchaseId) {
+            // 循环添加详细订单的流程订单ID 并计算总价格
+            for (DetailedPurchase detailedPurchase : list) {
+                // 设置PurchaseId
+                detailedPurchase.setPurchaseId(purchaseId);
+                // 添加详细订单
+                Integer insert1 = this.add(detailedPurchase);
+                if (insert1 <= 0) {
+                    return -1;
+                }
+            }
+        return 1;
     }
 }
