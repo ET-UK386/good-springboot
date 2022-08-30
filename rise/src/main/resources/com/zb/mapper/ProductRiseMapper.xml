@@ -1,0 +1,10 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.ProductRiseMapper">
+
+    <insert id="add"  useGeneratedKeys="true" keyProperty="id">
+        insert into product_rise (id, sku_id, number, status, price_id, user_id)
+        values (default, #{skuId}, #{number}, #{status}, #{priceId}, #{userId});
+    </insert>
+</mapper>
