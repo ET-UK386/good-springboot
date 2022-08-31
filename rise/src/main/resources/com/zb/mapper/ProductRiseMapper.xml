@@ -3,8 +3,45 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zb.mapper.ProductRiseMapper">
 
-    <insert id="add"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into product_rise (id, sku_id, number, status, price_id, user_id)
         values (default, #{skuId}, #{number}, #{status}, #{priceId}, #{userId});
     </insert>
+    <select id="findInSellingGoodsAll" resultType="com.zb.pojo.InSellingGoods">
+        select `pr`.`id`              AS `pr_id`,
+               `pr`.`sku_id`          AS `pr_sku_id`,
+               `pr`.`number`          AS `pr_number`,
+               `pr`.`status`          AS `pr_status`,
+               `pr`.`price_id`        AS `pr_price_id`,
+               `pr`.`user_id`         AS `pr_user_id`,
+               `p`.`id`               AS `p_id`,
+               `p`.`sku_id`           AS `p_sku_id`,
+               `p`.`price`            AS `p_price`,
+               `sku`.`id`             AS `sku_id`,
+               `sku`.`spu_id`         AS `sku_spu_id`,
+               `sku`.`sku_name`       AS `sku_sku_name`,
+               `sku`.`sku_desc`       AS `sku_sku_desc`,
+               `sku`.`color_id`       AS `sku_color_id`,
+               `sku`.`price_id`       AS `sku_price_id`,
+               `sku`.`Stock_id`       AS `sku_Stock_id`,
+               `sku`.`sales_volume`   AS `sku_sales_volume`,
+               `sku`.`company_id`     AS `sku_company_id`,
+               `sku`.`manufacturer`   AS `sku_manufacturer`,
+               `sku`.`Supplier_id`    AS `sku_Supplier_id`,
+               `ifk`.`id`             AS `ifk_id`,
+               `ifk`.`sku_id`         AS `ifk_sku_id`,
+               `ifk`.`spu_id`         AS `ifk_spu_id`,
+               `ifk`.`images_path_id` AS `ifk_images_path_id`,
+               `ifk`.`is_look`        AS `ifk_is_look`,
+               `ip`.`images_name`     AS `ip_images_name`,
+               `ip`.`path`            AS `ip_path`,
+               `ip`.`is_look`         AS `ip_is_look`,
+               `ip`.`id`              AS `ip_id`
+        from `product_rise` `pr`
+                 left join `price` `p` on `pr`.`price_id` = `p`.`id`
+                 left join `goodsku` `sku` on `pr`.`sku_id` = `sku`.`id`
+                 left join `images_fk` `ifk` on `sku`.`id` = `ifk`.`sku_id`
+                 left join `images_path` `ip` on `ifk`.`images_path_id` = `ip`.`id`
+        group by `pr`.`id`
+    </select>
 </mapper>
