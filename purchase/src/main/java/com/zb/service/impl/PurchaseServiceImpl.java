@@ -20,8 +20,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Autowired
     private PurchaseMapper purchaseMapper;
+
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+
+
     @Autowired
     private DetailedPurchaseService detailedPurchaseService;
 
@@ -61,7 +64,7 @@ public class PurchaseServiceImpl implements PurchaseService {
             }
         } else if (integer <= 0) {
             return -1;
-        }else if(purchase.getExamineStatus() == 2){
+        } else if (purchase.getExamineStatus() == 2) {
             return 0;
         }
 
@@ -72,16 +75,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Integer modifyPurchase(Long purchaseId, List<DetailedPurchase> list) {
         // 修改流程状态 改为0,并清空审核意见
         Integer integer = purchaseMapper.updateStatusById(purchaseId);
-        if(integer <= 0){
+        if (integer <= 0) {
             return -1;
         }
         // 删除该流程下的详细订单
-        if(list.size() > 0){
+        if (list.size() > 0) {
             Integer integer1 = detailedPurchaseService.deleteByPurchaseId(purchaseId);
         }
         // 创建详细订单
         Integer integer2 = detailedPurchaseService.bulkAdd(list, purchaseId);
-        if(integer2 <= 0){
+        if (integer2 <= 0) {
             return -1;
         }
         return 1;

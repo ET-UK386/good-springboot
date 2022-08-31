@@ -32,6 +32,7 @@ public interface PurchaseMapper {
 
     /**
      * 根据id修改Purchase
+     *
      * @return 受影响行数
      */
     Integer updateById(Purchase purchase);
@@ -45,6 +46,7 @@ public interface PurchaseMapper {
     Integer insert(Purchase purchase);
 
     /**
+
      * 单纯根据id修改状态
      * @param purchaseId
      * @return

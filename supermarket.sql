@@ -25,9 +25,9 @@ CREATE TABLE `color`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键 自增',
   `color_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '颜色',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -62,9 +62,9 @@ CREATE TABLE `detailed_purchase`  (
   `status` int(11) NULL DEFAULT NULL COMMENT '1: 同意， 2：代表驳回， 3：供应商没货',
   `logic_del` int(1) NULL DEFAULT 0 COMMENT '逻辑删除',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
@@ -95,9 +95,9 @@ CREATE TABLE `detailed_warehousing`  (
   `status` int(11) NULL DEFAULT NULL COMMENT '1: 同意， 2：代表驳回， 3：供应商没货',
   `logic_del` int(1) NULL DEFAULT 0 COMMENT '逻辑删除',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
@@ -129,9 +129,9 @@ CREATE TABLE `goodsku`  (
   `manufacturer` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生产商',
   `Supplier_id` int(11) NULL DEFAULT NULL COMMENT '供应商id 与供应商相关联',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renewId` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `logic_status` int(1) NULL DEFAULT 0,
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -165,9 +165,9 @@ CREATE TABLE `goodspu`  (
   `sort_id` int(11) NULL DEFAULT NULL COMMENT '所属分类id 关联分类表',
   `status` int(11) NULL DEFAULT 0 COMMENT '上架状态 0上架 1下架 2售罄',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 跟用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 跟用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -264,14 +264,14 @@ CREATE TABLE `inventory_verification`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `warehouse_id` int(11) NULL DEFAULT NULL COMMENT '入库id',
   `check_user_id` int(11) NULL DEFAULT NULL COMMENT '盘点人id',
-  `check_time` datetime(0) NULL DEFAULT NULL COMMENT '盘点时间',
+  `check_time` datetime NULL DEFAULT NULL COMMENT '盘点时间',
   `status` int(11) NULL DEFAULT NULL COMMENT '状态，正常\r\n/\r\n与商品库存不对',
   `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
   `discrepancy` int(11) NULL DEFAULT NULL COMMENT '与实际库存差异\r\n对一个		+1\r\n\r\n少一个		 -1',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人ID',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '修改人ID',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -295,7 +295,6 @@ CREATE TABLE `menu`  (
 
 -- ----------------------------
 -- Records of menu
--- ----------------------------
 INSERT INTO `menu` VALUES (1, '首页', NULL, 0, '/Home', 'el-icon-s-home');
 INSERT INTO `menu` VALUES (2, '零售', NULL, 0, '/Retail', 'el-icon-goods');
 INSERT INTO `menu` VALUES (3, '采购', NULL, 0, '/Purchase', 'el-icon-s-shop');
@@ -304,25 +303,26 @@ INSERT INTO `menu` VALUES (5, '商品管理', NULL, 0, '/Commodity', 'el-icon-s-
 INSERT INTO `menu` VALUES (6, '财务', NULL, 0, '/Finance', 'el-icon-s-finance');
 INSERT INTO `menu` VALUES (7, '供应商', NULL, 0, '/Supplier', 'el-icon-s-custom');
 INSERT INTO `menu` VALUES (8, '员工管理', NULL, 0, '/Employee', 'el-icon-user');
-INSERT INTO `menu` VALUES (9, '上架管理', NULL, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (9, '上架管理', NULL, 0, '/Goodrise', 'el-icon-document-add');
 INSERT INTO `menu` VALUES (101, '零售出库', '2', 1, '/Retail/Outbound', NULL);
 INSERT INTO `menu` VALUES (102, '零售退货', '2', 2, '/Retail/Returns', NULL);
-INSERT INTO `menu` VALUES (103, '审核列表', '3', 1, '/Purchase/Detail', NULL);
-INSERT INTO `menu` VALUES (104, '流程列表', '3', 2, '/Purchase/Statistics', NULL);
-INSERT INTO `menu` VALUES (105, '流程列表', '4', 1, '/Warehouse/Detail', NULL);
-INSERT INTO `menu` VALUES (106, '商品信息', '5', 1, '/Commodity/Message', NULL);
-INSERT INTO `menu` VALUES (107, '收入', '6', 1, '/Finance/Income', NULL);
-INSERT INTO `menu` VALUES (108, '支出', '6', 2, '/Finance/Expend', NULL);
-INSERT INTO `menu` VALUES (109, '供应商信息', '7', 1, '/Supplier/Message', NULL);
-INSERT INTO `menu` VALUES (110, '收银员', '8', 1, '/Employee/Cashier', NULL);
-INSERT INTO `menu` VALUES (111, '验货员', '8', 2, '/Employee/Inspector', NULL);
-INSERT INTO `menu` VALUES (112, '理货员', '8', 3, '/Employee/TallyClerk', NULL);
-INSERT INTO `menu` VALUES (113, '验货审核', '4', 2, '/Warehouse/CheckAudit', NULL);
-INSERT INTO `menu` VALUES (114, '入库审核', '4', 3, '/Warehouse/StorageAudit', NULL);
-INSERT INTO `menu` VALUES (115, '库存列表', '4', 4, '/Warehouse/warehouseList', NULL);
-INSERT INTO `menu` VALUES (116, '采购商品', '3', 1, '/Purchase/Stock', NULL);
-INSERT INTO `menu` VALUES (117, '商品spu信息', '5', 2, '/Commodity/goodspu', NULL);
-INSERT INTO `menu` VALUES (118, '商品上架', '9', 1, '/goodrise', NULL);
+INSERT INTO `menu` VALUES (103, '订单详情', '2', 3, '/Retail/LineItem', NULL);
+INSERT INTO `menu` VALUES (104, '采购商品', '3', 1, '/Purchase/Stock', NULL);
+INSERT INTO `menu` VALUES (105, '待审列表', '3', 1, '/Purchase/Detail', NULL);
+INSERT INTO `menu` VALUES (106, '流程列表', '3', 2, '/Purchase/Statistics', NULL);
+INSERT INTO `menu` VALUES (107, '流程列表', '4', 1, '/Warehouse/Detail', NULL);
+INSERT INTO `menu` VALUES (108, '商品信息', '5', 1, '/Commodity/Message', NULL);
+INSERT INTO `menu` VALUES (109, '收入', '6', 1, '/Finance/Income', NULL);
+INSERT INTO `menu` VALUES (110, '支出', '6', 2, '/Finance/Expend', NULL);
+INSERT INTO `menu` VALUES (111, '供应商信息', '7', 1, '/Supplier/Message', NULL);
+INSERT INTO `menu` VALUES (112, '收银员', '8', 1, '/Employee/Cashier', NULL);
+INSERT INTO `menu` VALUES (113, '验货员', '8', 2, '/Employee/Inspector', NULL);
+INSERT INTO `menu` VALUES (114, '理货员', '8', 3, '/Employee/TallyClerk', NULL);
+INSERT INTO `menu` VALUES (115, '验货审核', '4', 2, '/Warehouse/CheckAudit', NULL);
+INSERT INTO `menu` VALUES (116, '入库审核', '4', 3, '/Warehouse/StorageAudit', NULL);
+INSERT INTO `menu` VALUES (117, '库存列表', '4', 4, '/Warehouse/WarehouseList', NULL);
+INSERT INTO `menu` VALUES (118, '商品spu信息', '5', 2, '/Commodity/Goodspu', NULL);
+INSERT INTO `menu` VALUES (119, '商品上架', '9', 1, '/Goodrise/Goodrise', NULL);
 
 -- ----------------------------
 -- Table structure for power
@@ -333,9 +333,9 @@ CREATE TABLE `power`  (
   `role_id` int(11) NULL DEFAULT NULL COMMENT '角色id',
   `can_use` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '可使用功能',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 跟用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 跟用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -360,9 +360,9 @@ CREATE TABLE `price`  (
   `sku_id` int(11) NULL DEFAULT NULL COMMENT '商品skuid goodsku表关联',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -418,15 +418,15 @@ CREATE TABLE `purchase`  (
   `purchase_desc` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '进货说明',
   `purchase_number` int(11) NULL DEFAULT NULL COMMENT '进货数量',
   `examine_user_id` int(11) NULL DEFAULT NULL COMMENT '审核人id 与用户表相关联',
-  `examine_time` datetime(0) NULL DEFAULT NULL COMMENT '审核时间',
+  `examine_time` datetime NULL DEFAULT NULL COMMENT '审核时间',
   `examine_opinion` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核人意见',
   `examine_status` int(11) NULL DEFAULT NULL COMMENT '流程状态状态    0：审核中，1：审核完成， 2：审核不通过，3：审核驳回需要修改',
   `sum_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '总价',
   `logic_del` int(1) NULL DEFAULT 0 COMMENT '逻辑删除',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
@@ -451,9 +451,9 @@ CREATE TABLE `role`  (
   `user_power` int(32) NULL DEFAULT NULL COMMENT '用户权限',
   `parent_id` int(11) NULL DEFAULT NULL COMMENT '所属上级',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 跟用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 跟用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -500,9 +500,9 @@ CREATE TABLE `sort`  (
   `parent_id` int(11) NULL DEFAULT NULL COMMENT '父级id',
   `module` int(11) NULL DEFAULT NULL COMMENT '所属模块 0家电 1手机 2日用品...',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -527,9 +527,9 @@ CREATE TABLE `units`  (
   `units_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '单位名称',
   `module` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '属于什么计量单位',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -556,9 +556,9 @@ CREATE TABLE `user`  (
   `address` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
   `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 跟用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 跟用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `con1` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段1',
   `con2` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段2',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -603,9 +603,9 @@ CREATE TABLE `vendor`  (
   `principal` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '负责人',
   `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `purchase_time` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
   PRIMARY KEY (`id`) USING BTREE
@@ -640,9 +640,9 @@ CREATE TABLE `warehouse`  (
   `warehouse_address` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '仓库地址',
   `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '仓库练习电话',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `sku_id` int(11) NULL DEFAULT NULL COMMENT '商品skuID ',
   `batch` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '批次',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',
@@ -665,15 +665,15 @@ CREATE TABLE `warehousing`  (
   `purchase_id` int(11) NULL DEFAULT NULL COMMENT '进货单id 与进货表相关联',
   `detailed_purchase_id` int(11) NULL DEFAULT NULL COMMENT '进货详细单',
   `examine_user_id` int(11) NULL DEFAULT NULL COMMENT '审核人id 与用户表相关联',
-  `examine_time` datetime(0) NULL DEFAULT NULL COMMENT '审核时间',
+  `examine_time` datetime NULL DEFAULT NULL COMMENT '审核时间',
   `Warehousing_user_id` int(11) NULL DEFAULT NULL COMMENT '入库人id 与用户表相关联',
-  `Warehousing_time` datetime(0) NULL DEFAULT NULL COMMENT '入库时间',
+  `Warehousing_time` datetime NULL DEFAULT NULL COMMENT '入库时间',
   `Warehousing_number` int(11) NULL DEFAULT NULL COMMENT '入库数量',
   `status` int(11) NULL DEFAULT NULL COMMENT '入库明细',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人id 与用户表相关联',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_renew_id` int(11) NULL DEFAULT NULL COMMENT '更新人id 与用户表相关联',
-  `renew_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `renew_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `signing_details` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '签收明细',
   `inventory_details` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '入库明细',
   `con3` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备用字段3',

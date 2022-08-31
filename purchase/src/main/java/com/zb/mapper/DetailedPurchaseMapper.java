@@ -15,6 +15,7 @@ public interface DetailedPurchaseMapper {
 
     /**
      * 根据id查询
+     *
      * @param id id
      * @return 实体类
      */
@@ -22,6 +23,7 @@ public interface DetailedPurchaseMapper {
 
     /**
      * 根据purchaseId查询
+     *
      * @param purchaseId id
      * @return 实体类
      */
@@ -29,6 +31,7 @@ public interface DetailedPurchaseMapper {
 
     /**
      * 根据id修改
+     *
      * @param id id
      * @return 搜影响行数
      */
@@ -36,6 +39,7 @@ public interface DetailedPurchaseMapper {
 
     /**
      * 添加
+     *
      * @param detailedPurchase 实体类
      * @return 搜影响行数
      */
@@ -43,6 +47,7 @@ public interface DetailedPurchaseMapper {
 
     /**
      * 查找所有经销商
+     *
      * @return
      */
     List<Vendor> selectVendor();

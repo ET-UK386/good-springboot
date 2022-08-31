@@ -27,5 +27,6 @@ public interface PurchaseService {
 
     Integer audit(Purchase purchase);
 
+
     Integer modifyPurchase(Long purchaseId, List<DetailedPurchase> list);
 }

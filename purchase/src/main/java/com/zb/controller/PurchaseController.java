@@ -92,6 +92,7 @@ public class PurchaseController {
         List<Purchase> all = purchaseService.findPurchaseNotReviewed();
         return new Result().setCode(200).setMessage("success").setData(all);
     }
+
     /**
      * 查询已审核进货流程表
      *
@@ -123,25 +124,27 @@ public class PurchaseController {
     @PutMapping("purchaseAudit")
     public Result purchaseAudit(@RequestBody Purchase purchase) {
 
-        if(!(purchase.getExamineStatus() == 1 || purchase.getExamineStatus() == 2)){
+        if (!(purchase.getExamineStatus() == 1 || purchase.getExamineStatus() == 2)) {
             return new Result().setMessage("流程状态不对，请确认").setCode(404);
         }
+
 
         // 调用service实现审核
         Integer audit = purchaseService.audit(purchase);
         if (audit == -1) {
             return new Result().setMessage("error").setCode(500);
-        }else if(audit == 0){
+        } else if (audit == 0) {
             return new Result().setCode(404).setMessage("success,审核不通过").setData(purchase);
         }
         return new Result().setCode(200).setMessage("success，审核通过").setData(purchase);
     }
 
+
     /**
      * 修改进货流程
      */
     @PutMapping("modifyPurchase")
-    public Result modifyPurchase(@RequestBody Map<String, Object> map){
+    public Result modifyPurchase(@RequestBody Map<String, Object> map) {
 
         // 获取前端值
         Long purchaseId = ((Integer) map.get("purchaseId")).longValue();
