@@ -2,6 +2,7 @@ package com.zb.service.impl;
 
 import com.zb.mapper.PriceMapper;
 import com.zb.mapper.ProductRiseMapper;
+import com.zb.pojo.InSellingGoods;
 import com.zb.pojo.Price;
 import com.zb.pojo.ProductRise;
 import com.zb.pojo.front.Goodrise;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 @Service
 @Transactional
@@ -52,5 +54,10 @@ public class GoodriseServiceImpl implements IGoodriseService {
         }
 
         return true;
+    }
+
+    @Override
+    public List<InSellingGoods> findInSellingGoodsAll() {
+        return productRiseMapper.findInSellingGoodsAll();
     }
 }

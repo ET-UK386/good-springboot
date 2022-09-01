@@ -1,12 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zb.mapper.PriceMapper">
-    <insert id="addPrice"  useGeneratedKeys="true" keyProperty="id">
-        insert into price (id, sku_id, price,create_time,create_user_id)
-        values (default, #{skuId}, #{price}, now(),1);
+    <insert id="addPrice" useGeneratedKeys="true" keyProperty="id">
+        insert into price (id, sku_id, price, create_time, create_user_id)
+        values (default, #{skuId}, #{price}, now(), 1);
     </insert>
 
     <select id="listPrice" resultType="com.zb.pojo.Price">
-        select * from price where sku_id=#{skuId};
+        select *
+        from price
+        where sku_id = #{skuId};
     </select>
+
+
+    <select id="1">
+        SELECT pr.id              as pr_id,
+               pr.sku_id          as pr_sku_id,
+               pr.number          as pr_number,
+               pr.status          as pr_status,
+               pr.price_id        as pr_price_id,
+               pr.user_id         as pr_user_id,
+               p.id               as p_id,
+               p.sku_id           as p_sku_id,
+               MIN(p.price)       as p_price,
+               sku.id             as sku_id,
+               sku.spu_id         as sku_spu_id,
+               sku.sku_name       as sku_sku_name,
+               sku.sku_desc       as sku_sku_desc,
+               sku.color_id       as sku_color_id,
+               sku.price_id       as sku_price_id,
+               sku.Stock_id       as sku_Stock_id,
+               sku.sales_volume   as sku_sales_volume,
+               sku.company_id     as sku_company_id,
+               sku.manufacturer   as sku_manufacturer,
+               sku.Supplier_id    as sku_Supplier_id,
+               spu.id             as spu_id,
+               spu.good_name      as spu_good_name,
+               spu.brand          as spu_brand,
+               spu.sort_id        as spu_sort_id,
+               spu.status         as spu_status,
+               ifk.id             as ifk_id,
+               ifk.sku_id         as ifk_sku_id,
+               ifk.spu_id         as ifk_spu_id,
+               ifk.images_path_id as ifk_images_path_id,
+               ifk.is_look        as ifk_is_look,
+               ip.images_name     as ip_images_name,
+               ip.path            as ip_path,
+               ip.is_look         as ip_is_look,
+               ip.id              as ip_id
+        FROM product_rise AS pr
+                 LEFT JOIN price AS p ON pr.price_id = p.id
+                 LEFT JOIN goodsku AS sku ON pr.sku_id = sku.id
+                 LEFT JOIN goodspu AS spu ON sku.spu_id = spu.id
+                 LEFT JOIN images_fk AS ifk ON spu.id = ifk.spu_id
+                 LEFT JOIN images_path AS ip ON ifk.images_path_id = ip.id
+        GROUP BY pr.sku_id
+    </select>
+
 </mapper>
