@@ -13,6 +13,7 @@
         <module>upload</module>
         <module>purchase</module>
         <module>rise</module>
+        <module>retail</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

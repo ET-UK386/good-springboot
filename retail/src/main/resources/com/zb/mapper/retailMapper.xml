@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.mapper.retailMapper">
+
+    <resultMap id="listSalesDetails" type="com.zb.pojo.SalesDetails">
+        <result property="id" column="sd_id"/>
+        <result property="batchNumber" column="sd_batch_number"/>
+        <result property="number" column="sd_number"/>
+        <result property="price" column="sd_price"/>
+        <result property="state" column="sd_state"/>
+
+        <association property="goodsku" javaType="com.zb.pojo.Goodsku">
+            <result property="skuName" column="gs_sku_name"/>
+        </association>
+
+        <association property="vendor" javaType="com.zb.pojo.Vendor">
+            <result property="vendorName" column="ve_vendor_name"/>
+        </association>
+    </resultMap>
+
+    <select id="listSalesDetails" resultMap="listSalesDetails">
+        SELECT
+            sd.id AS sd_id,
+            sd.batch_number AS sd_batch_number,
+            sd.number AS sd_number,
+            sd.price AS sd_price,
+            gs.sku_name AS gs_sku_name,
+            ve.vendor_name AS ve_vendor_name,
+            sd.state AS sd_state
+        FROM
+            `sales_details` AS sd
+            INNER JOIN `goodsku` AS gs ON sd.sku_id = gs.id
+            INNER JOIN vendor AS ve ON gs.Supplier_id = ve.id
+    </select>
+</mapper>
