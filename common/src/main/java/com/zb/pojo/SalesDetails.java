@@ -45,6 +45,19 @@ public class SalesDetails implements Serializable {
      * 状态，0：未支付，1：未收货（运送途中），2：签收成功
      */
     private String state;
+    /**
+     * 付款时间
+     */
+    private Date payTime;
+    /**
+     * 发货时间
+     */
+    private Date shipmentsTime;
+    /**
+     * 成交时间
+     */
+    private Date finishTime;
+
 
     /**
      * 关联sku

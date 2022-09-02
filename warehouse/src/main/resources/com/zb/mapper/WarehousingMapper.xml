@@ -590,7 +590,7 @@
         left join goodsku sku on dp.sku_id = sku.id
         left join goodspu spu on sku.spu_id = spu.id
         <where>
-            <foreach collection="status" item="stu" open="(" separator=" or " close=")">
+            <foreach collection="status" item="stu" open="(" separator="or" close=")">
                 w.status = #{stu}
             </foreach>
         </where>

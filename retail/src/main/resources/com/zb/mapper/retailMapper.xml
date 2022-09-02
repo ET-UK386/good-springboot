@@ -8,7 +8,9 @@
         <result property="number" column="sd_number"/>
         <result property="price" column="sd_price"/>
         <result property="state" column="sd_state"/>
-
+        <result property="payTime" column="sd_pay_time"/>
+        <result property="shipmentsTime" column="sd_shipments_time"/>
+        <result property="finishTime" column="sd_finish_time"/>
         <association property="goodsku" javaType="com.zb.pojo.Goodsku">
             <result property="skuName" column="gs_sku_name"/>
         </association>
@@ -31,5 +33,41 @@
             `sales_details` AS sd
             INNER JOIN `goodsku` AS gs ON sd.sku_id = gs.id
             INNER JOIN vendor AS ve ON gs.Supplier_id = ve.id
+    </select>
+    <select id="listSalesDetailsByName" resultMap="listSalesDetails">
+        SELECT
+            sd.id AS sd_id,
+            sd.batch_number AS sd_batch_number,
+            sd.number AS sd_number,
+            sd.price AS sd_price,
+            gs.sku_name AS gs_sku_name,
+            ve.vendor_name AS ve_vendor_name,
+            sd.state AS sd_state,
+            sd.pay_time AS sd_pay_time,
+            sd.shipments_time AS sd_shipments_time,
+            sd.finish_time AS sd_finish_time
+        FROM
+            `sales_details` AS sd
+            INNER JOIN `goodsku` AS gs ON sd.sku_id = gs.id
+            INNER JOIN vendor AS ve ON gs.Supplier_id = ve.id
+			AND gs.sku_name LIKE CONCAT('%',#{name},'%')
+    </select>
+    <select id="listSalesDetailsById" resultMap="listSalesDetails">
+SELECT
+            sd.id AS sd_id,
+            sd.batch_number AS sd_batch_number,
+            sd.number AS sd_number,
+            sd.price AS sd_price,
+            gs.sku_name AS gs_sku_name,
+            ve.vendor_name AS ve_vendor_name,
+            sd.state AS sd_state,
+            sd.pay_time AS sd_pay_time,
+            sd.shipments_time AS sd_shipments_time,
+            sd.finish_time AS sd_finish_time
+        FROM
+            `sales_details` AS sd
+            INNER JOIN `goodsku` AS gs ON sd.sku_id = gs.id
+            INNER JOIN vendor AS ve ON gs.Supplier_id = ve.id
+			AND sd.id = #{id}
     </select>
 </mapper>

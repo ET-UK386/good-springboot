@@ -15,6 +15,16 @@ public class retailServiceImpl implements retailService {
     private com.zb.mapper.retailMapper retailMapper;
 
     @Override
+    public List<SalesDetails> listSalesDetailsByName(String name) {
+        return retailMapper.listSalesDetailsByName(name);
+    }
+
+    @Override
+    public List<SalesDetails> listSalesDetailsById(Integer id) {
+        return retailMapper.listSalesDetailsById(id);
+    }
+
+    @Override
     public List<SalesDetails> listSalesDetails() {
         return retailMapper.listSalesDetails();
     }
