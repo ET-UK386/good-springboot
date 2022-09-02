@@ -63,7 +63,7 @@ public class retailController {
      */
     @RequestMapping("updateSalesDetailsById")
     @ResponseBody
-    public Integer updateSalesDetailsById(@RequestParam("id") Integer id) {
+    public Integer updateSalesDetailsById(@RequestParam("id") Integer id, @RequestParam("status") String status) {
         return retailService.updateSalesDetailsById(id);
     }
 }
