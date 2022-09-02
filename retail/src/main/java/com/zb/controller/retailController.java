@@ -64,6 +64,12 @@ public class retailController {
     @RequestMapping("updateSalesDetailsById")
     @ResponseBody
     public Integer updateSalesDetailsById(@RequestParam("id") Integer id, @RequestParam("status") String status) {
-        return retailService.updateSalesDetailsById(id);
+        Integer flag = 0;
+        if (status.equals("未支付")) {
+            flag = 0;
+        } else if (status.equals("未收货")) {
+            flag = retailService.updateSalesDetailsById(id);
+        }
+        return flag;
     }
 }
