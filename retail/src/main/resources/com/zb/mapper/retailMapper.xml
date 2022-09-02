@@ -19,6 +19,9 @@
             <result property="vendorName" column="ve_vendor_name"/>
         </association>
     </resultMap>
+    <update id="updateSalesDetailsById">
+        UPDATE `sales_details` SET state=2 WHERE id = #{id}
+    </update>
 
     <select id="listSalesDetails" resultMap="listSalesDetails">
         SELECT

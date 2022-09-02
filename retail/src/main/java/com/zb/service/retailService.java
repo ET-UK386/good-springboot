@@ -11,4 +11,6 @@ public interface retailService {
     List<SalesDetails> listSalesDetailsByName(String name);
 
     List<SalesDetails> listSalesDetailsById(Integer id);
+
+    Integer updateSalesDetailsById(@Param("id") Integer id);
 }

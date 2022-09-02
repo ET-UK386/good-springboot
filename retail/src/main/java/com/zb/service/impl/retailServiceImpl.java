@@ -20,6 +20,11 @@ public class retailServiceImpl implements retailService {
     }
 
     @Override
+    public Integer updateSalesDetailsById(Integer id) {
+        return retailMapper.updateSalesDetailsById(id);
+    }
+
+    @Override
     public List<SalesDetails> listSalesDetailsById(Integer id) {
         return retailMapper.listSalesDetailsById(id);
     }

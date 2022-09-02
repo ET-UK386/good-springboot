@@ -54,4 +54,16 @@ public class retailController {
         return retailService.listSalesDetailsById(id);
     }
 
+
+    /**
+     * 修改为已签收
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("updateSalesDetailsById")
+    @ResponseBody
+    public Integer updateSalesDetailsById(@RequestParam("id") Integer id) {
+        return retailService.updateSalesDetailsById(id);
+    }
 }

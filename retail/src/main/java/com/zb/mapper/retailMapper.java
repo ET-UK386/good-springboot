@@ -15,4 +15,5 @@ public interface retailMapper {
 
     List<SalesDetails> listSalesDetailsById(@Param("id") Integer id);
 
+    Integer updateSalesDetailsById(@Param("id") Integer id);
 }
