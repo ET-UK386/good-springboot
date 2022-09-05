@@ -40,7 +40,10 @@ public class UploadImagesServiceImpl implements UploadImagesService {
         String s = OSSUploadUtil.uploadFile(file, suffix);
 
         // 封装数据
-        ImagesPath imagesPath = new ImagesPath().setPath(s).setImagesName(name);
+        ImagesPath imagesPath = new ImagesPath();
+        imagesPath.setPath(s);
+
+        imagesPath.setImagesName(name);
         ImagesFk imagesFk = new ImagesFk().setSkuId(skuId);
 
         // 保存到数据库

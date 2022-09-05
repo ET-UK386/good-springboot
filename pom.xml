@@ -14,6 +14,9 @@
         <module>purchase</module>
         <module>rise</module>
         <module>retail</module>
+        <module>shoppingcar</module>
+        <module>shoppingcar</module>
+
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
