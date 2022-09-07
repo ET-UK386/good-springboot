@@ -19,7 +19,7 @@ public class SkuController {
 
     @RequestMapping("showdetail")
     @ResponseBody
-    public Goodsku showdetail(@RequestParam String skuid){
+    public Goodsku showdetail(String skuid){
         System.out.println("1111111");
         return goodsDetailService.getGoodSkuByDetail(skuid);
     }
