@@ -11,11 +11,56 @@
             <result property="price" column="price"></result>
         </association>
     </resultMap>
+    <insert id="addShoppingCar">
+        insert into shopcar(id,sku_id,spu_id,number,totalPrice,warehouse_id,price_id,color_id,logic_state) values
+         (#{shopCar.id},#{shopCar.skuId},#{shopCar.spuId},#{shopCar.number},#{shopCar.totalPrice},#{shopCar.warehouseId},#{shopCar.price.id},
+          #{shopCar.color.id},0)
+    </insert>
     <select id="getGoodSkuByDetail" resultMap="skuNameAndPrice">
 
-        SELECT sku_desc,p.`price` FROM goodsku g
+        SELECT g.id,sku_desc,p.`price`  FROM goodsku g
         JOIN price p ON g.`price_id`=p.`id`
-        where g.id=#{id}
+        WHERE g.id=#{id}
 
     </select>
+    <select id="getImagesFk" resultMap="imagesFk">
+        SELECT * FROM images_fk k
+        JOIN images_path p ON p.`id`=k.`images_path_id`
+        JOIN goodsku s ON s.`id`=k.`sku_id`
+        WHERE s.`id`=#{id}
+    </select>
+
+    <select id="getSpu" resultType="java.lang.Integer">
+         SELECT spu.id FROM goodspu spu
+        JOIN goodsku sku ON sku.`spu_id`=spu.`id`
+        WHERE sku.id=#{id}
+    </select>
+    <select id="getColorList" resultType="com.zb.pojo.Color">
+        SELECT c.`color_name`  FROM color c
+        JOIN goodsku sku ON sku.`color_id`=c.`id`
+        JOIN goodspu spu ON spu.`id`=sku.`spu_id`
+        WHERE spu.`id`=#{id}
+    </select>
+    <select id="getCountOfShoppingCar" resultType="java.lang.Integer">
+        select count(*) from shopcar where logic_state=0
+    </select>
+    <select id="getColorId" resultType="java.lang.Integer">
+        select id from color where color_name=#{colorName}
+    </select>
+    <select id="getPriceId" resultType="java.lang.Integer">
+        select id from price where price=#{price} and sku_id=#{skuid}
+    </select>
+    <select id="getWareHouseid" resultType="java.lang.Integer">
+        select id from warehouse where sku_id = #{skuId}
+    </select>
+
+    <resultMap id="imagesFk" type="com.zb.pojo.ImagesFk">
+        <result property="id" column="id"></result>
+        <result property="skuId" column="sku_Id"></result>
+        <association property="imagesPath" javaType="com.zb.pojo.ImagesPath">
+            <result property="id" column="id"></result>
+            <result property="path" column="path"></result>
+        </association>
+    </resultMap>
+
 </mapper>

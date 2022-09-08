@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -47,12 +48,22 @@ public class Goodsku {
   private Integer logic_status;
 
   private Goodspu goodspu;
+
+  public List<ImagesFk> getImagesFks() {
+    return imagesFks;
+  }
+
+  public void setImagesFks(List<ImagesFk> imagesFks) {
+    this.imagesFks = imagesFks;
+  }
+
   private Sort sort;
   private User user;
   private Color color;
   private Price price;
   private Units units;
   private Result result;
+  private List<ImagesFk> imagesFks;
 
   /**
    * 不能删
